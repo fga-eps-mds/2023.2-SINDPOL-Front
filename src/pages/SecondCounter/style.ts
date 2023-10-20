@@ -1,5 +1,3 @@
-
-
 export const styles = {
     value : {
         fontSize: 78,
@@ -14,4 +12,4 @@ export const styles = {
         width: 64,
         margin: 4,
     }
-}
+} 

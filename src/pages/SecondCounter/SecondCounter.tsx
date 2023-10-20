@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../../utils/hooks";
-import { selectCount } from "../../../app/store/counter/counterSlice";
+import { useAppSelector } from "../../utils/hooks";
+import { selectCount } from "../../app/store/counter/counterSlice";
 
 import { styles } from "./style"
 

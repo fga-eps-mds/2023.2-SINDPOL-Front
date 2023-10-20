@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
-import { useAppSelector, useAppDispatch } from "../../../utils/hooks"
+import { useAppSelector, useAppDispatch } from "../../utils/hooks"
 import {
   decrement,
   increment,
@@ -8,14 +8,20 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from "../../../app/store/counter/counterSlice"
+} from "../../app/store/counter/counterSlice"
 import styles from "./Counter.module.css"
 
 import { SecondCounter } from "../SecondCounter/SecondCounter"
 
+interface incrementAmount {
+  amount: number
+  value: number
+}
+
 export function Counter() {
   const count = useAppSelector(selectCount)
   const dispatch = useAppDispatch()
+
   const [incrementAmount, setIncrementAmount] = useState("2")
 
   const [ incrementAmount2, setIncrementAmount2 ] = useState(100)
