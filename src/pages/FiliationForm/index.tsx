@@ -19,6 +19,19 @@ export default function FiliationForm(props: any) {
     phone: "",
     credential: "",
     birthDate: "",
+    rg: "",
+    cpf: "",
+    natural: "",
+    fatherName: "",
+    motherName: "",
+    function: "",
+    lotation: "",
+    admissionDate: "",
+    actualSituation: "",
+    civilState: "",
+    education: "",
+    bloodType: "",
+    gender: "",
   })
   const [boxes, setBoxes] = useState<Array<dependent>>([])
   const [cont, setCont] = useState(1)
@@ -109,10 +122,147 @@ export default function FiliationForm(props: any) {
               ></GenericInput>
               <GenericInput
                 type={"string"}
-                name={"username"}
-                value={""}
-                onChange={console.log("oi")}
-                label="Matricula"
+                name={"rg"}
+                value={formState.rg}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, rg: e.target.value })
+                }
+                label="RG"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+            </Box>
+            <Box id={"row-fields"} sx={styles.rowFields} marginTop={"30px"}>
+              <GenericInput
+                type={"string"}
+                name={"cpf"}
+                value={formState.cpf}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, cpf: e.target.value })
+                }
+                label="CPF"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+              <GenericInput
+                type={"string"}
+                name={"natural"}
+                value={formState.natural}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, natural: e.target.value })
+                }
+                label="Naturalidade"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+            </Box>
+            <Box id={"row-fields"} sx={styles.rowFields} marginTop={"30px"}>
+              <GenericInput
+                type={"string"}
+                name={"father-name"}
+                value={formState.fatherName}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, fatherName: e.target.value })
+                }
+                label="Nome do Pai"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+              <GenericInput
+                type={"string"}
+                name={"mother-name"}
+                value={formState.motherName}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, motherName: e.target.value })
+                }
+                label="Nome da Mãe"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+            </Box>
+            <Box id={"row-fields"} sx={styles.rowFields} marginTop={"30px"}>
+              <GenericInput
+                type={"string"}
+                name={"function"}
+                value={formState.function}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, function: e.target.value })
+                }
+                label="Cargo"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+              <GenericInput
+                type={"string"}
+                name={"lotation"}
+                value={formState.lotation}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, lotation: e.target.value })
+                }
+                label="Lotação"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+            </Box>
+            <Box id={"row-fields"} sx={styles.rowFields} marginTop={"30px"}>
+              <GenericInput
+                type={"string"}
+                name={"admission-date"}
+                value={formState.admissionDate}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, admissionDate: e.target.value })
+                }
+                label="Data de Admissão"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+              <GenericInput
+                type={"string"}
+                name={"actual-situation"}
+                value={formState.actualSituation}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({
+                    ...formState,
+                    actualSituation: e.target.value,
+                  })
+                }
+                label="Situação Atual"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+            </Box>
+            <Box id={"row-fields"} sx={styles.rowFields} marginTop={"30px"}>
+              <GenericInput
+                type={"string"}
+                name={"civil-state"}
+                value={formState.civilState}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, civilState: e.target.value })
+                }
+                label="Estado Civil"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+              <GenericInput
+                type={"string"}
+                name={"education"}
+                value={formState.education}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, education: e.target.value })
+                }
+                label="Escolaridade"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+            </Box>
+            <Box id={"row-fields"} sx={styles.rowFields} marginTop={"30px"}>
+              <GenericInput
+                type={"string"}
+                name={"blood-type"}
+                value={formState.bloodType}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, bloodType: e.target.value })
+                }
+                label="Tipo Sanguíneo"
+                sxFormControl={{ marginTop: "20px" }}
+              ></GenericInput>
+              <GenericInput
+                type={"string"}
+                name={"gender"}
+                value={formState.gender}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, gender: e.target.value })
+                }
+                label="Sexo"
                 sxFormControl={{ marginTop: "20px" }}
               ></GenericInput>
             </Box>
@@ -141,10 +291,17 @@ export default function FiliationForm(props: any) {
                 >
                   <GenericInput
                     type={"string"}
-                    name={"phone"}
+                    name={"full-name"}
                     value={""}
                     onChange={console.log("oi")}
                     label="Nome Completo"
+                  ></GenericInput>
+                  <GenericInput
+                    type={"string"}
+                    name={"birth-date"}
+                    value={""}
+                    onChange={console.log("oi")}
+                    label="Data de Nascimento"
                   ></GenericInput>
                   <GenericInput
                     type={"string"}

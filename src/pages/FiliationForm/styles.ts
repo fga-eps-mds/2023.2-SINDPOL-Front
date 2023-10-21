@@ -1,7 +1,6 @@
 export const styles = {
   formContainer: {
     backgroundColor: "transparent",
-    height: "100vh",
     width: "100vw",
     display: "flex",
     justifyContent: "center",
@@ -21,7 +20,6 @@ export const styles = {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
-    height: "350px",
   },
   rowFields: {
     display: "flex",
