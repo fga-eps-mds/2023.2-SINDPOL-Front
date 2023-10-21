@@ -4,6 +4,7 @@ import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
 import GenericButton from "../../components/GenericButton"
+import { FormRequest } from "../../app/services/formServicec"
 
 interface dependent {
   id: number
@@ -12,6 +13,13 @@ interface dependent {
 }
 
 export default function FiliationForm(props: any) {
+  const [formState, setFormState] = React.useState<FormRequest>({
+    fullName: "",
+    email: "",
+    phone: "",
+    credential: "",
+    birthDate: "",
+  })
   const [boxes, setBoxes] = useState<Array<dependent>>([])
   const [cont, setCont] = useState(1)
   const adicionarBox = () => {
@@ -48,16 +56,20 @@ export default function FiliationForm(props: any) {
               <GenericInput
                 type={"string"}
                 name={"full-name"}
-                value={""}
-                onChange={console.log("oi")}
+                value={formState.fullName}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, fullName: e.target.value })
+                }
                 label="Nome Completo"
                 sxFormControl={{ marginTop: "20px" }}
               ></GenericInput>
               <GenericInput
                 type={"string"}
                 name={"credential"}
-                value={""}
-                onChange={console.log("oi")}
+                value={formState.credential}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, credential: e.target.value })
+                }
                 label="Matricula"
                 sxFormControl={{ marginTop: "20px" }}
               ></GenericInput>
@@ -66,16 +78,20 @@ export default function FiliationForm(props: any) {
               <GenericInput
                 type={"string"}
                 name={"birth-date"}
-                value={""}
-                onChange={console.log("oi")}
+                value={formState.birthDate}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, birthDate: e.target.value })
+                }
                 label="Data de Nascimento"
                 sxFormControl={{ marginTop: "20px" }}
               ></GenericInput>
               <GenericInput
                 type={"string"}
                 name={"email"}
-                value={""}
-                onChange={console.log("oi")}
+                value={formState.email}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, email: e.target.value })
+                }
                 label="E-mail"
                 sxFormControl={{ marginTop: "20px" }}
               ></GenericInput>
@@ -84,8 +100,10 @@ export default function FiliationForm(props: any) {
               <GenericInput
                 type={"string"}
                 name={"phone"}
-                value={""}
-                onChange={console.log("oi")}
+                value={formState.phone}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormState({ ...formState, phone: e.target.value })
+                }
                 label="Celular"
                 sxFormControl={{ marginTop: "20px" }}
               ></GenericInput>
