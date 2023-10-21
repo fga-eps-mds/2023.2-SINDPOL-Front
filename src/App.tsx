@@ -1,12 +1,13 @@
 import logo from "./logo.svg"
-import { Counter } from "./pages/Counter/Counter"
 import Login from "./pages/Login"
 import "./App.css"
+import Sidebar from "./components/Sidebar"
+import AppRouter from "./utils/router/AppRouter"
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <AppRouter/>
     </div>
   )
 }
