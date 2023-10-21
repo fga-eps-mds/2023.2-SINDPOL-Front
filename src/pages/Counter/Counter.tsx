@@ -24,7 +24,7 @@ export function Counter() {
 
   const [incrementAmount, setIncrementAmount] = useState("2")
 
-  const [ incrementAmount2, setIncrementAmount2 ] = useState(100)
+  const [incrementAmount2, setIncrementAmount2] = useState(100)
 
   useEffect(() => {
     setIncrementAmount2(Number(incrementAmount2 - Number(count)))
@@ -43,7 +43,10 @@ export function Counter() {
           -
         </button>
         <span className={styles.value}>{count}</span>
-        <SecondCounter amount={incrementAmount2}  setAmount={setIncrementAmount2}/>
+        <SecondCounter
+          amount={incrementAmount2}
+          setAmount={setIncrementAmount2}
+        />
         <button
           className={styles.button}
           aria-label="Increment value"
@@ -57,7 +60,9 @@ export function Counter() {
           className={styles.textbox}
           aria-label="Set increment amount"
           value={incrementAmount}
-          onChange={(e) => {setIncrementAmount(e.target.value)}}
+          onChange={(e) => {
+            setIncrementAmount(e.target.value)
+          }}
         />
         <input
           className={styles.textbox}
