@@ -37,11 +37,11 @@ export default function GenericInput(props: GenericInputProps) {
                 maxWidth={'455px'}
                 {...props.sxFormControl && {sx: props.sxFormControl}}    
             >
-                {props.label && <FormLabel>{props.label}</FormLabel>} 
+                {props.label && <FormLabel margin={'0px'}>{props.label}</FormLabel>} 
                 <Input          
                     {...props}
                     maxWidth={'455px'}
-                    maxHeight={'60px'}
+                    minHeight={'50px'}
                     {...props.sxInput  && {sx: props.sxInput}}
                 />
                 {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}

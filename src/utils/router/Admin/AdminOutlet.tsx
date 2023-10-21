@@ -1,9 +1,9 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useAuth } from '../../../utils/hooks'
+import { useAuth } from '../../hooks'
 import Sidebar from '../../../components/Sidebar'
 import { Box } from '@chakra-ui/react'
 
-export default function PrivateOutlet() {
+export default function AdminOutlet() {
   const auth = useAuth()
   const location = useLocation()
 
