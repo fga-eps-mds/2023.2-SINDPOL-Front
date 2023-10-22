@@ -11,7 +11,7 @@ import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
 import { selectAssociates } from '../../app/store/associate/associateSlice';
 import { useAppSelector } from '../../utils/hooks';
-import { IconBoxSeam, IconEye, IconMenu } from '@tabler/icons-react';
+import { IconBoxSeam, IconEye, IconMenu2 } from '@tabler/icons-react';
 
 export default function Associates(props: any) {
     // cosnt associates = useAppSelector(selectAssociates);
@@ -155,7 +155,7 @@ export default function Associates(props: any) {
                         <Heading
                             id="associates-page-box-header-title"
                         >
-                            sindicalizados
+                            Sindicalizados
                         </Heading>
                         <GenericInput
                             id="associates-page-box-header-input"
@@ -211,7 +211,7 @@ export default function Associates(props: any) {
                                             <Divider orientation="vertical" color={"#734A00"} />
                                             <IconButton
                                                 aria-label="mais opções"
-                                                icon={<IconMenu />}
+                                                icon={<IconMenu2 />}
                                                 onClick={() => { }}
                                                 color={"#734A00"}
                                             />

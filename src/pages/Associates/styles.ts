@@ -1,7 +1,7 @@
 export const styles = {
     boxContainer: {
         width: '100%',
-        padding: '24px',
+        padding: '24px 12px',
     },
     box: {
         display: 'flex',
@@ -16,13 +16,14 @@ export const styles = {
         height: '100%',
         padding: '12px',
         overflowY: 'scroll',
+
+        
     },
     boxItem: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '100%',
         padding: '12px 24px',
         borderRadius: '16px',
 
