@@ -17,6 +17,7 @@ export default function AppRouter(props: any) {
         <Box>
             <Routes>
                 <Route path={'/'} element={<PublicOutlet />}>
+                    <Route path={'/'} element={<Login />} />
                     <Route path={'/login'} element={<Login />} />
                     {/* Pagina de filiação */}
                 </Route>

@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 interface GenericInputProps {
+    id?: string;
     type: string;
     name: string;
     value: string;
@@ -32,7 +33,7 @@ export default function GenericInput(props: GenericInputProps) {
     return (
         <>
             <FormControl  
-                id={props.name}
+                {...props.id && {id: props.id}}
                 isInvalid={props.error ? true : false}
                 maxWidth={'455px'}
                 {...props.sxFormControl && {sx: props.sxFormControl}}    
@@ -40,8 +41,6 @@ export default function GenericInput(props: GenericInputProps) {
                 {props.label && <FormLabel margin={'0px'}>{props.label}</FormLabel>} 
                 <Input          
                     {...props}
-                    maxWidth={'455px'}
-                    minHeight={'50px'}
                     {...props.sxInput  && {sx: props.sxInput}}
                 />
                 {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
