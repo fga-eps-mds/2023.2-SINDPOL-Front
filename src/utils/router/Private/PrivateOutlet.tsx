@@ -1,7 +1,7 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useAuth } from '../../../utils/hooks'
-import Sidebar from '../../../components/Sidebar'
-import { Box } from '@chakra-ui/react'
+import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { useAuth } from "../../../utils/hooks"
+import Sidebar from "../../../components/Sidebar"
+import { Box } from "@chakra-ui/react"
 
 export default function PrivateOutlet() {
   const auth = useAuth()
@@ -13,13 +13,4 @@ export default function PrivateOutlet() {
       <Outlet />
     </Box>
   )
-
-  // return auth.user ? (
-  //   <>
-  //     <Sidebar />
-  //     <Outlet />
-  //   </>
-  // ) : (
-  //   <Navigate to="/login" state={{ from: location }} />
-  // )
 }
