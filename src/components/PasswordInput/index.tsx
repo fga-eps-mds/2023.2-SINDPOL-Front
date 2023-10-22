@@ -10,8 +10,7 @@ import {
   InputGroup,
   Tooltip,
 } from "@chakra-ui/react"
-import EyeClose from "../../assets/svg/EyeCloseSvg"
-import EyeOpen from "../../assets/svg/EyeOpenSvg"
+import { IconEye, IconEyeOff } from "@tabler/icons-react"
 
 interface GenericInputProps {
   type: string
@@ -50,9 +49,11 @@ export default function PasswordInput(props: any) {
           <Input
             {...props}
             type={show ? "text" : "password"}
+            maxWidth={"455px"}
+            minHeight={"50px"}
             {...(props.sxInput && { sx: props.sxInput })}
           />
-          <InputRightElement width="4.5rem">
+          <InputRightElement height={"100%"}>
             <Tooltip
               label={show ? "Esconder senha" : "Mostrar senha"}
               placement="top"
@@ -60,7 +61,7 @@ export default function PasswordInput(props: any) {
               <IconButton
                 aria-label="show password"
                 fontSize="20px"
-                icon={show ? <EyeClose /> : <EyeOpen />}
+                icon={show ? <IconEyeOff /> : <IconEye />}
                 onClick={handleClick}
                 bg={"transparent"}
                 _hover={{ bg: "transparent" }}

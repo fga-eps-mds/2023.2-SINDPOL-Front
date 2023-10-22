@@ -1,11 +1,12 @@
+import logo from "./logo.svg"
 import Login from "./pages/Login"
 import "./App.css"
-import FiliationForm from "./pages/FiliationForm"
+import AppRouter from "./utils/router/AppRouter"
 
 function App() {
   return (
     <div className="App">
-      <FiliationForm />
+      <AppRouter />
     </div>
   )
 }

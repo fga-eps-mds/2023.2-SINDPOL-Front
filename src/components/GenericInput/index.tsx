@@ -40,7 +40,7 @@ export default function GenericInput(props: GenericInputProps) {
         <Input
           {...props}
           maxWidth={"455px"}
-          maxHeight={"60px"}
+          minHeight={"50px"}
           {...(props.sxInput && { sx: props.sxInput })}
         />
         {props.helperText && (

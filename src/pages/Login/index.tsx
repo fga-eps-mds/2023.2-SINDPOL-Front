@@ -5,8 +5,11 @@ import { LoginRequest } from "../../app/services/authService"
 import PasswordInput from "../../components/PasswordInput"
 import { styles } from "./styles"
 import GenericButton from "../../components/GenericButton"
+import { useNavigate } from "react-router-dom"
 
 export default function Login(props: any) {
+  const navigate = useNavigate()
+
   const [loginState, setLoginState] = React.useState<LoginRequest>({
     username: "",
     password: "",
@@ -43,7 +46,11 @@ export default function Login(props: any) {
           />
           <Link margin={"20px"}>Esqueci a senha</Link>
           <Link margin={"10px"}>Ainda não sou filiado</Link>
-          <GenericButton text="Entrar" marginTop={"20px"} />
+          <GenericButton
+            text="Entrar"
+            marginTop={"20px"}
+            onClick={() => navigate("/home")}
+          />
         </Box>
       </Box>
     </>
