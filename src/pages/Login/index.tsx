@@ -9,8 +9,11 @@ import { LoginRequest } from '../../app/services/authService';
 import PasswordInput from '../../components/PasswordInput';
 import { styles } from './styles';
 import GenericButton from '../../components/GenericButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(props: any) {
+    const navigate = useNavigate();
+
     const [loginState, setLoginState] = React.useState<LoginRequest>({
         username: '',
         password: ''
@@ -60,6 +63,7 @@ export default function Login(props: any) {
                     <GenericButton
                         text='Entrar'
                         marginTop={'20px'}
+                        onClick={() => navigate('/home')}
                     />
                 </Box>
             </Box>
