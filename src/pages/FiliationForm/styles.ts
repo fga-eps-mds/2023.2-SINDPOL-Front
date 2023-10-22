@@ -54,4 +54,7 @@ export const styles = {
     justifyContent: "center",
     backgroundColor: "transparent",
   },
+  inputSize: {
+    width: "300px",
+  },
 }

@@ -10,6 +10,7 @@ interface dependent {
   id: number
   name: string
   type: string
+  birthDate: string
 }
 
 export default function FiliationForm(props: any) {
@@ -40,6 +41,7 @@ export default function FiliationForm(props: any) {
       id: cont,
       name: "",
       type: "",
+      birthDate: "",
     }
     setCont(cont + 1)
     setBoxes((prevBoxes) => [...prevBoxes, novaBox])
@@ -49,6 +51,21 @@ export default function FiliationForm(props: any) {
     if (boxes && boxes.length > 0) {
       const novasBoxes = boxes.filter((box) => box.id !== boxId)
       setBoxes(novasBoxes)
+    }
+  }
+
+  const changeDependentFields = (
+    boxId: number,
+    name: string,
+    value: string,
+  ) => {
+    if (boxes && boxes.length > 0) {
+      boxes.map((e: any) => {
+        if (e.id === boxId) {
+          return { ...e, [name]: value }
+        }
+        return e
+      })
     }
   }
   return (
@@ -291,24 +308,31 @@ export default function FiliationForm(props: any) {
                 >
                   <GenericInput
                     type={"string"}
-                    name={"full-name"}
-                    value={""}
-                    onChange={console.log("oi")}
+                    name={"name"}
+                    value={box.name}
+                    onChange={changeDependentFields(box.id, "name", box.name)}
                     label="Nome Completo"
+                    sxFormControl={styles.inputSize}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
-                    name={"birth-date"}
-                    value={""}
-                    onChange={console.log("oi")}
+                    name={"birthDate"}
+                    value={box.birthDate}
+                    onChange={changeDependentFields(
+                      box.id,
+                      "birthDate",
+                      box.birthDate,
+                    )}
                     label="Data de Nascimento"
+                    sxFormControl={styles.inputSize}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
-                    name={"username"}
-                    value={""}
-                    onChange={console.log("oi")}
+                    name={"type"}
+                    value={box.type}
+                    onChange={changeDependentFields(box.id, "type", box.type)}
                     label="Parentesco"
+                    sxFormControl={styles.inputSize}
                   ></GenericInput>
                   <IconButton
                     aria-label={""}
