@@ -11,9 +11,11 @@ import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
 import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { IconBoxSeam, IconEye, IconMenu2 } from '@tabler/icons-react';
+import { IconEye, IconMenu2 } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Associates(props: any) {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const associates = useAppSelector(selectAssociates);
 
@@ -51,7 +53,7 @@ export default function Associates(props: any) {
                         <GenericButton
                             id="associates-page-box-header-add-button"
                             text="Cadastrar"
-                            onClick={() => { }}
+                            onClick={() => {navigate("/filiation")}}
                             sx={{ marginX: '12px' }}
                         />
                         <GenericButton
@@ -87,7 +89,7 @@ export default function Associates(props: any) {
                                         <IconButton
                                             aria-label="Ver sindicalizado"
                                             icon={<IconEye />}
-                                            onClick={() => { }}
+                                            onClick={() => {}}
                                             color={"#734A00"}
                                         />
                                         <Divider orientation="vertical" color={"#734A00"} />

@@ -11,6 +11,7 @@ import Documents from "../../pages/Documents"
 import Reports from "../../pages/Reports"
 import Associates from "../../pages/Associates"
 import Patrimony from "../../pages/Patrimony"
+import FiliationForm from "../../pages/FiliationForm"
 
 export default function AppRouter(props: any) {
     return (
@@ -19,6 +20,7 @@ export default function AppRouter(props: any) {
                 <Route path={'/'} element={<PublicOutlet />}>
                     <Route path={'/'} element={<Login />} />
                     <Route path={'/login'} element={<Login />} />
+                    <Route path={'/filiation'} element={<FiliationForm />} />
                     {/* Pagina de filiação */}
                 </Route>
                 <Route path={'/'} element={<PrivateOutlet />}>
