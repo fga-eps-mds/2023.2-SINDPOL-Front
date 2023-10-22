@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Box,
     Divider,
@@ -9,12 +9,16 @@ import {
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
-import { selectAssociates } from '../../app/store/associate/associateSlice';
+import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
 import { useAppSelector } from '../../utils/hooks';
 import { IconBoxSeam, IconEye, IconMenu2 } from '@tabler/icons-react';
 
 export default function Associates(props: any) {
-     const associates = useAppSelector(selectAssociates);
+    const associates = useAppSelector(selectAssociates);
+
+    useEffect(() => {
+        fetchAssociates();
+    });
 
     return (
         <Box
