@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import {
     Box,
     Divider,
@@ -10,14 +10,15 @@ import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
 import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
-import { useAppSelector } from '../../utils/hooks';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { IconBoxSeam, IconEye, IconMenu2 } from '@tabler/icons-react';
 
 export default function Associates(props: any) {
+    const dispatch = useAppDispatch();
     const associates = useAppSelector(selectAssociates);
 
     useEffect(() => {
-        fetchAssociates();
+        dispatch(fetchAssociates());
     });
 
     return (
