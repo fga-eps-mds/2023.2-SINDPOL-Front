@@ -5,6 +5,7 @@ import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
 import GenericButton from "../../components/GenericButton"
 import { FormRequest } from "../../app/services/formServicec"
+import { normalize } from "path"
 
 interface dependent {
   id: number
@@ -60,12 +61,13 @@ export default function FiliationForm(props: any) {
     value: string,
   ) => {
     if (boxes && boxes.length > 0) {
-      boxes.map((e: any) => {
+      const novasBoxes = boxes.map((e: any) => {
         if (e.id === boxId) {
           return { ...e, [name]: value }
         }
         return e
       })
+      setBoxes(novasBoxes)
     }
   }
   return (
@@ -310,7 +312,9 @@ export default function FiliationForm(props: any) {
                     type={"string"}
                     name={"name"}
                     value={box.name}
-                    onChange={changeDependentFields(box.id, "name", box.name)}
+                    onChange={(e: { target: { value: string } }) =>
+                      changeDependentFields(box.id, "name", e.target.value)
+                    }
                     label="Nome Completo"
                     sxFormControl={styles.inputSize}
                   ></GenericInput>
@@ -318,11 +322,9 @@ export default function FiliationForm(props: any) {
                     type={"string"}
                     name={"birthDate"}
                     value={box.birthDate}
-                    onChange={changeDependentFields(
-                      box.id,
-                      "birthDate",
-                      box.birthDate,
-                    )}
+                    onChange={(e: { target: { value: string } }) =>
+                      changeDependentFields(box.id, "birthDate", e.target.value)
+                    }
                     label="Data de Nascimento"
                     sxFormControl={styles.inputSize}
                   ></GenericInput>
@@ -330,7 +332,9 @@ export default function FiliationForm(props: any) {
                     type={"string"}
                     name={"type"}
                     value={box.type}
-                    onChange={changeDependentFields(box.id, "type", box.type)}
+                    onChange={(e: { target: { value: string } }) =>
+                      changeDependentFields(box.id, "type", e.target.value)
+                    }
                     label="Parentesco"
                     sxFormControl={styles.inputSize}
                   ></GenericInput>
