@@ -6,7 +6,7 @@ export const styles = {
         height: '90vh',
         width: '250px',
         backgroundColor: '#ffffff',
-        padding: '24px',
+        padding: '16px',
         margin: '24px',
         borderRadius: '24px',
     },
