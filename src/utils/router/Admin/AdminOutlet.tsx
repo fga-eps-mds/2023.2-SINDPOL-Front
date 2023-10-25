@@ -8,7 +8,7 @@ export default function AdminOutlet() {
   const location = useLocation()
 
   return (
-    <Box>
+    <Box sx={{display: 'flex'}}>
       <Sidebar />
       <Outlet />
     </Box>
