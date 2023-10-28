@@ -70,7 +70,7 @@ export default function Sidebar(props: any) {
   return (
     <Box id="sidebar-box" sx={styles.sidebarBox}>
       <Box>
-        <Image src="src/assets/logo.png" sx={styles.logo} />
+        <Image src="./src/assets/logo.png" sx={styles.logo} />
         <Box>
           {SidebarItem("IconHome")}
           {SidebarItem("IconUsers")}

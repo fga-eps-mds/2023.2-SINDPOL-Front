@@ -20,7 +20,7 @@ export default function Login(props: any) {
       <Box id={"container-login"} sx={styles.containerLogin}>
         <Box id={"login-box"} sx={styles.loginBox}>
           <Image
-            src="src/assets/logo.png"
+            src={"./src/assets/logo.png"}
             width={"470px"}
             marginBottom={"30px"}
           />
