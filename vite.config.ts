@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: true,
-    assetsDir: "assets",
+    assetsDir: "src/assets",
   },
   test: {
     globals: true,
