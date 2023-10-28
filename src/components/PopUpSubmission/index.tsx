@@ -17,22 +17,22 @@ import { SUCCESS } from "../../utils/constants/PopUp"
 interface PopUpSubmissionProps {
     title: string
     description: string
-    type: string
+    type:  "loading" | "error" | "info" | "warning" | "success";
 }
 
 class PopUpSubmissionState implements PopUpSubmissionProps {
     title: string
     description: string
-    type: string
+    type:  "loading" | "error" | "info" | "warning" | "success"
     bg: string
     iconColor: string
 
-    constructor(title: string, description: string, type: string) {
+    constructor(title: string, description: string, type:  "loading" | "error" | "info" | "warning" | "success") {
         this.title = title
         this.description = description
         this.type = type
-        this.bg = type === SUCCESS ? theme.colors.softGreen : theme.colors.softRed
-        this.iconColor = type === SUCCESS ? theme.colors.greenAccent : theme.colors.pinkAccent
+        this.bg = type === "success" ? theme.colors.softGreen : theme.colors.softRed
+        this.iconColor = type === "success" ? theme.colors.greenAccent : theme.colors.pinkAccent
     }
 }
 
