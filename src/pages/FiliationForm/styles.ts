@@ -25,7 +25,7 @@ export const styles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-end",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     backgroundColor: "transparent",
     height: "60px",
     width: "1200px",
