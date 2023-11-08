@@ -34,10 +34,19 @@ export default function AceeptanceList(props: DataTableProps) {
             sx={styles.table}>
             <Tbody fontFamily={theme.fonts.body}>
                 {props.data.map((item) => (
-                    <Tr key={item.id} _hover={{ bg: "#FFF7E8" }} borderRadius={'30px'}
+                    <Tr key={item.id} 
+                    _hover={{ bg: "#FFF7E8", color: "#734A00" }}
+
+                    borderRadius={'30px'}
                     >
                         <Td>
-                            <Checkbox iconColor='black' border='black' defaultChecked></Checkbox>
+                            <Checkbox
+                                iconColor='black'
+                                border='black'
+                                variant="circular"
+                                defaultChecked
+                                style={{ borderRadius: '16px' }} // Define o raio das bordas
+                            />
                         </Td>
                         <Td>
                             <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.name}</span><br />
@@ -47,10 +56,11 @@ export default function AceeptanceList(props: DataTableProps) {
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.data}</span>
                         </Td>
-                        <td>
+                        <td style={{ textAlign: 'right' }}>
                             <span style={{ color: 'black', fontSize: '14px' }}>{item.estado}</span>
+                            <IconButton aria-label='Search database' icon={<IconMinusVertical />} color={'gray'} />
                         </td>
-                        <td>
+                        <td> 
                             <IconButton
                                 aria-label="Ver sindicalizado"
                                 icon={<IconEye />}

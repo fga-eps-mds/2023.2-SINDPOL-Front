@@ -5,7 +5,7 @@
       "cpf": "123.456.789-00",
       "matricula": 1001,
       "data": "07/11/2023",
-      "estado": "Ativo"
+      "estado": "Pendente"
     },
     {
       "id": 2,
@@ -21,7 +21,7 @@
       "cpf": "555.555.555-00",
       "matricula": 1003,
       "data": "09/11/2023",
-      "estado": "Ativo"
+      "estado": "Pendente"
     }
   ]
   
