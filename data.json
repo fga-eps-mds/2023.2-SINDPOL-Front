@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "name": "João da Silva",
+      "cpf": "123.456.789-00",
+      "matricula": 1001,
+      "data": "07/11/2023",
+      "estado": "Ativo"
+    },
+    {
+      "id": 2,
+      "name": "Maria Oliveira",
+      "cpf": "987.654.321-00",
+      "matricula": 1002,
+      "data": "08/11/2023",
+      "estado": "Pendente"
+    },
+    {
+      "id": 3,
+      "name": "José Santos",
+      "cpf": "555.555.555-00",
+      "matricula": 1003,
+      "data": "09/11/2023",
+      "estado": "Ativo"
+    }
+  ]
+  
