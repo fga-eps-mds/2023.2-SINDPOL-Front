@@ -4,14 +4,16 @@ import {
     Divider,
     Heading,
     IconButton,
+    Icon,
     Text,
+    InputLeftElement,
 } from '@chakra-ui/react';
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
 import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { IconEye, IconMenu2 } from '@tabler/icons-react';
+import { IconEye, IconMenu2, IconSearch } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import AceeptanceList from '../../components/AceeptanceList';
 
@@ -55,7 +57,7 @@ export default function Associates(props: any) {
                     id="associates-page-box-header"
                     sx={styles.boxHeader}
                 >
-                    <Box 
+                    <Box
                         sx={styles.boxHeaderTop}
                     >
                         <Heading
@@ -72,18 +74,18 @@ export default function Associates(props: any) {
                             onChange={() => { }}
                         />
                     </Box>
-                    <Box 
+                    <Box
                         sx={styles.boxHeaderBotton}
                     >
                         <GenericButton
                             id="associates-page-box-header-add-button"
-                            text="Cadastrar"
+                            text="Aprovar cadastro"
                             onClick={() => { navigate("/filiation") }}
                             sx={{ marginX: '12px' }}
                         />
                         <GenericButton
                             id="associates-page-box-header-import-button"
-                            text="Importar"
+                            text="Desaprovar cadastro"
                             onClick={() => { }}
                             sx={{ marginX: '12px' }}
                         />
