@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Divider,
@@ -7,6 +7,7 @@ import {
     Icon,
     Text,
     InputLeftElement,
+    Button, Menu, MenuButton, MenuList, MenuItem
 } from '@chakra-ui/react';
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
@@ -17,13 +18,27 @@ import { IconEye, IconMenu2, IconSearch } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import AceeptanceList from '../../components/AceeptanceList';
 
-
-
 export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const associates = useAppSelector(selectAssociates);
     const [dataList, setDataList] = useState([]);
+    const [opcaoSelecionada, setOpcaoSelecionada] = useState<string | null>(null); // Adicionando a declaração inicial
+
+    const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
+
+    const handleOpcaoSelecionada = (opcao: string) => {
+        setOpcaoSelecionada(opcao);
+        // Adicione aqui a lógica que deseja executar quando uma opção for selecionada
+        console.log(`Opção selecionada: ${opcao}`);
+    };
+
+    useEffect(() => {
+        // Exemplo de uso da opcaoSelecionada, você pode adicionar sua lógica aqui
+        if (opcaoSelecionada) {
+            console.log(`Realizando alguma ação com a opção selecionada: ${opcaoSelecionada}`);
+        }
+    }, [opcaoSelecionada]);
 
     useEffect(() => {
         // Função assíncrona para buscar e ler o arquivo JSON
@@ -42,7 +57,7 @@ export default function Associates(props: any) {
 
     useEffect(() => {
         dispatch(fetchAssociates());
-    });
+    }, [dispatch]); // Adicionando a dependência 'dispatch' ao useEffect
 
     return (
         <Box
@@ -73,6 +88,21 @@ export default function Associates(props: any) {
                             value=""
                             onChange={() => { }}
                         />
+
+                        <Menu>
+                            <MenuButton as={Button} colorScheme="blue">
+                                {opcaoSelecionada ? `Ordenar por ${opcaoSelecionada}` : 'Ordenar por'}
+                            </MenuButton>
+                            <MenuList>
+                                {Opcoes.map((opcao) => (
+                                    <MenuItem key={opcao} onClick={() => handleOpcaoSelecionada(opcao)}>
+                                        {opcao}
+                                    </MenuItem>
+                                ))}
+                            </MenuList>
+                        </Menu>
+
+
                     </Box>
                     <Box
                         sx={styles.boxHeaderBotton}
