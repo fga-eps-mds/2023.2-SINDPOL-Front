@@ -45,7 +45,9 @@ export default function Login(props: any) {
             sxFormControl={{ marginTop: "15px" }}
           />
           <Link margin={"20px"}>Esqueci a senha</Link>
-          <Link margin={"10px"}>Ainda não sou filiado</Link>
+          <Link margin={"10px"} onClick={() => navigate("/filiation")}>
+            Ainda não sou filiado
+          </Link>
           <GenericButton
             text="Entrar"
             marginTop={"20px"}

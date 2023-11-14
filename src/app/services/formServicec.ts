@@ -1,5 +1,3 @@
-import { S } from "vitest/dist/types-e3c9754d.js"
-
 export interface FormRequest {
   fullName: string
   warName: string
