@@ -35,7 +35,8 @@ export const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    marginVertical: "30px",
+    marginTop: "30px",
+    paddingBottom: "30px",
   },
   dependentTitleRow: {
     display: "flex",

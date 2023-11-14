@@ -32,7 +32,7 @@ interface Error {
   error: boolean
   message: string
 }
-export default function PasswordInput(props: any) {
+export default function PasswordInput(props: GenericInputProps) {
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
 
@@ -41,7 +41,6 @@ export default function PasswordInput(props: any) {
       <FormControl
         id={props.name}
         isInvalid={props.error ? true : false}
-        maxWidth={"455px"}
         {...(props.sxFormControl && { sx: props.sxFormControl })}
       >
         {props.label && <FormLabel>{props.label}</FormLabel>}
@@ -49,8 +48,6 @@ export default function PasswordInput(props: any) {
           <Input
             {...props}
             type={show ? "text" : "password"}
-            maxWidth={"455px"}
-            minHeight={"50px"}
             {...(props.sxInput && { sx: props.sxInput })}
           />
           <InputRightElement height={"100%"}>
