@@ -15,9 +15,7 @@ export const styles = {
         width: '100%',
         height: '100%',
         padding: '12px',
-        overflowY: 'scroll',
-
-        
+        overflowY: 'scroll', 
     },
     boxItem: {
         display: 'flex',
@@ -38,6 +36,7 @@ export const styles = {
         width: '100%',
         padding: '24px',
         fontSize:'20px',
+        fontWeight: 'semibold',
         color:'black'
     },
     boxHeaderTop:{
@@ -50,5 +49,11 @@ export const styles = {
         flexDirection: 'row',
         marginTop:'30px',
         justifyContent: "flex-start"
+    },
+    boxHeaderTitle:{
+        fontWeight: 'semibold',
+        textAlign: 'right',
     }
+
+
 };

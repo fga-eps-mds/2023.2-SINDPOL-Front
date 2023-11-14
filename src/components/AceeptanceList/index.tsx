@@ -10,7 +10,7 @@ import {
     Checkbox,
 } from '@chakra-ui/react';
 import theme from "../../theme/theme";
-import { IconEye, IconEyeOff, IconDotsVertical, IconChevronDown, IconArrowNarrowRight, IconMinusVertical } from '@tabler/icons-react';
+import { IconEye, IconMinusVertical } from '@tabler/icons-react';
 import { IconButton } from '@chakra-ui/react';
 import { styles } from "./styles";
 

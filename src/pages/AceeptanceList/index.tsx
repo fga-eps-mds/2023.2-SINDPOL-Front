@@ -1,45 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import {
     Box,
-    Divider,
     Heading,
-    IconButton,
-    Icon,
-    Text,
-    InputLeftElement,
-    Button, Menu, MenuButton, MenuList, MenuItem
 } from '@chakra-ui/react';
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
 import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { IconEye, IconMenu2, IconSearch } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import AceeptanceList from '../../components/AceeptanceList';
+import MenuOrdenacao from '../../components/GenericMenuOptions';
+
+
 
 export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const associates = useAppSelector(selectAssociates);
     const [dataList, setDataList] = useState([]);
-    const [opcaoSelecionada, setOpcaoSelecionada] = useState<string | null>(null); // Adicionando a declaração inicial
-
     const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
 
-    const handleOpcaoSelecionada = (opcao: string) => {
-        setOpcaoSelecionada(opcao);
-        // Adicione aqui a lógica que deseja executar quando uma opção for selecionada
-        console.log(`Opção selecionada: ${opcao}`);
+    const handleSelecao = (opcao: string) => {
+        // Adicione aqui a lógica que deseja executar quando uma opção for selecionada na página
+        console.log(`Opção selecionada na página: ${opcao}`);
     };
-
-    useEffect(() => {
-        // Exemplo de uso da opcaoSelecionada, você pode adicionar sua lógica aqui
-        if (opcaoSelecionada) {
-            console.log(`Realizando alguma ação com a opção selecionada: ${opcaoSelecionada}`);
-        }
-    }, [opcaoSelecionada]);
-
     useEffect(() => {
         // Função assíncrona para buscar e ler o arquivo JSON
         const fetchData = async () => {
@@ -77,32 +62,20 @@ export default function Associates(props: any) {
                     >
                         <Heading
                             id="associates-page-box-header-title"
+                            sx={styles.boxHeaderTitle}
                         >
                             Aprovar cadastro de sindicalizados
                         </Heading>
                         <GenericInput
                             id="associates-page-box-header-input"
-                            placeholder="Pesquisar por Nome ou Mátricula"
+                            placeholder="Pesquisar por Nome ou Matrícula"
                             type="text"
                             name="search"
                             value=""
+                            sxInput={{ border: 'none', borderRadius: '50px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                             onChange={() => { }}
                         />
-
-                        <Menu>
-                            <MenuButton as={Button} colorScheme="blue">
-                                {opcaoSelecionada ? `Ordenar por ${opcaoSelecionada}` : 'Ordenar por'}
-                            </MenuButton>
-                            <MenuList>
-                                {Opcoes.map((opcao) => (
-                                    <MenuItem key={opcao} onClick={() => handleOpcaoSelecionada(opcao)}>
-                                        {opcao}
-                                    </MenuItem>
-                                ))}
-                            </MenuList>
-                        </Menu>
-
-
+                        <MenuOrdenacao opcoes={Opcoes} onSelecao={handleSelecao} />
                     </Box>
                     <Box
                         sx={styles.boxHeaderBotton}
@@ -111,13 +84,13 @@ export default function Associates(props: any) {
                             id="associates-page-box-header-add-button"
                             text="Aprovar cadastro"
                             onClick={() => { navigate("/filiation") }}
-                            sx={{ marginX: '12px' }}
+                            sx={{ marginX: '12px', borderRadius: '50px' }}
                         />
                         <GenericButton
                             id="associates-page-box-header-import-button"
                             text="Desaprovar cadastro"
                             onClick={() => { }}
-                            sx={{ marginX: '12px' }}
+                            sx={{ marginX: '12px', borderRadius: '50px' }}
                         />
                     </Box>
                 </Box>
