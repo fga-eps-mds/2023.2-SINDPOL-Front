@@ -20,16 +20,15 @@ export default function Associates(props: any) {
     const associates = useAppSelector(selectAssociates);
     const [dataList, setDataList] = useState([]);
     const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
+    
 
     const handleSelecao = (opcao: string) => {
-        // Adicione aqui a lógica que deseja executar quando uma opção for selecionada na página
         console.log(`Opção selecionada na página: ${opcao}`);
     };
     useEffect(() => {
-        // Função assíncrona para buscar e ler o arquivo JSON
         const fetchData = async () => {
             try {
-                const response = await fetch('data.json'); // Substitua pelo caminho correto para o arquivo JSON
+                const response = await fetch('data.json'); 
                 const data = await response.json();
                 setDataList(data);
             } catch (error) {
@@ -42,7 +41,8 @@ export default function Associates(props: any) {
 
     useEffect(() => {
         dispatch(fetchAssociates());
-    }, [dispatch]); // Adicionando a dependência 'dispatch' ao useEffect
+    }, [dispatch]); 
+    
 
     return (
         <Box
@@ -83,7 +83,7 @@ export default function Associates(props: any) {
                         <GenericButton
                             id="associates-page-box-header-add-button"
                             text="Aprovar cadastro"
-                            onClick={() => { navigate("/filiation") }}
+                            onClick={() => {  }}
                             sx={{ marginX: '12px', borderRadius: '50px' }}
                         />
                         <GenericButton
