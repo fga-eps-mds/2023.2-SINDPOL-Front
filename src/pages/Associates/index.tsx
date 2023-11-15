@@ -34,6 +34,7 @@ export default function Associates(props: any) {
             name="search"
             value=""
             onChange={() => {}}
+            sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
           />
           <Box>
             <GenericButton

@@ -24,7 +24,7 @@ interface GenericInputProps {
 }
 
 interface Error {
-  error: boolean
+  hasError: boolean
   message: string
 }
 
@@ -33,7 +33,7 @@ export default function GenericInput(props: GenericInputProps) {
     <>
       <FormControl
         {...(props.id && { id: props.id })}
-        isInvalid={props.error ? true : false}
+        isInvalid={props.error?.hasError ? true : false}
         {...(props.sxFormControl && { sx: props.sxFormControl })}
       >
         {props.label && <FormLabel margin={"0px"}>{props.label}</FormLabel>}

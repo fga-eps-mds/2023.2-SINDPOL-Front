@@ -8,6 +8,7 @@ import { defaultFormState, FormState } from "./formControl"
 import { useAppDispatch } from "../../utils/hooks"
 import { createAssociate } from "../../app/store/associate/associateSlice"
 import { useNavigate } from "react-router-dom"
+import { createObjectToSubmit, validateField } from "./normalize"
 
 interface dependent {
   id: number
@@ -45,16 +46,20 @@ export default function FiliationForm(props: any) {
   }
 
   const submitForm = () => {
-    const data = Object.entries(formState).map(([key, value]) => {
-      return { [key]: value.value }
-    })
-
+    let data = createObjectToSubmit(formState, boxes)
     console.log("formstate:: ", data)
 
     dispatch(createAssociate(data))
   }
 
   const changeFormState = (name: string, value: any) => {
+    if (!validateField(name, value)) {
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: { ...prevState[name], isInvalid: true },
+      }))
+    }
+
     setFormState((prevState) => ({
       ...prevState,
       [name]: { ...prevState[name], value },
@@ -90,6 +95,10 @@ export default function FiliationForm(props: any) {
             }
             label={value.label}
             sxFormControl={value.sx}
+            error={{
+              hasError: value.isInvalid,
+              message: "Campo obrigatório",
+            }}
           ></GenericInput>
         </div>
       )
