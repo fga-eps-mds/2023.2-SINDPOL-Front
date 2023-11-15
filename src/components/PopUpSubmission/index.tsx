@@ -15,32 +15,38 @@ import theme from "../../theme/theme"
 import { SUCCESS } from "../../utils/constants/PopUp"
 
 interface PopUpSubmissionProps {
+    open: boolean
     title: string
     description: string
     type:  "loading" | "error" | "info" | "warning" | "success";
+    onClose: () => {}
 }
 
 class PopUpSubmissionState implements PopUpSubmissionProps {
+    open: boolean
     title: string
     description: string
     type:  "loading" | "error" | "info" | "warning" | "success"
     bg: string
     iconColor: string
+    onClose: () => {}
 
-    constructor(title: string, description: string, type:  "loading" | "error" | "info" | "warning" | "success") {
+    constructor(open:boolean, title: string, description: string, type:  "loading" | "error" | "info" | "warning" | "success", onClose:() =>{}){
+        this.open = open
         this.title = title
         this.description = description
         this.type = type
         this.bg = type === "success" ? theme.colors.softGreen : theme.colors.softRed
         this.iconColor = type === "success" ? theme.colors.greenAccent : theme.colors.pinkAccent
+        this.onClose = onClose;
     }
 }
 
 export default function PopUpSubmission(props: PopUpSubmissionProps) {
-    const propsSubmission: PopUpSubmissionState = new PopUpSubmissionState(props.title, props.description, props.type)
+    const propsSubmission: PopUpSubmissionState = new PopUpSubmissionState(props.open, props.title, props.description, props.type, props.onClose)
     return (
         <>
-            <Modal isOpen={true} onClose={() => { }} >
+            <Modal isOpen={props.open} onClose={() => {props.onClose()}} >
                 <ModalOverlay />
                 <ModalContent boxShadow={'none'}>
                     <ModalBody>
