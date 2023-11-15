@@ -4,21 +4,20 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
-} from '@chakra-ui/react'
-import {
     Modal,
     ModalOverlay,
     ModalContent,
     ModalBody,
 } from '@chakra-ui/react'
 import theme from "../../theme/theme"
-import { SUCCESS } from "../../utils/constants/PopUp"
+
+type statusType = "loading" | "error" | "info" | "warning" | "success";
 
 interface PopUpSubmissionProps {
     open: boolean
     title: string
     description: string
-    type:  "loading" | "error" | "info" | "warning" | "success";
+    type:  statusType;
     onClose: () => {}
 }
 
@@ -26,12 +25,12 @@ class PopUpSubmissionState implements PopUpSubmissionProps {
     open: boolean
     title: string
     description: string
-    type:  "loading" | "error" | "info" | "warning" | "success"
+    type:  statusType
     bg: string
     iconColor: string
     onClose: () => {}
 
-    constructor(open:boolean, title: string, description: string, type:  "loading" | "error" | "info" | "warning" | "success", onClose:() =>{}){
+    constructor(open:boolean, title: string, description: string, type:  statusType, onClose:() =>{}){
         this.open = open
         this.title = title
         this.description = description
@@ -42,37 +41,35 @@ class PopUpSubmissionState implements PopUpSubmissionProps {
     }
 }
 
-export default function PopUpSubmission(props: PopUpSubmissionProps) {
+export default function PopUpSubmission(props: Readonly<PopUpSubmissionProps>) {
     const propsSubmission: PopUpSubmissionState = new PopUpSubmissionState(props.open, props.title, props.description, props.type, props.onClose)
     return (
-        <>
-            <Modal isOpen={props.open} onClose={() => {props.onClose()}} >
-                <ModalOverlay />
-                <ModalContent boxShadow={'none'}>
-                    <ModalBody>
-                        <Alert
-                            status={props.type}
-                            variant='subtle'
-                            flexDirection='column'
-                            alignItems='center'
-                            justifyContent='center'
-                            textAlign='center'
-                            height='200px'
-                            width='400px'
-                            borderRadius='10'
-                            bg={propsSubmission.bg}
-                        >
-                            <AlertIcon boxSize='55px' id="icone" mb={5} color={propsSubmission.iconColor} />
-                            <AlertTitle mb={2} fontSize='lg' fontFamily={theme.fonts.rubik} color={"white"} >
-                                {propsSubmission.title}
-                            </AlertTitle>
-                            <AlertDescription maxWidth='sm' fontFamily={theme.fonts.rubik} fontWeight={"light"} color={"white"}>
-                                {propsSubmission.description}
-                            </AlertDescription>
-                        </Alert>
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
-        </>
+        <Modal isOpen={props.open} onClose={() => { props.onClose() }} >
+            <ModalOverlay />
+            <ModalContent boxShadow={'none'}>
+                <ModalBody>
+                    <Alert
+                        status={props.type}
+                        variant='subtle'
+                        flexDirection='column'
+                        alignItems='center'
+                        justifyContent='center'
+                        textAlign='center'
+                        height='200px'
+                        width='400px'
+                        borderRadius='10'
+                        bg={propsSubmission.bg}
+                    >
+                        <AlertIcon boxSize='55px' id="icone" mb={5} color={propsSubmission.iconColor} />
+                        <AlertTitle mb={2} fontSize='lg' fontFamily={theme.fonts.rubik} color={"white"} >
+                            {propsSubmission.title}
+                        </AlertTitle>
+                        <AlertDescription maxWidth='sm' fontFamily={theme.fonts.rubik} fontWeight={"light"} color={"white"}>
+                            {propsSubmission.description}
+                        </AlertDescription>
+                    </Alert>
+                </ModalBody>
+            </ModalContent>
+        </Modal>
     )
 }
