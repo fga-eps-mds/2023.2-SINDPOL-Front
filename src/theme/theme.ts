@@ -16,6 +16,7 @@ const theme = {
     body: "Inter, sans-serif",
     heading: "Inter, sans-serif",
     mono: "Inter, sans-serif",
+    rubik: "Rubik, sans-serif",
     logo: "Archivo, Inter, sans-serif",
   },
   styles: {
@@ -28,6 +29,10 @@ const theme = {
   },
   colors: {
     orange: "#FFA500",
+    greenAccent: "#CBF8B6",
+    softGreen: "#779E70",
+    pinkAccent: "#F1B4BB",
+    softRed: "#CF6E6E",
   },
 }
 export default theme
