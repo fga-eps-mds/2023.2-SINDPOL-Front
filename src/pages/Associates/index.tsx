@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react"
+import React, { useEffect } from "react"
 import { Box, Divider, Heading, IconButton, Text } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"

@@ -1,10 +1,8 @@
-import { createApi } from "@reduxjs/toolkit/query/react"
-import { RootState } from "../store/store"
 import httpClient from "../api/HttpClient"
 
 function getAssociates() {
   httpClient
-    .get("/")
+    .get("/gestao/users")
     .then((response) => {
       return response.data
     })

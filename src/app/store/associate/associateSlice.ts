@@ -1,13 +1,10 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import type { RootState } from "../store"
-import HttpClient from "../../api/HttpClient"
 import {
   getAssociate,
   getAssociates,
   postAssociate,
 } from "../../services/associatesService"
-
-type Associate = {}
 
 type AssociateState = {
   associates: any[]
