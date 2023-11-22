@@ -14,6 +14,7 @@ import MenuOrdenacao from '../../components/GenericMenuOptions';
 
 
 
+
 export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ export default function Associates(props: any) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('data.json'); 
+                const response = await fetch('https://sindpol-gateway-5b358c57af52.herokuapp.com/api/gestao/users/'); 
                 const data = await response.json();
                 setDataList(data);
             } catch (error) {
@@ -39,9 +40,11 @@ export default function Associates(props: any) {
         fetchData();
     }, []);
 
+   
+
     useEffect(() => {
         dispatch(fetchAssociates());
-    }, [dispatch]); 
+    }, [dispatch]);
     
 
     return (

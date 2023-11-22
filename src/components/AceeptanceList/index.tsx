@@ -18,9 +18,9 @@ interface DataItem {
     id: number;
     name: string;
     cpf: string;
-    matricula: number;
-    data: string;
-    estado: string;
+    registration: number;
+    birth_date: string;
+    status: string;
 }
 
 interface DataTableProps {
@@ -52,12 +52,12 @@ export default function AceeptanceList(props: DataTableProps) {
                             <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.name}</span><br />
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.cpf}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
-                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.matricula}</span>
+                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.registration}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
-                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.data}</span>
+                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.birth_date}</span>
                         </Td>
                         <td style={{ textAlign: 'right' }}>
-                            <span style={{ color: 'black', fontSize: '14px' }}>{item.estado}</span>
+                            <span style={{ color: 'black', fontSize: '14px' }}>{item.status}</span>
                             <IconButton aria-label='Search database' icon={<IconMinusVertical />} color={'gray'} />
                         </td>
                         <td> 
