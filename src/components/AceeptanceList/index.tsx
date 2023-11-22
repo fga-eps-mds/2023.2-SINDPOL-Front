@@ -28,16 +28,20 @@ interface DataTableProps {
 }
 
 export default function AceeptanceList(props: DataTableProps) {
+    const [isButtonActive, setIsButtonActive] = useState(false);
 
+    const handleCheckboxChange = () => {
+        setIsButtonActive(!isButtonActive);
+    };
     return (
         <Table variant="unstyled"
             sx={styles.table}>
             <Tbody fontFamily={theme.fonts.body}>
                 {props.data.map((item) => (
-                    <Tr key={item.id} 
-                    _hover={{ bg: "#FFF7E8", color: "#734A00" }}
+                    <Tr key={item.id}
+                        _hover={{ bg: "#FFF7E8", color: "#734A00" }}
 
-                    borderRadius={'30px'}
+                        borderRadius={'30px'}
                     >
                         <Td>
                             <Checkbox
@@ -46,6 +50,7 @@ export default function AceeptanceList(props: DataTableProps) {
                                 variant="circular"
                                 defaultChecked
                                 style={{ borderRadius: '16px' }} // Define o raio das bordas
+                                onChange={handleCheckboxChange} // Chama a função ao mudar o estado do checkbox
                             />
                         </Td>
                         <Td>
@@ -60,7 +65,7 @@ export default function AceeptanceList(props: DataTableProps) {
                             <span style={{ color: 'black', fontSize: '14px' }}>{item.status}</span>
                             <IconButton aria-label='Search database' icon={<IconMinusVertical />} color={'gray'} />
                         </td>
-                        <td> 
+                        <td>
                             <IconButton
                                 aria-label="Ver sindicalizado"
                                 icon={<IconEye />}

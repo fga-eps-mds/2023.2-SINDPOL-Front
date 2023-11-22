@@ -40,7 +40,6 @@ export default function Associates(props: any) {
         fetchData();
     }, []);
 
-   
 
     useEffect(() => {
         dispatch(fetchAssociates());

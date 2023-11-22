@@ -46,10 +46,20 @@ function deleteAssociate(id: number) {
   })
 }
 
+function disableUser(id: number) {
+  httpClient.patch(`/user/${id}`).then(response => {
+    return response.data
+  }).catch(error => {
+    console.log(error)
+    return error
+  })
+}
+
 export {
     getAssociates,
     getAssociate,
     createAssociate,
     updateAssociate,
-    deleteAssociate
+    deleteAssociate,
+    disableUser
 }
