@@ -23,6 +23,7 @@ export default function Associates(props: any) {
         dispatch(fetchAssociates());
     });
 
+
     return (
         <Box
             id="asssociates-page-container"

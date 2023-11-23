@@ -13,33 +13,48 @@ import AceeptanceList from '../../components/AceeptanceList';
 import MenuOrdenacao from '../../components/GenericMenuOptions';
 
 
+
 export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const associates = useAppSelector(selectAssociates);
     const [dataList, setDataList] = useState([]);
     const [dataList1, setDataList1] = useState<{ id: string; name: string }[]>([]);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
 
     const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
+
+    const handleCheckboxChange = (id: string) => {
+        const updatedIds = selectedIds.includes(id)
+            ? selectedIds.filter(selectedId => selectedId !== id)
+            : [...selectedIds, id];
+        setSelectedIds(updatedIds);
+        console.log(updatedIds)
+
+        return { selectedIds, handleCheckboxChange };
+    };
 
 
     const handleSelecao = (opcao: string) => {
         console.log(`Opção selecionada na página: ${opcao}`);
     };
 
-    const handleDisableUser = async (userId: string) => {
+    const handleDisableUsers = async () => {
         try {
-            const response = await fetch(`http://localhost:8001/api/users/${userId}/disable`, {
-                method: 'PATCH',
-            });
+            for (const userId of selectedIds) {
+                const response = await fetch(`https://sindpol-gateway-5b358c57af52.herokuapp.com/api/gestao/users/${userId}/disable`, {
+                    method: 'PATCH',
+                });
 
-            if (response.ok) {
-                console.log('User disabled successfully');
-            } else {
-                console.error('Failed to disable user:', response.statusText);
+                if (response.ok) {
+                    console.log(`User with ID ${userId} disabled successfully`);
+                } else {
+                    console.error(`Failed to disable user with ID ${userId}:`, response.statusText);
+                }
             }
         } catch (error) {
-            console.error('Error disabling user:', error);
+            console.error('Error disabling users:', error);
         }
     };
 
@@ -47,12 +62,10 @@ export default function Associates(props: any) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8001/api/users/');
+                const response = await fetch('https://sindpol-gateway-5b358c57af52.herokuapp.com/api/gestao/users/');
                 const data = await response.json();
                 setDataList(data);
                 setDataList1(data);
-                console.log(data);
-
             } catch (error) {
                 console.error('Erro ao buscar dados do arquivo JSON:', error);
             }
@@ -60,10 +73,10 @@ export default function Associates(props: any) {
         fetchData();
     }, []);
 
-
-
     useEffect(() => {
         dispatch(fetchAssociates());
+        console.log(associates);
+
     }, [dispatch]);
 
 
@@ -103,18 +116,16 @@ export default function Associates(props: any) {
                     <Box
                         sx={styles.boxHeaderBotton}
                     >
-                        {dataList1.map(user => (
-                            <GenericButton
-                                id="associates-page-box-header-import-button"
-                                text="Aprovar cadastro"
-                                onClick={() => handleDisableUser(user.id)} // Passe o ID do usuário para desabilitar
-                                sx={{ marginX: '12px', borderRadius: '50px' }}
-                            />
-                        ))}
+                        <GenericButton
+                            id="associates-page-box-header-import-button"
+                            text="Aprovar cadastro"
+                            onClick={() => {}} 
+                            sx={{ marginX: '12px', borderRadius: '50px' }}
+                        />
                         <GenericButton
                             id="associates-page-box-header-import-button"
                             text="Desaprovar cadastro"
-                            onClick={() => handleDisableUser('user_id_here')} // Passe o ID do usuário para desabilitar
+                            onClick={handleDisableUsers} // Chama a função para desativar os usuários selecionados
                             sx={{ marginX: '12px', borderRadius: '50px' }}
                         />
                     </Box>
@@ -124,7 +135,7 @@ export default function Associates(props: any) {
                     sx={styles.boxList}
                 >
                     {/* Tabela de associados */}
-                    <AceeptanceList data={dataList} />
+                    <AceeptanceList data={dataList} selectedIds={selectedIds} onCheckboxChange={handleCheckboxChange} />
 
                 </Box>
                 <Box

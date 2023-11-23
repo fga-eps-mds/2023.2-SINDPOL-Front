@@ -25,14 +25,12 @@ interface DataItem {
 
 interface DataTableProps {
     data: DataItem[];
-}
+    selectedIds: string[]; // Adicionando a propriedade de IDs selecionados
+    onCheckboxChange: (id: string) => void; // Função para manipular a seleção
+  }
 
-export default function AceeptanceList(props: DataTableProps) {
-    const [isButtonActive, setIsButtonActive] = useState(false);
+export default function AceeptanceList(props: DataTableProps ) {
 
-    const handleCheckboxChange = () => {
-        setIsButtonActive(!isButtonActive);
-    };
     return (
         <Table variant="unstyled"
             sx={styles.table}>
@@ -48,16 +46,15 @@ export default function AceeptanceList(props: DataTableProps) {
                                 iconColor='black'
                                 border='black'
                                 variant="circular"
-                                defaultChecked
                                 style={{ borderRadius: '16px' }} // Define o raio das bordas
-                                onChange={handleCheckboxChange} // Chama a função ao mudar o estado do checkbox
-                            />
+                                onChange={() => props.onCheckboxChange(item.id.toString())} // Chamar a função no componente principal
+                                />
                         </Td>
                         <Td>
                             <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.name}</span><br />
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.cpf}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
-                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.registration}</span>
+                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.status}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.birth_date}</span>
                         </Td>
@@ -78,4 +75,5 @@ export default function AceeptanceList(props: DataTableProps) {
             </Tbody>
         </Table>
     );
+
 };
