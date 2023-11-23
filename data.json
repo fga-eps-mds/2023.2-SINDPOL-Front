@@ -1,27 +1,26 @@
 [
-    {
-      "id": 1,
-      "name": "João da Silva",
-      "cpf": "123.456.789-00",
-      "matricula": 1001,
-      "data": "07/11/2023",
-      "estado": "Pendente"
-    },
-    {
-      "id": 2,
-      "name": "Maria Oliveira",
-      "cpf": "987.654.321-00",
-      "matricula": 1002,
-      "data": "08/11/2023",
-      "estado": "Pendente"
-    },
-    {
-      "id": 3,
-      "name": "José Santos",
-      "cpf": "555.555.555-00",
-      "matricula": 1003,
-      "data": "09/11/2023",
-      "estado": "Pendente"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "name": "John Doe",
+    "cpf": "123.456.789-10",
+    "registration": 1001,
+    "birth_date": "1990-05-15",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "cpf": "987.654.321-00",
+    "registration": 1002,
+    "birth_date": "1985-11-20",
+    "status": "inactive"
+  },
+  {
+    "id": 3,
+    "name": "Alice Johnson",
+    "cpf": "456.789.123-50",
+    "registration": 1003,
+    "birth_date": "1995-02-28",
+    "status": "active"
+  }
+]
