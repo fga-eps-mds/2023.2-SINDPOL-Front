@@ -62,8 +62,8 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"}>{associate.name}</Text>
-                    <Text align={"left"}>{associate.id} : : {associate.cpf}</Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.name}</Text>
+                    <Text align={"left"}>{associate.registration} : : {associate.cpf}</Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton

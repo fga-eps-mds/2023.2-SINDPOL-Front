@@ -1,7 +1,6 @@
 export const styles = {
   formContainer: {
     backgroundColor: "transparent",
-    width: "100vw",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -10,7 +9,6 @@ export const styles = {
     display: "flex",
     flexDirection: "column",
     backgroundColor: "white",
-    width: "1313px",
     minHeight: "90vh",
     borderRadius: "16px",
   },
@@ -32,6 +30,7 @@ export const styles = {
   },
   rowButtons: {
     display: "flex",
+    flexWrap: "wrap",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
@@ -43,15 +42,18 @@ export const styles = {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "transparent",
+    marginTop: "30px",
+    padding: "12px"
   },
   divider: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "black",
-    width: "1200px",
+    maxWidth: "1100px",
     height: "1px",
     justifyContent: "center",
+    marginLeft: "12px",
   },
   columnDependents: {
     display: "flex",
@@ -59,6 +61,7 @@ export const styles = {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
+    padding: "12px",
   },
   inputSize: {
     margin: "12px 8px 0px 0px",

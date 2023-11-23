@@ -14,9 +14,10 @@ interface dependent {
   id: number
   name: string
   cpf: string
-  birthDate: string
-  type: string
-  cellphone: string
+  birth_date: string
+  gender: string
+  relationship: string
+  phone: string
 }
 
 export default function FiliationForm(props: any) {
@@ -30,9 +31,10 @@ export default function FiliationForm(props: any) {
       id: cont,
       name: "",
       cpf: "",
-      birthDate: "",
-      type: "",
-      cellphone: "",
+      birth_date: "",
+      gender: "not binary",
+      relationship: "",
+      phone: "",
     }
     setCont(cont + 1)
     setBoxes((prevBoxes) => [...prevBoxes, novaBox])
@@ -89,16 +91,10 @@ export default function FiliationForm(props: any) {
           <GenericInput
             type={"string"}
             name={key}
-            value={value.value}
             onChange={(e: { target: { value: any } }) =>
               changeFormState(key, e.target.value)
             }
-            label={value.label}
-            sxFormControl={value.sx}
-            error={{
-              hasError: value.isInvalid,
-              message: "Campo obrigatório",
-            }}
+            {...value}
           ></GenericInput>
         </div>
       )
@@ -126,20 +122,17 @@ export default function FiliationForm(props: any) {
           <Box id={"dependent-title"} sx={styles.dependentTitleRow}>
             <Text
               fontSize={"24px"}
-              marginRight={"10px"}
-              marginLeft={"50px"}
-              marginTop={"20px"}
             >
               Dependentes
             </Text>
             <IconArrowDown height={"24px"}></IconArrowDown>
           </Box>
-          <Box id={"divider"} sx={styles.divider} marginLeft={"50px"}></Box>
+          <Box id={"divider"} sx={styles.divider}></Box>
           <GenericButton
             text="Adicionar Dependente"
             marginTop={"20px"}
             marginLeft={"50px"}
-            width={"340px"}
+            width={"250px"}
             onClick={adicionarBox}
           />
           <Box id={"column-dependents"} sx={styles.columnDependents}>
@@ -172,30 +165,30 @@ export default function FiliationForm(props: any) {
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
-                    name={"birthDate"}
-                    value={box.birthDate}
+                    name={"birth_date"}
+                    value={box.birth_date}
                     onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "birthDate", e.target.value)
+                      changeDependentFields(box.id, "birth_date", e.target.value)
                     }
                     label="Data de Nascimento*"
                     sxFormControl={{ ...styles.inputSize, width: "190px" }}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
-                    name={"type"}
-                    value={box.type}
+                    name={"relationship"}
+                    value={box.relationship}
                     onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "type", e.target.value)
+                      changeDependentFields(box.id, "relationship", e.target.value)
                     }
                     label="Parentesco"
                     sxFormControl={{ ...styles.inputSize, width: "120px" }}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
-                    name={"cellphone"}
-                    value={box.cellphone}
+                    name={"phone"}
+                    value={box.phone}
                     onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "cellphone", e.target.value)
+                      changeDependentFields(box.id, "phone", e.target.value)
                     }
                     label="Celular*"
                     sxFormControl={{ ...styles.inputSize, width: "170px" }}
@@ -214,13 +207,13 @@ export default function FiliationForm(props: any) {
             <GenericButton
               text="Enviar Solicitação de Filiação"
               marginTop={"20px"}
-              width={"491px"}
+              width={"250px"}
               onClick={submitForm}
             />
             <GenericButton
               text="Cancelar"
               marginTop={"20px"}
-              width={"157px"}
+              width={"150px"}
               onClick={() => navigate("/login")}
             />
           </Box>
