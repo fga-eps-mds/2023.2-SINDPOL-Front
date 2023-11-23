@@ -91,11 +91,9 @@ export default function FiliationForm(props: any) {
           <GenericInput
             type={"string"}
             name={key}
-            onChange={(e: { target: { value: any } }) =>
-              changeFormState(key, e.target.value)
-            }
+            onChange={(e: { target: { value: any} } ) => changeFormState(key, e.target.value)}
             {...value}
-          ></GenericInput>
+            ></GenericInput>
         </div>
       )
     })
