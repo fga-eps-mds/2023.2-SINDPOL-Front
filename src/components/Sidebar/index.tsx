@@ -12,6 +12,7 @@ import {
   IconLogout,
 } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
+import Logo from "../../assets/logo.png"
 
 const sidebarItens = {
   IconHome: { icon: <IconHome />, label: "Pagina Inicial", destiny: "/home" },
@@ -70,7 +71,7 @@ export default function Sidebar(props: any) {
   return (
     <Box id="sidebar-box" sx={styles.sidebarBox}>
       <Box>
-        <Image src="./src/assets/logo.png" sx={styles.logo} />
+        <Image src={Logo} sx={styles.logo} />
         <Box>
           {SidebarItem("IconHome")}
           {SidebarItem("IconUsers")}
