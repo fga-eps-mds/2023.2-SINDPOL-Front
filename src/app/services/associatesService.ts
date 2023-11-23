@@ -1,7 +1,7 @@
 import httpClient from "../api/HttpClient"
 
-function getAssociates() {
-  httpClient
+async function getAssociates() {
+  return await httpClient
     .get("/gestao/users")
     .then((response) => {
       return response.data
@@ -11,8 +11,8 @@ function getAssociates() {
     })
 }
 
-function getAssociate(id: number) {
-  httpClient
+async function getAssociate(id: number) {
+  return await httpClient
     .get(`/gestao/users/${id}`)
     .then((response) => {
       return response.data
@@ -23,8 +23,8 @@ function getAssociate(id: number) {
     })
 }
 
-function postAssociate(associate: any) {
-  httpClient
+async function postAssociate(associate: any) {
+  return await httpClient
     .post("/gestao/users", associate)
     .then((response) => {
       return response.data
@@ -35,8 +35,8 @@ function postAssociate(associate: any) {
     })
 }
 
-function updateAssociate(id: number, associate: any) {
-  httpClient
+async function updateAssociate(id: number, associate: any) {
+  return await httpClient
     .put(`/user/${id}`, associate)
     .then((response) => {
       return response.data
@@ -47,8 +47,8 @@ function updateAssociate(id: number, associate: any) {
     })
 }
 
-function deleteAssociate(id: number) {
-  httpClient
+async function deleteAssociate(id: number) {
+  return await httpClient
     .delete(`/user/${id}`)
     .then((response) => {
       return response.data

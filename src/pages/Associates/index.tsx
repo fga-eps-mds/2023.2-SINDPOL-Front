@@ -14,11 +14,13 @@ import { useNavigate } from "react-router-dom"
 export default function Associates(props: any) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const associates = useAppSelector(selectAssociates)
+  const [associates, setAssociates] = React.useState<any>([])
 
   useEffect(() => {
-    dispatch(fetchAssociates())
-  })
+    dispatch(fetchAssociates()).then((res) => {
+      setAssociates(res.payload)
+    })
+  }, [])
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -55,13 +57,13 @@ export default function Associates(props: any) {
         </Box>
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
-          {associates.map((associate) => {
+          {associates.map((associate: any) => {
             return (
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
                     <Text align={"left"}>{associate.name}</Text>
-                    <Text align={"left"}>{associate.id}</Text>
+                    <Text align={"left"}>{associate.id} : : {associate.cpf}</Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
