@@ -17,7 +17,7 @@ import MenuOrdenacao from '../../components/GenericMenuOptions';
 export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const associates = useAppSelector(selectAssociates);
+    const [associates, setAssociates] = React.useState<any>([])
     const [dataList, setDataList] = useState([]);
     const [dataList1, setDataList1] = useState<{ id: string; name: string }[]>([]);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -43,7 +43,7 @@ export default function Associates(props: any) {
     const handleDisableUsers = async () => {
         try {
             for (const userId of selectedIds) {
-                const response = await fetch(`https://sindpol-gateway-5b358c57af52.herokuapp.com/api/gestao/users/${userId}/disable`, {
+                const response = await fetch(`http://localhost:8001/api/users/${userId}/disable`, {
                     method: 'PATCH',
                 });
 
@@ -58,11 +58,29 @@ export default function Associates(props: any) {
         }
     };
 
+    const handleEnableUsers = async () => {
+        try {
+            for (const userId of selectedIds) {
+                const response = await fetch(`http://localhost:8001/api/users/${userId}/enable`, {
+                    method: 'PATCH',
+                });
+
+                if (response.ok) {
+                    console.log(`User with ID ${userId} enable successfully`);
+                } else {
+                    console.error(`Failed to enable user with ID ${userId}:`, response.statusText);
+                }
+            }
+        } catch (error) {
+            console.error('Error disabling users:', error);
+        }
+    };
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://sindpol-gateway-5b358c57af52.herokuapp.com/api/gestao/users/');
+                const response = await fetch('http://localhost:8001/api/users/');
                 const data = await response.json();
                 setDataList(data);
                 setDataList1(data);
@@ -73,11 +91,14 @@ export default function Associates(props: any) {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        dispatch(fetchAssociates());
-        console.log(associates);
 
-    }, [dispatch]);
+    useEffect(() => {
+      dispatch(fetchAssociates()).then((res) => {
+        setAssociates(res.payload)
+      })
+    }, [])
+
+    console.log(associates)
 
 
     return (
@@ -119,7 +140,7 @@ export default function Associates(props: any) {
                         <GenericButton
                             id="associates-page-box-header-import-button"
                             text="Aprovar cadastro"
-                            onClick={() => {}} 
+                            onClick={handleEnableUsers} // Chama a função para desativar os usuários selecionados
                             sx={{ marginX: '12px', borderRadius: '50px' }}
                         />
                         <GenericButton

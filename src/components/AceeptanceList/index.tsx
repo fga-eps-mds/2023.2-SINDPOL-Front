@@ -54,7 +54,7 @@ export default function AceeptanceList(props: DataTableProps ) {
                             <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.name}</span><br />
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.cpf}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
-                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.status}</span>
+                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.registration}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.birth_date}</span>
                         </Td>
