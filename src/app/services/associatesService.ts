@@ -59,6 +59,18 @@ async function deleteAssociate(id: number) {
     })
 }
 
+async function disableAssociate(id: number) {
+  return await httpClient
+    .patch(`/user/${id}/disable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
 export {
   getAssociates,
   getAssociate,
