@@ -61,7 +61,7 @@ async function deleteAssociate(id: number) {
 
 async function disableAssociate(id: string) {
   return await httpClient
-    .patch(`/gestao/user/${id}/disable`)
+    .patch(`/gestao/users/${id}/disable`)
     .then((response) => {
       return response.data
     })
@@ -73,7 +73,7 @@ async function disableAssociate(id: string) {
 
 async function enableAssociate(id: string) {
   return await httpClient
-    .patch(`/gestao/user/${id}/enable`)
+    .patch(`/gestao/users/${id}/enable`)
     .then((response) => {
       return response.data
     })
