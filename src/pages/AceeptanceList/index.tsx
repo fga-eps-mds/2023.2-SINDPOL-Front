@@ -6,13 +6,11 @@ import {
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
-import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
+import { fetchAssociates, selectAssociates,disableAssociateID,enableAssociateID } from '../../app/store/associate/associateSlice';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { useNavigate } from 'react-router-dom';
 import AceeptanceList from '../../components/AceeptanceList';
 import MenuOrdenacao from '../../components/GenericMenuOptions';
-
-
 
 export default function Associates(props: any) {
     const navigate = useNavigate();
@@ -21,9 +19,12 @@ export default function Associates(props: any) {
     const [dataList, setDataList] = useState([]);
     const [dataList1, setDataList1] = useState<{ id: string; name: string }[]>([]);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
-
     const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
+
+
+    const handleSelecao = (opcao: string) => {
+        console.log(`Opção selecionada na página: ${opcao}`);
+    };
 
     const handleCheckboxChange = (id: string) => {
         const updatedIds = selectedIds.includes(id)
@@ -35,71 +36,44 @@ export default function Associates(props: any) {
         return { selectedIds, handleCheckboxChange };
     };
 
+    const handleEnableUsers = async () => {
+        try {
+            for (const userId of selectedIds) {
+                const resultAction = await dispatch(enableAssociateID(userId));
+                const { error } = resultAction.payload;
 
-    const handleSelecao = (opcao: string) => {
-        console.log(`Opção selecionada na página: ${opcao}`);
+                if (!error) {
+                    console.log(`User with ID ${userId} enabled successfully`);
+                } else {
+                    console.error(`Failed to enable user with ID ${userId}:`, error);
+                }
+            }
+        } catch (error) {
+            console.error('Error enabling users:', error);
+        }
     };
 
     const handleDisableUsers = async () => {
         try {
             for (const userId of selectedIds) {
-                const response = await fetch(`http://localhost:8001/api/users/${userId}/disable`, {
-                    method: 'PATCH',
-                });
-
-                if (response.ok) {
-                    console.log(`User with ID ${userId} disabled successfully`);
+                const resultAction = await dispatch(disableAssociateID(userId));
+                const { error } = resultAction.payload;
+                if (!error) {
+                    console.log(`User with ID ${userId} enabled successfully`);
                 } else {
-                    console.error(`Failed to disable user with ID ${userId}:`, response.statusText);
+                    console.error(`Failed to enable user with ID ${userId}:`, error);
                 }
             }
         } catch (error) {
-            console.error('Error disabling users:', error);
+            console.error('Error enabling users:', error);
         }
     };
 
-    const handleEnableUsers = async () => {
-        try {
-            for (const userId of selectedIds) {
-                const response = await fetch(`http://localhost:8001/api/users/${userId}/enable`, {
-                    method: 'PATCH',
-                });
-
-                if (response.ok) {
-                    console.log(`User with ID ${userId} enable successfully`);
-                } else {
-                    console.error(`Failed to enable user with ID ${userId}:`, response.statusText);
-                }
-            }
-        } catch (error) {
-            console.error('Error disabling users:', error);
-        }
-    };
-
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8001/api/users/');
-                const data = await response.json();
-                setDataList(data);
-                setDataList1(data);
-            } catch (error) {
-                console.error('Erro ao buscar dados do arquivo JSON:', error);
-            }
-        };
-        fetchData();
-    }, []);
-
-
-    useEffect(() => {
-      dispatch(fetchAssociates()).then((res) => {
-        setAssociates(res.payload)
-      })
+        dispatch(fetchAssociates()).then((res) => {
+            setAssociates(res.payload)
+        })
     }, [])
-
-    console.log(associates)
-
 
     return (
         <Box
@@ -156,7 +130,7 @@ export default function Associates(props: any) {
                     sx={styles.boxList}
                 >
                     {/* Tabela de associados */}
-                    <AceeptanceList data={dataList} selectedIds={selectedIds} onCheckboxChange={handleCheckboxChange} />
+                    <AceeptanceList data={associates} selectedIds={selectedIds} onCheckboxChange={handleCheckboxChange} />
 
                 </Box>
                 <Box
