@@ -6,6 +6,7 @@ import PasswordInput from "../../components/PasswordInput"
 import { styles } from "./styles"
 import GenericButton from "../../components/GenericButton"
 import { useNavigate } from "react-router-dom"
+import Logo from "../../assets/logo.png"
 
 export default function Login(props: any) {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ export default function Login(props: any) {
       <Box id={"container-login"} sx={styles.containerLogin}>
         <Box id={"login-box"} sx={styles.loginBox}>
           <Image
-            src={"./src/assets/logo.png"}
+            src={Logo}
             width={"470px"}
             marginBottom={"30px"}
           />
