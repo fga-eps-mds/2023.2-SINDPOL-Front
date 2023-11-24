@@ -6,8 +6,8 @@ import {
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
-import { fetchAssociates, selectAssociates,disableAssociateID,enableAssociateID } from '../../app/store/associate/associateSlice';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { fetchAssociates,disableAssociateID,enableAssociateID } from '../../app/store/associate/associateSlice';
+import { useAppDispatch} from '../../utils/hooks';
 import { useNavigate } from 'react-router-dom';
 import AceeptanceList from '../../components/AceeptanceList';
 import MenuOrdenacao from '../../components/GenericMenuOptions';
@@ -16,8 +16,6 @@ export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [associates, setAssociates] = React.useState<any>([])
-    const [dataList, setDataList] = useState([]);
-    const [dataList1, setDataList1] = useState<{ id: string; name: string }[]>([]);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
 
@@ -48,6 +46,8 @@ export default function Associates(props: any) {
                     console.error(`Failed to enable user with ID ${userId}:`, error);
                 }
             }
+            window.location.reload();
+
         } catch (error) {
             console.error('Error enabling users:', error);
         }
@@ -64,6 +64,8 @@ export default function Associates(props: any) {
                     console.error(`Failed to enable user with ID ${userId}:`, error);
                 }
             }
+            window.location.reload();
+
         } catch (error) {
             console.error('Error enabling users:', error);
         }
