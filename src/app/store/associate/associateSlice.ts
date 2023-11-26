@@ -42,7 +42,7 @@ export const fetchAssociate = createAsyncThunk(
 export const createAssociate = createAsyncThunk(
   "associate/createAssociate",
   async (associate: any) => {
-    var result = await postAssociate(associate)
+    const result = await postAssociate(associate)
 
     if (result == null) {
       return { error: result }

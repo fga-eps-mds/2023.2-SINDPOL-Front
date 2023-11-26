@@ -52,26 +52,6 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
 
 export function validateField(key: string, value: any) {
   switch (key) {
-    case "fullName" ||
-      "warName" ||
-      "natural" ||
-      "civilState" ||
-      "address" ||
-      "city" ||
-      "uf" ||
-      "complement" ||
-      "gender" ||
-      "motherName" ||
-      "fatherName" ||
-      "scolarity" ||
-      "religion" ||
-      "bloodType" ||
-      "actualSituation" ||
-      "role" ||
-      "bodyOdLaw" ||
-      "workPost" ||
-      "lotation":
-      return validateString(value)
     case "birthDate" || "admissionDate":
       return validateDate(value)
     case "cpf":
@@ -84,11 +64,13 @@ export function validateField(key: string, value: any) {
       return validateNumber(value)
     case "email":
       return validateEmail(value)
-    case "cellphone" || "phone":
+    case "phone":
       return validatePhone(value)
+    case "cellphone":
+      return validatePhone(value)
+    default:
+      return validateString(value)
   }
-
-  return true
 }
 
 export function validateString(value: string) {
