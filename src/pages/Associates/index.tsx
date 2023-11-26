@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import Modal from "./modal"
+import Modal from "../../components/Modal/modal"
 import { Box, Divider, Heading, IconButton, Text, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
