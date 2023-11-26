@@ -52,7 +52,9 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
 
 export function validateField(key: string, value: any) {
   switch (key) {
-    case "birthDate" || "admissionDate":
+    case "admissionDate":
+      return validateDate(value)
+    case "birthDate":
       return validateDate(value)
     case "cpf":
       return validateCpf(value)
