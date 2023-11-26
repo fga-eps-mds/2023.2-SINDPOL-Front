@@ -1,16 +1,14 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Modal from "../../components/Modal/modal"
 import { Box, Divider, Heading, IconButton, Text, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
-import {
-  fetchAssociates,
-  selectAssociates,
-} from "../../app/store/associate/associateSlice"
+import { fetchAssociates, selectAssociates } from "../../app/store/associate/associateSlice"
 import { useAppDispatch, useAppSelector } from "../../utils/hooks"
 import { IconEye, IconMenu2, IconFileUpload } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
+import Papa from "papaparse";
 
 export default function Associates(props: any) {
   const navigate = useNavigate()
@@ -18,12 +16,30 @@ export default function Associates(props: any) {
   const [associates, setAssociates] = React.useState<any>([])
   const [openModal, setOpenModal] = React.useState<boolean>(false)
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
+  const [dados, setDados] = React.useState([])
 
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
       setAssociates(res.payload)
     })
   }, [])
+
+  const importAssociates = () => {
+    setOpenModal(false)
+    setOpenModal2(true)
+  }
+
+  const readAssociatedData = (e) => {
+    //ler arquivo csv de dados dos associados a serem cadastrados
+    const arquivo = e.target.files[0]
+    Papa.parse(arquivo, {
+      header: true,
+      complete: function(results) {
+        console.log(results.data)
+        setDados(results.data)
+      }
+    })
+  }
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -93,28 +109,40 @@ export default function Associates(props: any) {
         <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
           <Box id="modal-body" sx={styles.modalBox}>
-            <IconButton
-              aria-label="upload de arquivo"
-              icon={<IconFileUpload />}
-              onClick={() => { }}
-              color={"#000"}
-            />
+            <input type="file" accept=".csv" onChange={readAssociatedData}/>
             <Text>Solte um arquivo csv ou escolha</Text>
           </Box>
           <GenericButton 
             text="Importar sindicalizados"
-            onClick={() => setOpenModal2(true)}>
+            onClick={() => importAssociates()}>
           </GenericButton>
           </Box>
         </Modal>
         
         <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
-          <Box>
           <Text>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
-          <Box id="modal-body" sx={styles.modalBoxResult}>
-            <Text>teste</Text>
-          </Box>
-          </Box>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Nome de guerra</th>
+                <th>Matricula</th>
+                <th>Data Nascimento</th>
+                <th>CPF</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dados.map((dado: any) => {
+                return (
+                  <tr>
+                    <td>{dado.fullName}</td>
+                    <td>{dado.warName}</td>
+                    <td>{dado.credential}</td>
+                    <td>{dado.birthDate}</td>
+                    <td>{dado.cpf}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
         </Modal>
 
         <Box id="associates-page-box-footer">{/* Botões de paginação */}</Box>
