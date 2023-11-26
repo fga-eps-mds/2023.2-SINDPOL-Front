@@ -33,7 +33,11 @@ export default function Login(props: any) {
               setLoginState({ ...loginState, username: e.target.value })
             }
             label="Matricula"
-            sxFormControl={{ marginTop: "20px" }}
+            sxFormControl={{
+              marginTop: "20px",
+              maxWidth: "500px",
+              minHeight: "50px",
+            }}
           />
           <PasswordInput
             type={"password"}
@@ -43,10 +47,16 @@ export default function Login(props: any) {
               setLoginState({ ...loginState, password: e.target.value })
             }
             label="Senha"
-            sxFormControl={{ marginTop: "15px" }}
+            sxFormControl={{
+              marginTop: "15px",
+              maxWidth: "500px",
+              minHeight: "50px",
+            }}
           />
           <Link margin={"20px"}>Esqueci a senha</Link>
-          <Link margin={"10px"}>Ainda não sou filiado</Link>
+          <Link margin={"10px"} onClick={() => navigate("/filiation")}>
+            Ainda não sou filiado
+          </Link>
           <GenericButton
             text="Entrar"
             marginTop={"20px"}
