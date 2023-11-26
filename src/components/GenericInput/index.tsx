@@ -17,10 +17,11 @@ interface GenericInputProps {
   rightElement?: any
   label?: string
   placeholder?: string
-  error?: Error
+  error: Error
   helperText?: string
   sxFormControl?: any
   sxInput?: any
+  isRequired?: boolean
 }
 
 interface Error {
@@ -33,17 +34,16 @@ export default function GenericInput(props: GenericInputProps) {
     <>
       <FormControl
         {...(props.id && { id: props.id })}
-        isInvalid={props.error?.hasError ? true : false}
+        isInvalid={props.error.hasError ? true : false}
+        isRequired={props.isRequired}
         {...(props.sxFormControl && { sx: props.sxFormControl })}
       >
         {props.label && <FormLabel margin={"0px"}>{props.label}</FormLabel>}
         <Input {...props} {...(props.sxInput && { sx: props.sxInput })} />
-        {props.helperText && (
-          <FormHelperText>{props.helperText}</FormHelperText>
-        )}
-        {props.error && (
-          <FormErrorMessage>{props.error?.message}</FormErrorMessage>
-        )}
+        {!props.error.hasError
+          ? <FormHelperText>{props.helperText}</FormHelperText>
+          : <FormErrorMessage margin={"0px"}>{props.error.message}</FormErrorMessage>
+        }
       </FormControl>
     </>
   )

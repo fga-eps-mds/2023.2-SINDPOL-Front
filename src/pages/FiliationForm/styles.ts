@@ -21,8 +21,8 @@ export const styles = {
   },
   rowFields: {
     display: "flex",
+    alignItems: "flex-start",
     flexDirection: "row",
-    alignItems: "flex-end",
     justifyContent: "flex-start",
     backgroundColor: "transparent",
     maxWidth: "1200px",

@@ -39,6 +39,7 @@ interface Property {
   sxFormControl: any
   label?: string
   type?: string
+  isRequired?: boolean
 }
 
 export const defaultFormState = {

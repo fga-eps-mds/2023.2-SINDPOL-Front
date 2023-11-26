@@ -92,6 +92,10 @@ export default function FiliationForm(props: any) {
             type={"string"}
             name={key}
             onChange={(e: { target: { value: any} } ) => changeFormState(key, e.target.value)}
+            error={{
+              hasError: value.isInvalid,
+              message: "oi",
+            }}
             {...value}
             ></GenericInput>
         </div>
@@ -150,6 +154,10 @@ export default function FiliationForm(props: any) {
                     }
                     label="Nome Completo*"
                     sxFormControl={{ ...styles.inputSize, width: "300px" }}
+                    error={{
+                      hasError: false,
+                      message: "",
+                    }}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
@@ -160,6 +168,10 @@ export default function FiliationForm(props: any) {
                     }
                     label="CPF"
                     sxFormControl={{ ...styles.inputSize, width: "190px" }}
+                    error={{
+                      hasError: false,
+                      message: "",
+                    }}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
@@ -170,6 +182,10 @@ export default function FiliationForm(props: any) {
                     }
                     label="Data de Nascimento*"
                     sxFormControl={{ ...styles.inputSize, width: "190px" }}
+                    error={{
+                      hasError: false,
+                      message: "",
+                    }}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
@@ -180,6 +196,10 @@ export default function FiliationForm(props: any) {
                     }
                     label="Parentesco"
                     sxFormControl={{ ...styles.inputSize, width: "120px" }}
+                    error={{
+                      hasError: false,
+                      message: "",
+                    }}
                   ></GenericInput>
                   <GenericInput
                     type={"string"}
@@ -190,6 +210,10 @@ export default function FiliationForm(props: any) {
                     }
                     label="Celular*"
                     sxFormControl={{ ...styles.inputSize, width: "170px" }}
+                    error={{
+                      hasError: false,
+                      message: "",
+                    }}
                   ></GenericInput>
                   <IconButton
                     aria-label={""}
