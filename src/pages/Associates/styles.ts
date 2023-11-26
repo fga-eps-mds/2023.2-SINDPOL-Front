@@ -38,4 +38,16 @@ export const styles = {
         width: '100%',
         padding: '24px',
     },
+    modalBox: {
+        borderWidth: '3px',
+        borderStyle: 'dashed',
+        margin: '15px',
+    },
+    modalBoxResult: {
+        margin: '15px',
+    },
+    text: {
+        fontWeight: 'bold',
+        fontSize: '30px'
+    },
 };

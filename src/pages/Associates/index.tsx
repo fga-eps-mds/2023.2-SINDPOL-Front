@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
-import { Box, Divider, Heading, IconButton, Text } from "@chakra-ui/react"
+import Modal from "./modal"
+import { Box, Divider, Heading, IconButton, Text, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
@@ -8,13 +9,15 @@ import {
   selectAssociates,
 } from "../../app/store/associate/associateSlice"
 import { useAppDispatch, useAppSelector } from "../../utils/hooks"
-import { IconEye, IconMenu2 } from "@tabler/icons-react"
+import { IconEye, IconMenu2, IconFileUpload } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
 
 export default function Associates(props: any) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [associates, setAssociates] = React.useState<any>([])
+  const [openModal, setOpenModal] = React.useState<boolean>(false)
+  const [openModal2, setOpenModal2] = React.useState<boolean>(false)
 
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
@@ -50,11 +53,12 @@ export default function Associates(props: any) {
             <GenericButton
               id="associates-page-box-header-import-button"
               text="Importar"
-              onClick={() => {}}
+              onClick={() => setOpenModal(true)}
               sx={{ marginX: "12px" }}
             />
           </Box>
         </Box>
+        
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
           {associates.map((associate: any) => {
@@ -85,6 +89,34 @@ export default function Associates(props: any) {
             )
           })}
         </Box>
+        
+        <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+          <Box>
+          <Box id="modal-body" sx={styles.modalBox}>
+            <IconButton
+              aria-label="upload de arquivo"
+              icon={<IconFileUpload />}
+              onClick={() => { }}
+              color={"#000"}
+            />
+            <Text>Solte um arquivo csv ou escolha</Text>
+          </Box>
+          <GenericButton 
+            text="Importar sindicalizados"
+            onClick={() => setOpenModal2(true)}>
+          </GenericButton>
+          </Box>
+        </Modal>
+        
+        <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
+          <Box>
+          <Text>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
+          <Box id="modal-body" sx={styles.modalBoxResult}>
+            <Text>teste</Text>
+          </Box>
+          </Box>
+        </Modal>
+
         <Box id="associates-page-box-footer">{/* Botões de paginação */}</Box>
       </Box>
     </Box>
