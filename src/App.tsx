@@ -7,7 +7,7 @@ import AppRouter from "./utils/router/AppRouter"
 function App() {
   return (
     <div className="App">
-      <AceeptanceList />
+      <AppRouter />
     </div>
   )
 }

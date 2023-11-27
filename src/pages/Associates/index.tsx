@@ -16,9 +16,11 @@ export default function Associates(props: any) {
   const dispatch = useAppDispatch()
   const [associates, setAssociates] = React.useState<any>([])
 
-    useEffect(() => {
-        dispatch(fetchAssociates());
-    });
+  useEffect(() => {
+    dispatch(fetchAssociates()).then((res) => {
+      setAssociates(res.payload)
+    })
+  }, [])
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -33,7 +35,7 @@ export default function Associates(props: any) {
             type="text"
             name="search"
             value=""
-            onChange={() => {}}
+            onChange={() => { }}
             sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
           />
           <Box>
@@ -48,7 +50,7 @@ export default function Associates(props: any) {
             <GenericButton
               id="associates-page-box-header-import-button"
               text="Importar"
-              onClick={() => {}}
+              onClick={() => { }}
               sx={{ marginX: "12px" }}
             />
           </Box>
@@ -67,14 +69,14 @@ export default function Associates(props: any) {
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
                     <IconButton
                       aria-label="mais opções"
                       icon={<IconMenu2 />}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       color={"#734A00"}
                     />
                   </Box>
