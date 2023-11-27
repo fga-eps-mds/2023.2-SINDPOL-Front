@@ -16,9 +16,11 @@ export default function Associates(props: any) {
   const dispatch = useAppDispatch()
   const [associates, setAssociates] = React.useState<any>([])
 
-    useEffect(() => {
-        dispatch(fetchAssociates());
-    });
+  useEffect(() => {
+    dispatch(fetchAssociates()).then((res) => {
+      setAssociates(res.payload)
+    })
+  }, [])
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
