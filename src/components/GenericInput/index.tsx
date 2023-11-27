@@ -22,6 +22,7 @@ interface GenericInputProps {
   sxFormControl?: any
   sxInput?: any
   isRequired?: boolean
+  mask?: (value: string) => string
 }
 
 interface Error {
@@ -30,6 +31,15 @@ interface Error {
 }
 
 export default function GenericInput(props: GenericInputProps) {
+  const applyMask = (value: string, maskFunction?: (value: string) => string) => {
+    return maskFunction ? maskFunction(value) : value;
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const maskedValue = applyMask(value, props.mask);
+    props.onChange(maskedValue);
+  };
   return (
     <>
       <FormControl
@@ -39,7 +49,10 @@ export default function GenericInput(props: GenericInputProps) {
         {...(props.sxFormControl && { sx: props.sxFormControl })}
       >
         {props.label && <FormLabel margin={"0px"}>{props.label}</FormLabel>}
-        <Input {...props} {...(props.sxInput && { sx: props.sxInput })} />
+        <Input {...props} {...(props.sxInput && { sx: props.sxInput })}
+          value={applyMask(props.value, props.mask)} // Aplica a máscara condicionalmente
+          onChange={handleChange}
+        />
         {!props.error.hasError
           ? <FormHelperText>{props.helperText}</FormHelperText>
           : <FormErrorMessage margin={"0px"}>{props.error.message}</FormErrorMessage>

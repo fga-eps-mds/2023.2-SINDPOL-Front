@@ -40,6 +40,7 @@ interface Property {
   label?: string
   type?: string
   isRequired?: boolean
+  mask?: (value: string) => string
 }
 
 export const defaultFormState = {
@@ -63,6 +64,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Matrícula",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{6})(\d{2})$/, '$1/$2');
+    }
   },
   birthDate: {
     value: "",
@@ -77,6 +81,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "RG",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{2})(\d{3})(\d{3})(\d{1})$/, '$1.$2.$3-$4');
+    }
   },
   cpf: {
     value: "",
@@ -84,6 +91,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "CPF",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+    }
   },
   natural: {
     value: "",
@@ -112,6 +122,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "140px" },
     label: "CEP",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+    }
   },
   address: {
     value: "",
@@ -168,6 +181,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Celular",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    }
   },
   phone: {
     value: "",
@@ -175,6 +191,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Telefone",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    }
   },
   gender: {
     value: "",

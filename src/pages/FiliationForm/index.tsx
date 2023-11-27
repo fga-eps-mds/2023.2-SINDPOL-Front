@@ -214,6 +214,7 @@ export default function FiliationForm(props: any) {
                       hasError: false,
                       message: "",
                     }}
+                    mask={(value) => `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`}
                   ></GenericInput>
                   <IconButton
                     aria-label={""}
