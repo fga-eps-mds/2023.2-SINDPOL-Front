@@ -57,7 +57,7 @@ export default function Associates(props: any) {
         </Box>
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
-          {associates.map((associate: any) => {
+          {associates.length > 0 && associates.map((associate: any) => {
             return (
               <>
                 <Box sx={styles.boxItem}>
