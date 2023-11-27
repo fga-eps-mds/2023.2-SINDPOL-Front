@@ -17,12 +17,32 @@ export default function Associates(props: any) {
     const dispatch = useAppDispatch();
     const [associates, setAssociates] = React.useState<any>([])
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
-    const Opcoes = ['Novo', 'Antigo', 'Matrícula'];
+    const Opcoes = ['Novo', 'Antigo'];
 
 
     const handleSelecao = (opcao: string) => {
         console.log(`Opção selecionada na página: ${opcao}`);
+    
+        let sortedAssociates = [...associates]; 
+    
+        if (opcao === 'Novo') {
+            sortedAssociates.sort((a: any, b: any) => {
+                const dateA = new Date(a.created_at).getTime(); 
+                const dateB = new Date(b.created_at).getTime();
+                return dateB - dateA;
+            });
+        } else if (opcao === 'Antigo') {
+            sortedAssociates.sort((a: any, b: any) => {
+                const dateA = new Date(a.created_at).getTime();
+                const dateB = new Date(b.created_at).getTime();
+                return dateA - dateB; 
+            });
+        }
+    
+        setAssociates(sortedAssociates); 
     };
+    
+    
 
     const handleCheckboxChange = (id: string) => {
         const updatedIds = selectedIds.includes(id)
