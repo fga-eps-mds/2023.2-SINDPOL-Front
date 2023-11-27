@@ -1,12 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import type { RootState } from "../store"
-import {
-  getAssociate,
-  getAssociates,
-  postAssociate,
-  disableAssociate,
-  enableAssociate,
-} from "../../services/associatesService"
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "../store";
+import HttpClient from "../../api/HttpClient";
+import { getAssociate, getAssociates } from "../../services/associatesService";
+
+type Associate = {
+
+}
 
 type AssociateState = {
   associates: any[]
@@ -42,9 +41,9 @@ export const fetchAssociate = createAsyncThunk(
 )
 
 export const createAssociate = createAsyncThunk(
-  "associate/createAssociate",
-  async (associate: any) => {
-    var result = await postAssociate(associate)
+    'associate/createAssociate',
+    async (associate: any) => {
+        var result = await getAssociate(associate)
 
     if (result == null) {
       return { error: result }
@@ -60,41 +59,13 @@ export const updateAssociate = createAsyncThunk(
   async (associate: any) => {
     var result = await getAssociate(associate)
 
-    if (result == null) {
-      return { error: result }
+        if(result == null) {
+            return {'error': result}
+        }
+
+        setAssociate(result);
+        return result;
     }
-
-    setAssociate(result)
-    return result
-  },
-)
-
-export const disableAssociateID = createAsyncThunk(
-  "associate/deleteAssociate",
-  async (id: string) => {
-    var result = await disableAssociate(id)
-
-    if (result == null) {
-      return { error: result }
-    }
-
-    setAssociate(result)
-    return result
-  },
-)
-
-export const enableAssociateID = createAsyncThunk(
-  "associate/deleteAssociate",
-  async (id: string) => {
-    var result = await enableAssociate(id)
-
-    if (result == null) {
-      return { error: result }
-    }
-
-    setAssociate(result)
-    return result
-  },
 )
 
 export const deleteAssociate = createAsyncThunk(

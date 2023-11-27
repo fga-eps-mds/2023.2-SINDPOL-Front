@@ -57,6 +57,7 @@ async function deleteAssociate(id: number) {
       console.log(error)
       return error
     })
+<<<<<<< HEAD
 }
 
 async function disableAssociate(id: string) {
@@ -81,6 +82,8 @@ async function enableAssociate(id: string) {
       console.log(error)
       return error
     })
+=======
+>>>>>>> 90cc137f826ff71a2ae6b4e39484c6ab71de8439
 }
 
 export {
@@ -89,6 +92,9 @@ export {
   postAssociate,
   updateAssociate,
   deleteAssociate,
+<<<<<<< HEAD
   disableAssociate,
   enableAssociate,
+=======
+>>>>>>> 90cc137f826ff71a2ae6b4e39484c6ab71de8439
 }
