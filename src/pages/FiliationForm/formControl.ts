@@ -40,6 +40,7 @@ interface Property {
   label?: string
   type?: string
   isRequired?: boolean
+  helperText?: string
   mask?: (value: string) => string
 }
 
@@ -50,6 +51,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Nome completo",
     type: "string",
+    isRequired: true,
   },
   warName: {
     value: "",
@@ -64,6 +66,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Matrícula",
     type: "string",
+    isRequired: true,
     mask: (value: string) => {
       return value.replace(/^(\d{6})(\d{2})$/, '$1/$2');
     }
@@ -74,6 +77,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Data de nascimento",
     type: "string",
+    isRequired: true,
   },
   rg: {
     value: "",
@@ -81,6 +85,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "RG",
     type: "string",
+    isRequired: true,
     mask: (value: string) => {
       return value.replace(/^(\d{2})(\d{3})(\d{3})(\d{1})$/, '$1.$2.$3-$4');
     }
@@ -91,6 +96,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "CPF",
     type: "string",
+    isRequired: true,
     mask: (value: string) => {
       return value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
     }
@@ -174,6 +180,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "E-mail",
     type: "string",
+    isRequired: true,
   },
   cellphone: {
     value: "",
@@ -181,6 +188,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Celular",
     type: "string",
+    isRequired: true,
     mask: (value: string) => {
       return value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
     }
@@ -201,6 +209,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Sexo",
     type: "string",
+    isRequired: true,
   },
   motherName: {
     value: "",
@@ -208,6 +217,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Nome da mãe",
     type: "string",
+    isRequired: true,
   },
   fatherName: {
     value: "",
@@ -215,6 +225,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Nome do pai",
     type: "string",
+    isRequired: true,
   },
   scolarity: {
     value: "",
@@ -236,6 +247,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "150px" },
     label: "Tipo sanguíneo",
     type: "string",
+    isRequired: true,
   },
   actualSituation: {
     value: "",
@@ -243,6 +255,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Situação atual",
     type: "string",
+    isRequired: true,
   },
   admissionDate: {
     value: "",
@@ -250,6 +263,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Data de admissão",
     type: "string",
+    isRequired: true,
   },
   role: {
     value: "",
@@ -257,13 +271,15 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Cargo",
     type: "string",
+    isRequired: true,
   },
   bodyOfLaw: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "Orgão*",
+    label: "Orgão",
     type: "string",
+    isRequired: true,
   },
   workPost: {
     value: "",
@@ -271,6 +287,7 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Posto de trabalho",
     type: "string",
+    isRequired: true,
   },
   lotation: {
     value: "",
@@ -278,5 +295,6 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Lotação",
     type: "string",
+    isRequired: true,
   },
 }
