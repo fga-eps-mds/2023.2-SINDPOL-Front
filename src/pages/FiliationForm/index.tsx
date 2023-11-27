@@ -53,7 +53,8 @@ export default function FiliationForm(props: any) {
 
     dispatch(createAssociate(data)).then((res) => {
       if (res.payload.response.status !== 422) {
-        navigate("/login")
+        window.history.back()
+        // navigate("/login")
       }
     })
   }
