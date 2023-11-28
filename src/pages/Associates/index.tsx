@@ -5,6 +5,7 @@ import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
 import {
   fetchAssociates,
+  fetchAssociate,
   selectAssociates,
 } from "../../app/store/associate/associateSlice"
 import { useAppDispatch, useAppSelector } from "../../utils/hooks"
@@ -21,6 +22,10 @@ export default function Associates(props: any) {
       setAssociates(res.payload)
     })
   }, [])
+
+  const handleEyeClick = (associateId: string) => {
+    console.log("ID do associado:", associateId)
+  }
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -63,13 +68,13 @@ export default function Associates(props: any) {
                 <Box sx={styles.boxItem}>
                   <Box>
                     <Text align={"left"} fontWeight={'bold'}>{associate.name}</Text>
-                    <Text align={"left"}>{associate.registration} : : {associate.cpf}</Text>
+                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birth_date} </Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => {}}
+                      onClick={() => { handleEyeClick(associate.id)}}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
