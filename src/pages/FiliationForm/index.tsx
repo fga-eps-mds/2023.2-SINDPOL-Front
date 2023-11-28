@@ -51,7 +51,12 @@ export default function FiliationForm(props: any) {
     let data = createObjectToSubmit(formState, boxes)
     console.log("formstate:: ", data)
 
-    dispatch(createAssociate(data))
+    dispatch(createAssociate(data)).then((res) => {
+      if (res.payload.response.status !== 422) {
+        window.history.back()
+        // navigate("/login")
+      }
+    })
   }
 
   const changeFormState = (name: string, value: any) => {
