@@ -27,7 +27,7 @@ export const fetchAssociates = createAsyncThunk(
 
 export const fetchAssociate = createAsyncThunk(
   "associate/getAssociateById",
-  async (id: number) => {
+  async (id: string | undefined) => {
     var result = await getAssociate(id)
 
     if (result == null) {
@@ -69,7 +69,7 @@ export const updateAssociate = createAsyncThunk(
 
 export const deleteAssociate = createAsyncThunk(
   "associate/deleteAssociate",
-  async (id: number) => {
+  async (id: string | undefined) => {
     var result = await getAssociate(id)
 
     if (result == null) {

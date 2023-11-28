@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { Link } from 'react-router-dom';
 import { Box, Divider, Heading, IconButton, Text } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
@@ -12,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks"
 import { IconEye, IconMenu2 } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
 
+
 export default function Associates(props: any) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -24,7 +26,8 @@ export default function Associates(props: any) {
   }, [])
 
   const handleEyeClick = (associateId: string) => {
-    console.log("ID do associado:", associateId)
+    console.log("ID do associado:", associateId);
+    navigate(`/update/${associateId}`);
   }
 
   return (
@@ -40,7 +43,7 @@ export default function Associates(props: any) {
             type="text"
             name="search"
             value=""
-            onChange={() => {}}
+            onChange={() => { }}
             sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
           />
           <Box>
@@ -55,7 +58,7 @@ export default function Associates(props: any) {
             <GenericButton
               id="associates-page-box-header-import-button"
               text="Importar"
-              onClick={() => {}}
+              onClick={() => { }}
               sx={{ marginX: "12px" }}
             />
           </Box>
@@ -74,14 +77,15 @@ export default function Associates(props: any) {
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => { handleEyeClick(associate.id)}}
+                      onClick={() => { handleEyeClick(associate.id) }}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
+
                     <IconButton
                       aria-label="mais opções"
                       icon={<IconMenu2 />}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       color={"#734A00"}
                     />
                   </Box>

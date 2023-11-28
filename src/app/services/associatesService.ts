@@ -11,7 +11,7 @@ async function getAssociates() {
     })
 }
 
-async function getAssociate(id: number) {
+async function getAssociate(id: string | undefined) {
   return await httpClient
     .get(`/gestao/users/${id}`)
     .then((response) => {

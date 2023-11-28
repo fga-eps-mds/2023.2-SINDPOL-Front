@@ -1,5 +1,6 @@
 import { Box, Image, Text, IconButton } from "@chakra-ui/react"
-import React, { useState } from "react"
+import { useParams } from 'react-router-dom';
+import React, { useState,useEffect } from "react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
@@ -9,6 +10,9 @@ import { useAppDispatch } from "../../utils/hooks"
 import { createAssociate } from "../../app/store/associate/associateSlice"
 import { useNavigate } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
+import {
+  fetchAssociate,
+} from "../../app/store/associate/associateSlice"
 
 interface dependent {
   id: number
@@ -26,6 +30,9 @@ export default function FiliationForm(props: any) {
   const [formState, setFormState] = React.useState<FormState>(defaultFormState)
   const [boxes, setBoxes] = useState<Array<dependent>>([])
   const [cont, setCont] = useState(1)
+  const [associate, setAssociate] = React.useState<any>([])
+  const { associateId } = useParams();
+
   const adicionarBox = () => {
     const novaBox: dependent = {
       id: cont,
@@ -99,12 +106,29 @@ export default function FiliationForm(props: any) {
     })
   }
 
+  useEffect(() => {
+    dispatch(fetchAssociate(associateId)).then((res) => {
+      setAssociate(res.payload); 
+      setFormState((prevState) => {
+        const updatedFormState = { ...prevState };
+        Object.keys(res.payload).forEach((key) => {
+          if (updatedFormState[key]) {
+            updatedFormState[key].value = res.payload[key];
+          }
+        });
+        return updatedFormState;
+      });
+    });
+  }, []);
+
+  console.log(associate)
+
   return (
     <>
       <Box id={"container-form"} sx={styles.formContainer}>
         <Box id={"form-box"} sx={styles.formBox}>
           <Image
-            src="src/assets/logo.png"
+            src="../src/assets/logo.png"
             width={"84px"}
             marginLeft={"30px"}
             marginTop={"10px"}

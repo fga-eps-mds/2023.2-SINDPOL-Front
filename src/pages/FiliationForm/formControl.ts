@@ -1,9 +1,9 @@
 export interface FormState {
   [key: string]: Property
-  fullName: Property
+  name: Property
   warName: Property
-  credential: Property
-  birthDate: Property
+  registration: Property
+  birth_date: Property
   rg: Property
   cpf: Property
   natural: Property
@@ -41,8 +41,10 @@ interface Property {
   type?: string
 }
 
+
+
 export const defaultFormState = {
-  fullName: {
+  name: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
@@ -56,14 +58,14 @@ export const defaultFormState = {
     label: "Nome de guerra",
     type: "string",
   },
-  credential: {
+  registration: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Matrícula",
     type: "string",
   },
-  birthDate: {
+  birth_date: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
