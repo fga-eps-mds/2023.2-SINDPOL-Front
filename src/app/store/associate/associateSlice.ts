@@ -4,6 +4,7 @@ import {
   getAssociate,
   getAssociates,
   postAssociate,
+  updateAssociate,
 } from "../../services/associatesService"
 
 type AssociateState = {
@@ -53,10 +54,10 @@ export const createAssociate = createAsyncThunk(
   },
 )
 
-export const updateAssociate = createAsyncThunk(
+export const updateAssociates = createAsyncThunk(
   "associate/updateAssociate",
-  async (associate: any) => {
-    var result = await getAssociate(associate)
+  async ({ id, associate }: { id: string | undefined, associate: any }) => {
+    var result = await updateAssociate(id,associate)
 
     if (result == null) {
       return { error: result }

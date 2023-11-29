@@ -35,9 +35,9 @@ async function postAssociate(associate: any) {
     })
 }
 
-async function updateAssociate(id: number, associate: any) {
+async function updateAssociate(id: string | undefined, associate: any) {
   return await httpClient
-    .put(`/user/${id}`, associate)
+    .put(`gestao/users/${id}`, associate)
     .then((response) => {
       return response.data
     })
