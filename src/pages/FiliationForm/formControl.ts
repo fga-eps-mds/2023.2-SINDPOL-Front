@@ -1,14 +1,14 @@
 export interface FormState {
   [key: string]: Property
-  name: Property
-  nickname: Property
-  registration: Property
-  birth_date: Property
+  fullName: Property
+  warName: Property
+  credential: Property
+  birthDate: Property
   rg: Property
   cpf: Property
-  place_of_birth: Property
+  natural: Property
   ufNatural: Property
-  marital_status: Property
+  civilState: Property
   cep: Property
   address: Property
   number: Property
@@ -20,13 +20,13 @@ export interface FormState {
   cellphone: Property
   phone: Property
   gender: Property
-  mother_name: Property
-  father_name: Property
+  motherName: Property
+  fatherName: Property
   scolarity: Property
   religion: Property
-  blood_type: Property
+  bloodType: Property
   actualSituation: Property
-  admission_date: Property
+  admissionDate: Property
   role: Property
   bodyOfLaw: Property
   workPost: Property
@@ -41,31 +41,29 @@ interface Property {
   type?: string
 }
 
-
-
 export const defaultFormState = {
-  name: {
+  fullName: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Nome completo",
     type: "string",
   },
-  nickname: {
+  warName: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Nome de guerra",
     type: "string",
   },
-  registration: {
+  credential: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Matrícula",
     type: "string",
   },
-  birth_date: {
+  birthDate: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
@@ -86,7 +84,7 @@ export const defaultFormState = {
     label: "CPF",
     type: "string",
   },
-  place_of_birth: {
+  natural: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
@@ -100,7 +98,7 @@ export const defaultFormState = {
     label: "UF Nat.",
     type: "string",
   },
-  marital_status: {
+  civilState: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
@@ -184,14 +182,14 @@ export const defaultFormState = {
     label: "Sexo",
     type: "string",
   },
-  mother_name: {
+  motherName: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Nome da mãe",
     type: "string",
   },
-  father_name: {
+  fatherName: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
@@ -212,7 +210,7 @@ export const defaultFormState = {
     label: "Religião",
     type: "string",
   },
-  blood_type: {
+  bloodType: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
@@ -226,7 +224,7 @@ export const defaultFormState = {
     label: "Situação atual",
     type: "string",
   },
-  admission_date: {
+  admissionDate: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
