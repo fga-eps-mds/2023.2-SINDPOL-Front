@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Box,
-    Heading,
-} from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import { styles } from './styles';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
-import { fetchAssociates,disableAssociateID,enableAssociateID } from '../../app/store/associate/associateSlice';
-import { useAppDispatch} from '../../utils/hooks';
+import { fetchAssociates, disableAssociateID, enableAssociateID } from '../../app/store/associate/associateSlice';
+import { useAppDispatch } from '../../utils/hooks';
 import { useNavigate } from 'react-router-dom';
 import AceeptanceList from '../../components/AceeptanceList';
 import MenuOrdenacao from '../../components/GenericMenuOptions';
 
-export default function Associates(props: any) {
+export default function Aceeptance(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [associates, setAssociates] = React.useState<any>([])
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const Opcoes = ['Novo', 'Antigo'];
 
-
     const handleSelecao = (opcao: string) => {
         console.log(`Opção selecionada na página: ${opcao}`);
-    
-        let sortedAssociates = [...associates]; 
-    
+
+        let sortedAssociates = [...associates];
+
         if (opcao === 'Novo') {
             sortedAssociates.sort((a: any, b: any) => {
-                const dateA = new Date(a.created_at).getTime(); 
+                const dateA = new Date(a.created_at).getTime();
                 const dateB = new Date(b.created_at).getTime();
                 return dateB - dateA;
             });
@@ -35,14 +31,12 @@ export default function Associates(props: any) {
             sortedAssociates.sort((a: any, b: any) => {
                 const dateA = new Date(a.created_at).getTime();
                 const dateB = new Date(b.created_at).getTime();
-                return dateA - dateB; 
+                return dateA - dateB;
             });
         }
-    
-        setAssociates(sortedAssociates); 
+
+        setAssociates(sortedAssociates);
     };
-    
-    
 
     const handleCheckboxChange = (id: string) => {
         const updatedIds = selectedIds.includes(id)

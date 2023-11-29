@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    Checkbox,
-} from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Checkbox } from '@chakra-ui/react';
 import theme from "../../theme/theme";
 import { IconEye, IconMinusVertical } from '@tabler/icons-react';
 import { IconButton } from '@chakra-ui/react';
@@ -65,7 +56,7 @@ export default function AceeptanceList(props: DataTableProps ) {
                         <td>
                             <IconButton
                                 aria-label="Ver sindicalizado"
-                                icon={<IconEye />}
+                                icon={<IconEye/>}
                                 onClick={() => { }}
                                 color={"black"}
                             />
