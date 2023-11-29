@@ -105,9 +105,8 @@ const slice = createSlice({
 
 export const { setAssociates, setAssociateId, setAssociate } = slice.actions
 
-export const selectAssociates = (state: RootState) => state.associate.associates
-export const selectAssociateId = (state: RootState) =>
-  state.associate.associateId
-export const selectAssociate = (state: RootState) => state.associate.associate
+export const selectAssociates  = (state: RootState) => state.associate.associates
+export const selectAssociateId = (state: RootState) => state.associate.associateId
+export const selectAssociate   = (state: RootState) => state.associate.associate
 
 export default slice.reducer

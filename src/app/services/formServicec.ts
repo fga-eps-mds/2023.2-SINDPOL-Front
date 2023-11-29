@@ -1,11 +1,11 @@
 export interface FormRequest {
   fullName: string
   warName: string
-  credential: string
+  registration: string
   birthDate: string
   rg: string
   cpf: string
-  natural: string
+  placeOfBirth: string
   ufNatural: string
   civilState: string
   cep: string
