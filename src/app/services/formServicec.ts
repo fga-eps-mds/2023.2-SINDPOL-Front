@@ -11,9 +11,11 @@ export interface FormRequest {
   cep: string
   address: string
   number: string
+  neighborhood: string
   city: string
-  uf: string
+  state: string
   complement: string
+  uf: string
   email: string
   cellphone: string
   phone: string
@@ -23,9 +25,9 @@ export interface FormRequest {
   scolarity: string
   religion: string
   bloodType: string
-  function: string
-  actualSituation: string
+  actualWorkSituation: string
   admissionDate: string
+  jobRole: string
   role: string
   bodyOfLaw: string
   lotation: string

@@ -2,20 +2,20 @@ export interface FormState {
   [key: string]: Property
   fullName: Property
   warName: Property
-  credential: Property
+  registration: Property
   birthDate: Property
   rg: Property
   cpf: Property
-  natural: Property
+  placeOfBirth: Property
   ufNatural: Property
   civilState: Property
   cep: Property
   address: Property
   number: Property
-  city: Property
-  uf: Property
   neighborhood: Property
+  city: Property
   complement: Property
+  uf: Property
   email: Property
   cellphone: Property
   phone: Property
@@ -25,12 +25,12 @@ export interface FormState {
   scolarity: Property
   religion: Property
   bloodType: Property
-  actualSituation: Property
+  actualWorkSituation: Property
   admissionDate: Property
-  role: Property
+  jobRole: Property
   bodyOfLaw: Property
-  workPost: Property
   lotation: Property
+  workPost: Property
 }
 
 interface Property {
@@ -56,7 +56,7 @@ export const defaultFormState = {
     label: "Nome de guerra",
     type: "string",
   },
-  credential: {
+  registration: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
@@ -84,7 +84,7 @@ export const defaultFormState = {
     label: "CPF",
     type: "string",
   },
-  natural: {
+  placeOfBirth: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
@@ -217,7 +217,7 @@ export const defaultFormState = {
     label: "Tipo sanguíneo",
     type: "string",
   },
-  actualSituation: {
+  actualWorkSituation: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "200px" },
@@ -231,7 +231,7 @@ export const defaultFormState = {
     label: "Data de admissão",
     type: "string",
   },
-  role: {
+  jobRole: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
