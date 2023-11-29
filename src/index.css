@@ -13,16 +13,18 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: #FFF7E840;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #FFA50040;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar-thumb:hover {
