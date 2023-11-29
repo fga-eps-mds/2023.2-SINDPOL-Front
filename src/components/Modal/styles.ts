@@ -16,7 +16,9 @@ export const MODAL_STYLE: CSSProperties = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    padding: '150px',
+    padding: '80px',
+    maxWidth: '640px',
+    maxHeight: '460px',
     backgroundColor: '#FFF',
     borderRadius: '10px'
 }
