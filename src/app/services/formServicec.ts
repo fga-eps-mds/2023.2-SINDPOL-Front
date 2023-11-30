@@ -13,7 +13,6 @@ export interface FormRequest {
   number: string
   neighborhood: string
   city: string
-  state: string
   complement: string
   uf: string
   email: string
@@ -28,8 +27,8 @@ export interface FormRequest {
   actualWorkSituation: string
   admissionDate: string
   jobRole: string
-  role: string
   bodyOfLaw: string
   lotation: string
   workPost: string
+  systemRole: string
 }

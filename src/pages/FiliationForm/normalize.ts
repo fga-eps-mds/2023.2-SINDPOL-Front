@@ -16,7 +16,6 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
     number: formState.number.value,
     neighborhood: formState.neighborhood.value,
     city: formState.city.value,
-    state: formState.uf.value,
     complement: formState.complement.value,
     uf: formState.uf.value,
     email: formState.email.value,
@@ -34,9 +33,7 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
     bodyOfLaw: formState.bodyOfLaw.value,
     lotation: formState.lotation.value,
     workPost: formState.workPost.value,
-    dispatcher: "--",
-    dispatched_date: Date.now(),
-    role: "Sindicalizado",
+    systemRole: "Sindicalizado",
     dependents: dependents.map((dependent) => {
       return {
         ...dependent,
