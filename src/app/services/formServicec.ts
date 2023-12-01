@@ -31,4 +31,5 @@ export interface FormRequest {
   lotation: string
   workPost: string
   systemRole: string
+  password: string
 }

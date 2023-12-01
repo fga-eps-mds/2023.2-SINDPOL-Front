@@ -25,6 +25,8 @@ export default function Associates(props: any) {
     })
   }, [])
 
+  console.log(associates)
+
   const handleEyeClick = (associateId: string) => {
     console.log("ID do associado:", associateId);
     navigate(`/update/${associateId}`);
@@ -70,14 +72,14 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.name}</Text>
-                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birth_date} </Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
+                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate} </Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => { handleEyeClick(associate.id) }}
+                      onClick={() => { handleEyeClick(associate.id)}}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />

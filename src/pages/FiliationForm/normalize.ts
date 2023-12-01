@@ -4,7 +4,7 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
   let data = {
     fullName: formState.fullName.value,
     warName: formState.warName.value,
-    registration: formState.credential.value,
+    registration: formState.registration.value,
     birthDate: new Date(formState.birthDate.value).getTime(),
     rg: formState.rg.value,
     cpf: formState.cpf.value,
@@ -34,6 +34,7 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
     lotation: formState.lotation.value,
     workPost: formState.workPost.value,
     systemRole: "Sindicalizado",
+    password:"1234",
     dependents: dependents.map((dependent) => {
       return {
         ...dependent,

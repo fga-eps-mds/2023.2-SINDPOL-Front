@@ -17,7 +17,6 @@ export const fetchAssociates = createAsyncThunk(
   "associate/getAssociates",
   async () => {
     var result = await getAssociates()
-
     if (result === null) {
       return "error"
     }
