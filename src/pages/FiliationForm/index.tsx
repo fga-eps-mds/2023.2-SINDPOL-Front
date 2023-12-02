@@ -143,9 +143,14 @@ export default function FiliationForm(props: any) {
             marginTop={"10px"}
           />
           <Box id={"column-fields"} sx={styles.columnFields}>
+          {location.pathname === '/filiation' ? (
             <Text fontSize={"20px"} fontWeight={"semibold"} marginTop={"20px"}>
               Formulário de Filiação
             </Text>
+          ) : (
+            <Text fontSize={"20px"} fontWeight={"semibold"} marginTop={"20px"}>
+              Detalhes do Sindicalizado
+            </Text>)}
             <Box id={"row-fields"} sx={styles.rowFields} marginTop={"20px"}>
               {renderForm()}
             </Box>
@@ -244,19 +249,28 @@ export default function FiliationForm(props: any) {
               />
             ) : (
               <GenericButton
-                text="Salvar"
+                text="Salvar Alterações"
                 marginTop={"20px"}
                 width={"150px"}
                 onClick={updateForm}
 
               />
             )}
-            <GenericButton
-              text="Cancelar"
-              marginTop={"20px"}
-              width={"150px"}
-              onClick={() => navigate("/login")}
-            />
+            {location.pathname === '/filiation' ? ( // Rota específica para alterar o texto e a função
+              <GenericButton
+                text="Cancelar"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={() => navigate("/login")}
+              />
+            ) : (
+              <GenericButton
+                text="Voltar"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={() => navigate("/Associates")}
+              />
+            )}
           </Box>
         </Box>
       </Box>
