@@ -21,7 +21,8 @@ export default function AppRouter(props: any) {
         <Route path={"/"} element={<PublicOutlet />}>
           <Route path={"/"} element={<Login />} />
           <Route path={"/login"} element={<Login />} />
-          <Route path={"/filiation"} element={<FiliationForm />} />
+          <Route path={"/filiation/"} element={<FiliationForm />} />
+          <Route path={"/update/:associateId"} element={<FiliationForm />} />
           {/* Pagina de filiação */}
         </Route>
         <Route path={"/"} element={<PrivateOutlet />}>

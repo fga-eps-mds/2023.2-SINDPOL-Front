@@ -17,7 +17,6 @@ export const fetchAssociates = createAsyncThunk(
   "associate/getAssociates",
   async () => {
     var result = await getAssociates()
-
     if (result === null) {
       return "error"
     }
@@ -28,7 +27,7 @@ export const fetchAssociates = createAsyncThunk(
 
 export const fetchAssociate = createAsyncThunk(
   "associate/getAssociateById",
-  async (id: number) => {
+  async (id: string | undefined) => {
     var result = await getAssociate(id)
 
     if (result == null) {
@@ -54,10 +53,10 @@ export const createAssociate = createAsyncThunk(
   },
 )
 
-export const updateAssociate = createAsyncThunk(
+export const updateAssociates = createAsyncThunk(
   "associate/updateAssociate",
-  async (associate: any) => {
-    var result = await getAssociate(associate)
+  async ({ id, associate }: { id: string | undefined, associate: any }) => {
+    var result = await updateAssociate(id,associate)
 
         if(result == null) {
             return {'error': result}
@@ -83,10 +82,9 @@ export const deleteAssociate = createAsyncThunk(
 )
 
 export const disableAssociateID = createAsyncThunk(
-  "associate/deleteAssociate",
+  "associate/disableAssociate",
   async (id: string) => {
     var result = await disableAssociate(id)
-
         if(result == null) {
             return {'error': result}
         }
@@ -94,15 +92,13 @@ export const disableAssociateID = createAsyncThunk(
       return { error: result }
     }
 
-        setAssociate(result);
-        return result;
     setAssociate(result)
     return result
   },
 )
 
 export const enableAssociateID = createAsyncThunk(
-  "associate/deleteAssociate",
+  "associate/enableAssociate",
   async (id: string) => {
     var result = await enableAssociate(id)
 
@@ -137,9 +133,8 @@ const slice = createSlice({
 
 export const { setAssociates, setAssociateId, setAssociate } = slice.actions
 
-export const selectAssociates = (state: RootState) => state.associate.associates
-export const selectAssociateId = (state: RootState) =>
-  state.associate.associateId
-export const selectAssociate = (state: RootState) => state.associate.associate
+export const selectAssociates  = (state: RootState) => state.associate.associates
+export const selectAssociateId = (state: RootState) => state.associate.associateId
+export const selectAssociate   = (state: RootState) => state.associate.associate
 
 export default slice.reducer
