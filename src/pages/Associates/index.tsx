@@ -1,15 +1,18 @@
 import React, { useEffect } from "react"
+import { Link } from 'react-router-dom';
 import { Box, Divider, Heading, IconButton, Text } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
 import {
   fetchAssociates,
+  fetchAssociate,
   selectAssociates,
 } from "../../app/store/associate/associateSlice"
 import { useAppDispatch, useAppSelector } from "../../utils/hooks"
 import { IconEye, IconMenu2 } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
+
 
 export default function Associates(props: any) {
   const navigate = useNavigate()
@@ -21,6 +24,13 @@ export default function Associates(props: any) {
       setAssociates(res.payload)
     })
   }, [])
+
+  console.log(associates)
+
+  const handleEyeClick = (associateId: string) => {
+    console.log("ID do associado:", associateId);
+    navigate(`/update/${associateId}`);
+  }
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -35,7 +45,7 @@ export default function Associates(props: any) {
             type="text"
             name="search"
             value=""
-            onChange={() => {}}
+            onChange={() => { }}
             sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
           />
           <Box>
@@ -50,7 +60,7 @@ export default function Associates(props: any) {
             <GenericButton
               id="associates-page-box-header-import-button"
               text="Importar"
-              onClick={() => {}}
+              onClick={() => { }}
               sx={{ marginX: "12px" }}
             />
           </Box>
@@ -62,21 +72,22 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.name}</Text>
-                    <Text align={"left"}>{associate.registration} : : {associate.cpf}</Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
+                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate} </Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => {}}
+                      onClick={() => { handleEyeClick(associate.id)}}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
+
                     <IconButton
                       aria-label="mais opções"
                       icon={<IconMenu2 />}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       color={"#734A00"}
                     />
                   </Box>
