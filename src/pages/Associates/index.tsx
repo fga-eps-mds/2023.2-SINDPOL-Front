@@ -1,15 +1,10 @@
 import React, { useEffect } from "react"
-import { Link } from 'react-router-dom';
 import { Box, Divider, Heading, IconButton, Text } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
-import {
-  fetchAssociates,
-  fetchAssociate,
-  selectAssociates,
-} from "../../app/store/associate/associateSlice"
-import { useAppDispatch, useAppSelector } from "../../utils/hooks"
+import { fetchAssociates } from "../../app/store/associate/associateSlice"
+import { useAppDispatch } from "../../utils/hooks"
 import { IconEye, IconMenu2 } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
 
@@ -72,8 +67,8 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
-                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate} </Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.fullname}</Text>
+                    <Text align={"left"}>Mat.: {associate.registration} | CPF: {associate.cpf} | {associate.birthDate}</Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton

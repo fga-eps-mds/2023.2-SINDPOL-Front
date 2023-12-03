@@ -1,11 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
-import HttpClient from "../../api/HttpClient";
-import { getAssociate, getAssociates, disableAssociate, enableAssociate} from "../../services/associatesService";
-
-type Associate = {
-
-}
+import { getAssociate, getAssociates, disableAssociate, enableAssociate, updateAssociate, postAssociate} from "../../services/associatesService";
 
 type AssociateState = {
   associates: any[]
@@ -69,7 +64,7 @@ export const updateAssociates = createAsyncThunk(
 
 export const deleteAssociate = createAsyncThunk(
   "associate/deleteAssociate",
-  async (id: number) => {
+  async (id: string | undefined) => {
     var result = await getAssociate(id)
 
     if (result == null) {
