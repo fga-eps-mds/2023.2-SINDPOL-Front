@@ -96,7 +96,7 @@ export default function FiliationForm(props: any) {
           <GenericInput
             type={"string"}
             name={key}
-            onChange={(e: { target: { value: any} } ) => changeFormState(key, e.target.value)}
+            onChange={changeFormState}
             error={{
               hasError: value.isInvalid,
               message: "oi",
