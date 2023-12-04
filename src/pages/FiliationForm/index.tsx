@@ -99,7 +99,7 @@ export default function FiliationForm(props: any) {
             onChange={changeFormState}
             error={{
               hasError: value.isInvalid,
-              message: "",
+              message: "Erro",
             }}
             {...value}
             ></GenericInput>
