@@ -10,6 +10,7 @@ import { createAssociate } from "../../app/store/associate/associateSlice"
 import { useNavigate } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
 import GenericDropdown from "../../components/GenericDropdown"
+import PopUpSubmission from "../../components/PopUpSubmission"
 
 interface dependent {
   id: number
@@ -27,6 +28,9 @@ export default function FiliationForm(props: any) {
   const [formState, setFormState] = React.useState<FormState>(defaultFormState)
   const [boxes, setBoxes] = useState<Array<dependent>>([])
   const [cont, setCont] = useState(1)
+  const [modalOk, setModalOk] = useState(false)
+  const [error, setError] = useState({})
+
   const adicionarBox = () => {
     const novaBox: dependent = {
       id: cont,
@@ -54,8 +58,21 @@ export default function FiliationForm(props: any) {
 
     dispatch(createAssociate(data)).then((res) => {
       if (res.payload.response.status !== 422) {
-        window.history.back()
+        setModalOk(true)
+
+        setTimeout(() => {
+          setModalOk(false)
+          window.history.back()
+        }, 3000)
+
         // navigate("/login")
+      } else {
+        setError(res.payload.response.data)
+        setModalOk(true)
+
+        setTimeout(() => {
+          setModalOk(false)
+        }, 3000)
       }
     })
   }
@@ -271,6 +288,17 @@ export default function FiliationForm(props: any) {
             />
           </Box>
         </Box>
+        <PopUpSubmission
+          type={error ? "error" : "success"}
+          open={modalOk}
+          onClose={() => setModalOk(false)}
+          title={!error ? "Sucesso!" : "Erro!"}
+          description={
+            !error
+              ? "Sua solicitação de filiação foi enviada com sucesso!"
+              : "Ocorreu um erro ao enviar sua solicitação de filiação. Por favor, tente novamente mais tarde."
+          }
+        />
       </Box>
     </>
   )

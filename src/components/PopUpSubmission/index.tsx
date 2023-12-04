@@ -18,7 +18,7 @@ interface PopUpSubmissionProps {
     title: string
     description: string
     type:  statusType;
-    onClose: () => {}
+    onClose: () => void
 }
 
 class PopUpSubmissionState implements PopUpSubmissionProps {
@@ -28,9 +28,9 @@ class PopUpSubmissionState implements PopUpSubmissionProps {
     type:  statusType
     bg: string
     iconColor: string
-    onClose: () => {}
+    onClose: () => void
 
-    constructor(open:boolean, title: string, description: string, type:  statusType, onClose:() =>{}){
+    constructor(open:boolean, title: string, description: string, type:  statusType, onClose:() => void){
         this.open = open
         this.title = title
         this.description = description
@@ -43,6 +43,7 @@ class PopUpSubmissionState implements PopUpSubmissionProps {
 
 export default function PopUpSubmission(props: Readonly<PopUpSubmissionProps>) {
     const propsSubmission: PopUpSubmissionState = new PopUpSubmissionState(props.open, props.title, props.description, props.type, props.onClose)
+    
     return (
         <Modal isOpen={props.open} onClose={() => { props.onClose() }} >
             <ModalOverlay />

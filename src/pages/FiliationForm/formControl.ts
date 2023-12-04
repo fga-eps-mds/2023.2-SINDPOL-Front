@@ -148,7 +148,6 @@ export const defaultFormState = {
       { value: "São Paulo", label: "SP" },
       { value: "Sergipe", label: "SE" },
       { value: "Tocantins", label: "TO" },
-      ,
     ],
   },
   civilState: {
@@ -237,7 +236,6 @@ export const defaultFormState = {
       { value: "São Paulo", label: "SP" },
       { value: "Sergipe", label: "SE" },
       { value: "Tocantins", label: "TO" },
-      ,
     ],
   },
   email: {
