@@ -33,8 +33,14 @@ export interface FormState {
   lotation: Property
 }
 
+interface DropdownOption {
+  value: string
+  label: string
+}
+
 interface Property {
   value: string
+  options?: DropdownOption[]
   isInvalid: boolean
   sxFormControl: any
   label?: string
@@ -68,8 +74,8 @@ export const defaultFormState = {
     type: "string",
     isRequired: true,
     mask: (value: string) => {
-      return value.replace(/^(\d{6})(\d{2})$/, '$1/$2');
-    }
+      return value.replace(/^(\d{6})(\d{2})$/, "$1/$2")
+    },
   },
   birthDate: {
     value: "",
@@ -87,8 +93,8 @@ export const defaultFormState = {
     type: "string",
     isRequired: true,
     mask: (value: string) => {
-      return value.replace(/^(\d{2})(\d{3})(\d{3})(\d{1})$/, '$1.$2.$3-$4');
-    }
+      return value.replace(/^(\d{2})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4")
+    },
   },
   cpf: {
     value: "",
@@ -98,8 +104,8 @@ export const defaultFormState = {
     type: "string",
     isRequired: true,
     mask: (value: string) => {
-      return value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
-    }
+      return value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4")
+    },
   },
   natural: {
     value: "",
@@ -113,7 +119,37 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "80px" },
     label: "UF Nat.",
-    type: "string",
+    type: "select",
+    options: [
+      { value: "Acre", label: "AC" },
+      { value: "Alagoas", label: "AL" },
+      { value: "Amapá", label: "AP" },
+      { value: "Amazonas", label: "AM" },
+      { value: "Bahia", label: "BA" },
+      { value: "Ceará", label: "CE" },
+      { value: "Distrito Federal", label: "DF" },
+      { value: "Espírito Santo", label: "ES" },
+      { value: "Goiás", label: "GO" },
+      { value: "Maranhão", label: "MA" },
+      { value: "Mato Grosso", label: "MT" },
+      { value: "Mato Grosso do Sul", label: "MS" },
+      { value: "Minas Gerais", label: "MG" },
+      { value: "Pará", label: "PA" },
+      { value: "Paraíba", label: "PB" },
+      { value: "Paraná", label: "PR" },
+      { value: "Pernambuco", label: "PE" },
+      { value: "Piauí", label: "PI" },
+      { value: "Rio de Janeiro", label: "RJ" },
+      { value: "Rio Grande do Norte", label: "RN" },
+      { value: "Rio Grande do Sul", label: "RS" },
+      { value: "Rondônia", label: "RO" },
+      { value: "Roraima", label: "RR" },
+      { value: "Santa Catarina", label: "SC" },
+      { value: "São Paulo", label: "SP" },
+      { value: "Sergipe", label: "SE" },
+      { value: "Tocantins", label: "TO" },
+      ,
+    ],
   },
   civilState: {
     value: "",
@@ -129,8 +165,8 @@ export const defaultFormState = {
     label: "CEP",
     type: "string",
     mask: (value: string) => {
-      return value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
-    }
+      return value.replace(/^(\d{5})(\d{3})$/, "$1-$2")
+    },
   },
   address: {
     value: "",
@@ -172,7 +208,37 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "80px" },
     label: "UF",
-    type: "string",
+    type: "select",
+    options: [
+      { value: "Acre", label: "AC" },
+      { value: "Alagoas", label: "AL" },
+      { value: "Amapá", label: "AP" },
+      { value: "Amazonas", label: "AM" },
+      { value: "Bahia", label: "BA" },
+      { value: "Ceará", label: "CE" },
+      { value: "Distrito Federal", label: "DF" },
+      { value: "Espírito Santo", label: "ES" },
+      { value: "Goiás", label: "GO" },
+      { value: "Maranhão", label: "MA" },
+      { value: "Mato Grosso", label: "MT" },
+      { value: "Mato Grosso do Sul", label: "MS" },
+      { value: "Minas Gerais", label: "MG" },
+      { value: "Pará", label: "PA" },
+      { value: "Paraíba", label: "PB" },
+      { value: "Paraná", label: "PR" },
+      { value: "Pernambuco", label: "PE" },
+      { value: "Piauí", label: "PI" },
+      { value: "Rio de Janeiro", label: "RJ" },
+      { value: "Rio Grande do Norte", label: "RN" },
+      { value: "Rio Grande do Sul", label: "RS" },
+      { value: "Rondônia", label: "RO" },
+      { value: "Roraima", label: "RR" },
+      { value: "Santa Catarina", label: "SC" },
+      { value: "São Paulo", label: "SP" },
+      { value: "Sergipe", label: "SE" },
+      { value: "Tocantins", label: "TO" },
+      ,
+    ],
   },
   email: {
     value: "",
@@ -190,8 +256,8 @@ export const defaultFormState = {
     type: "string",
     isRequired: true,
     mask: (value: string) => {
-      return value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-    }
+      return value.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3")
+    },
   },
   phone: {
     value: "",
@@ -200,16 +266,20 @@ export const defaultFormState = {
     label: "Telefone",
     type: "string",
     mask: (value: string) => {
-      return value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-    }
+      return value.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3")
+    },
   },
   gender: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Sexo",
-    type: "string",
+    type: "select",
     isRequired: true,
+    options: [
+      { value: "Masculino", label: "Masculino" },
+      { value: "Feminino", label: "Feminino" },
+    ],
   },
   motherName: {
     value: "",
@@ -239,15 +309,42 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Religião",
-    type: "string",
+    type: "select",
+    options: [
+      { value: "cristianismo", label: "Cristianismo" },
+      { value: "islamismo", label: "Islamismo" },
+      { value: "hinduismo", label: "Hinduísmo" },
+      { value: "budismo", label: "Budismo" },
+      { value: "judaismo", label: "Judaísmo" },
+      { value: "siquismo", label: "Siquismo" },
+      { value: "taoismo", label: "Taoísmo" },
+      { value: "xintoismo", label: "Xintoísmo" },
+      { value: "jainismo", label: "Jainismo" },
+      { value: "fe_bahai", label: "Fé Baháʼí" },
+      { value: "zoroastrismo", label: "Zoroastrismo" },
+      { value: "confucionismo", label: "Confucionismo" },
+      { value: "xamanismo", label: "Xamanismo" },
+      { value: "wicca", label: "Wicca" },
+      { value: "ateismo", label: "Ateísmo" },
+    ],
   },
   bloodType: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
     label: "Tipo sanguíneo",
-    type: "string",
+    type: "select",
     isRequired: true,
+    options: [
+      { value: "A+", label: "A+" },
+      { value: "A-", label: "A-" },
+      { value: "B+", label: "B+" },
+      { value: "B-", label: "B-" },
+      { value: "AB+", label: "AB+" },
+      { value: "AB-", label: "AB-" },
+      { value: "O+", label: "O+" },
+      { value: "O-", label: "O-" },
+    ],
   },
   actualSituation: {
     value: "",

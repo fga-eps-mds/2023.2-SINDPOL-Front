@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../utils/hooks"
 import { createAssociate } from "../../app/store/associate/associateSlice"
 import { useNavigate } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
+import GenericDropdown from "../../components/GenericDropdown"
 
 interface dependent {
   id: number
@@ -91,20 +92,35 @@ export default function FiliationForm(props: any) {
 
   const renderForm = () => {
     return Object.entries(formState).map(([key, value]) => {
-      return (
-        <div>
-          <GenericInput
-            type={"string"}
-            name={key}
-            onChange={changeFormState}
-            error={{
-              hasError: value.isInvalid,
-              message: "Erro",
-            }}
-            {...value}
-            ></GenericInput>
-        </div>
-      )
+      switch (value.type) {
+        case "string":
+          return (
+            <div>
+              <GenericInput
+                type={"string"}
+                name={key}
+                onChange={changeFormState}
+                error={{
+                  hasError: value.isInvalid,
+                  message: "Erro",
+                }}
+                {...value}
+              ></GenericInput>
+            </div>
+          )
+        case "select":
+          return (
+            <div>
+              <GenericDropdown
+                type={"string"}
+                name={key}
+                onChange={changeFormState}
+                {...value}
+                options={value.options}
+              ></GenericDropdown>
+            </div>
+          )
+      }
     })
   }
 
@@ -127,11 +143,7 @@ export default function FiliationForm(props: any) {
             </Box>
           </Box>
           <Box id={"dependent-title"} sx={styles.dependentTitleRow}>
-            <Text
-              fontSize={"24px"}
-            >
-              Dependentes
-            </Text>
+            <Text fontSize={"24px"}>Dependentes</Text>
             <IconArrowDown height={"24px"}></IconArrowDown>
           </Box>
           <Box id={"divider"} sx={styles.divider}></Box>
@@ -183,7 +195,11 @@ export default function FiliationForm(props: any) {
                     name={"birth_date"}
                     value={box.birth_date}
                     onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "birth_date", e.target.value)
+                      changeDependentFields(
+                        box.id,
+                        "birth_date",
+                        e.target.value,
+                      )
                     }
                     label="Data de Nascimento*"
                     sxFormControl={{ ...styles.inputSize, width: "190px" }}
@@ -197,7 +213,11 @@ export default function FiliationForm(props: any) {
                     name={"relationship"}
                     value={box.relationship}
                     onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "relationship", e.target.value)
+                      changeDependentFields(
+                        box.id,
+                        "relationship",
+                        e.target.value,
+                      )
                     }
                     label="Parentesco"
                     sxFormControl={{ ...styles.inputSize, width: "120px" }}
@@ -219,7 +239,12 @@ export default function FiliationForm(props: any) {
                       hasError: false,
                       message: "",
                     }}
-                    mask={(value) => `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`}
+                    mask={(value) =>
+                      `(${value.slice(0, 2)}) ${value.slice(
+                        2,
+                        7,
+                      )}-${value.slice(7)}`
+                    }
                   ></GenericInput>
                   <IconButton
                     aria-label={""}

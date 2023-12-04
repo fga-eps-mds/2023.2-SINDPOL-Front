@@ -43,7 +43,7 @@ export default function GenericDropdown(props: DropdownProps) {
         onChange={handleChange}
         {...(props.sxSelect && { sx: props.sxSelect })}
       >
-        {props.options.map((option) => (
+        {props.options!.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
