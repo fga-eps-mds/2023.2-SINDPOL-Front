@@ -15,7 +15,7 @@ interface DropdownProps {
   id?: string
   name: string
   value: string
-  options: DropdownOption[]
+  options?: DropdownOption[]
   onChange: (name: string, value: string) => void
   label?: string
   helperText?: string
