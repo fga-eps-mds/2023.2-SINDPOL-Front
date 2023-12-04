@@ -59,10 +59,36 @@ async function deleteAssociate(id: number) {
     })
 }
 
+async function disableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/disable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
+async function enableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/enable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
 export {
   getAssociates,
   getAssociate,
   postAssociate,
   updateAssociate,
   deleteAssociate,
+  disableAssociate,
+  enableAssociate,
 }

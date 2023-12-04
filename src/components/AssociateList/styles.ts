@@ -11,7 +11,5 @@ export const styles = {
         position : 'absolute',
         top: '-25px',
         left: '275px',   
-    }, 
-
-    
+    },  
 }
