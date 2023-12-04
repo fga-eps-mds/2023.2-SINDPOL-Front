@@ -69,7 +69,7 @@ export default function FiliationForm(props: any) {
 
     setFormState((prevState) => ({
       ...prevState,
-      [name]: { ...prevState[name], value },
+      [name]: { ...prevState[name], isInvalid: false, value },
     }))
   }
 
@@ -99,7 +99,7 @@ export default function FiliationForm(props: any) {
             onChange={changeFormState}
             error={{
               hasError: value.isInvalid,
-              message: "oi",
+              message: "",
             }}
             {...value}
             ></GenericInput>
