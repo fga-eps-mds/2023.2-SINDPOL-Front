@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactNode } from 'react';
 import { IconButton, Text } from "@chakra-ui/react"
 import { IconX } from "@tabler/icons-react"
 import { styles } from "../../pages/Associates/styles"
-import { BACKGROUND_STYLE, MODAL_STYLE, HEADER, TEXT_MODAL, CLOSE_MODAL_BUTTON } from "./styles";
+import { BACKGROUND_STYLE, MODAL_STYLE, HEADER, TEXT_MODAL, CLOSE_MODAL_BUTTON, CHILDREN } from "./styles";
 
 interface ModalProps {
     isOpen: boolean;
@@ -29,7 +29,7 @@ export default function Modal({ isOpen, setModalOpen, Title, children }: ModalPr
                             </IconButton>
                         </div>
                     </div>
-                    <div>{children}</div>
+                    <div style={CHILDREN}>{children}</div>
                 </div>
             </div>
         );

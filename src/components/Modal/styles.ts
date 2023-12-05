@@ -41,3 +41,10 @@ export const CLOSE_MODAL_BUTTON: CSSProperties = {
     position: 'fixed',
     right: '10%',
 }
+
+export const CHILDREN: CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+}
