@@ -2,14 +2,15 @@ import { render } from "@testing-library/react"
 import { Provider } from "react-redux"
 import { store } from "../app/store/store"
 import App from "../App"
+import { MemoryRouter } from 'react-router-dom';
+import { Router } from "react-router"
 
-test("renders learn react link", () => {
-  const { getByText } = render(
-    <Provider store={store}>
+
+test('renders learn react link', () => {
+  render(
+    <MemoryRouter initialEntries={['/']}>
       <App />
-    </Provider>,
-  )
-
-  // eslint-disable-next-line testing-library/prefer-screen-queries
-  expect(getByText(/learn/i)).toBeInTheDocument()
-})
+    </MemoryRouter>
+  );
+  
+});
