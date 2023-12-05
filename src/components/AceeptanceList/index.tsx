@@ -7,10 +7,10 @@ import { styles } from "./styles";
 
 interface DataItem {
     id: number;
-    name: string;
+    fullname: string;
     cpf: string;
     registration: number;
-    birth_date: string;
+    birthDate: string;
     status: string;
 }
 
@@ -42,12 +42,12 @@ export default function AceeptanceList(props: DataTableProps ) {
                                 />
                         </Td>
                         <Td>
-                            <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.name}</span><br />
+                            <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.fullname}</span><br />
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.cpf}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.registration}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
-                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.birth_date}</span>
+                            <span style={{ color: 'gray', fontSize: '12px' }}>{item.birthDate}</span>
                         </Td>
                         <td style={{ textAlign: 'right' }}>
                             <span style={{ color: 'black', fontSize: '14px' }}>{item.status}</span>

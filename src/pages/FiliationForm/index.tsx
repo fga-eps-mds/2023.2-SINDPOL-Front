@@ -130,8 +130,6 @@ export default function FiliationForm(props: any) {
     });
   }, []);
 
-  console.log(associate)
-
   return (
     <>
       <Box id={"container-form"} sx={styles.formContainer}>
