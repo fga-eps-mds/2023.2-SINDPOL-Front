@@ -82,7 +82,7 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
     label: "Data de nascimento",
-    type: "string",
+    type: "date",
     isRequired: true,
   },
   rg: {
@@ -357,7 +357,7 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Data de admissão",
-    type: "string",
+    type: "date",
     isRequired: true,
   },
   role: {

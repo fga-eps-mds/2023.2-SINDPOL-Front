@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
 import GenericDropdown from "../../components/GenericDropdown"
 import PopUpSubmission from "../../components/PopUpSubmission"
+import DatePicker from "../../components/DatePicker"
 
 interface dependent {
   id: number
@@ -136,6 +137,13 @@ export default function FiliationForm(props: any) {
                 options={value.options}
               ></GenericDropdown>
             </div>
+          )
+        case "date":
+          return (
+            <DatePicker
+              onChange={changeFormState}
+              {...value}
+            />
           )
       }
     })
