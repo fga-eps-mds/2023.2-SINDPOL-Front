@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Modal from "../../components/Modal/modal"
+import MyTable from "../../components/FiliationByFileList"
 import { Box, Divider, Heading, IconButton, Text, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react"
-import { styles , INPUT_HIDDEN, ICON, LABEL_ICON } from "./styles"
+import { styles, INPUT_HIDDEN, ICON, LABEL_ICON, TABLE, TABLE_MOTIVO } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
 import { fetchAssociates, selectAssociates } from "../../app/store/associate/associateSlice"
@@ -105,30 +106,29 @@ export default function Associates(props: any) {
             />
           </Box>
         </Box>
-
+        
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
           {associates.map((associate: any) => {
             return (
-
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
-                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate}</Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.name}</Text>
+                    <Text align={"left"}>{associate.registration} : : {associate.cpf}</Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => { }}
+                      onClick={() => {}}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
                     <IconButton
                       aria-label="mais opções"
                       icon={<IconMenu2 />}
-                      onClick={() => { }}
+                      onClick={() => {}}
                       color={"#734A00"}
                     />
                   </Box>
@@ -137,33 +137,52 @@ export default function Associates(props: any) {
             )
           })}
         </Box>
-
-        <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}  >
+        
+        <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
-          <Box id="modal-body" sx={styles.modalBox}>
-            <input type="file" accept=".csv" onChange={handleFileChange}/>
-            <Text>Solte um arquivo csv ou escolha</Text>
-          </Box>
-          <GenericButton 
-            text="Importar sindicalizados"
-            onClick={() => importAssociates()}>
-          </GenericButton>
+            <Box id="modal-body" sx={styles.modalBox}>
+              <input type="file" id="fileInput" style={INPUT_HIDDEN} accept=".csv" onChange={readAssociatedData} />
+              <label htmlFor="file" for="fileInput" style={LABEL_ICON}>
+                <IconFileUpload style={ICON} />
+              </label>
+              <Text sx={styles.textImport} >Solte um arquivo csv ou escolha</Text>
+            </Box>
+            <GenericButton
+              sx={styles.associatImportButtom}
+              text="Importar sindicalizados"
+              onClick={() => importAssociates()}>
+            </GenericButton>
           </Box>
         </Modal>
-
-        <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)} >
-          <Text>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Nome de guerra</th>
-              <th>Matricula</th>
-              <th>Data Nascimento</th>
-              <th>CPF</th>
-            </tr>
-          </thead>
-
-        </Modal>
+        <Box>
+          <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
+            <Text sx={{ marginTop: '30px', marginBottom: '20px', textAlign: 'left' }}>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
+            <table style={TABLE}>
+              <thead>
+                <tr style={TABLE}>
+                  <th style={TABLE}>Linha</th>
+                  <th style={TABLE}>Status</th>
+                  <th style={TABLE_MOTIVO}>Motivo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={TABLE}>0</td>
+                  <td style={TABLE}>Aprovado</td>
+                  <td style={TABLE_MOTIVO}>------</td>
+                </tr><tr>
+                  <td style={TABLE}>1</td>
+                  <td style={TABLE}>Aprovado</td>
+                  <td style={TABLE_MOTIVO}>------</td>
+                </tr><tr>
+                  <td style={TABLE}>2</td>
+                  <td style={TABLE}>Aprovado</td>
+                  <td style={TABLE_MOTIVO}>------</td>
+                </tr>
+              </tbody>
+            </table>
+          </Modal>
+        </Box>
 
         <Box id="associates-page-box-footer">{/* Botões de paginação */}</Box>
       </Box>

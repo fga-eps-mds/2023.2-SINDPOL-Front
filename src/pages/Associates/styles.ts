@@ -15,6 +15,18 @@ export const LABEL_ICON: CSSProperties = {
     top: '40%'
 }
 
+export const TABLE: CSSProperties = {
+    border: '1px solid black',
+    padding: '10px',
+}
+
+export const TABLE_MOTIVO: CSSProperties = {
+    border: '1px solid black',
+    padding: '10px',
+    width: '300px',
+    maxWidth: '300px',
+}
+
 export const styles = {
     boxContainer: {
         width: '100%',
@@ -78,6 +90,6 @@ export const styles = {
         display: 'none',
     },
     textImport: {
-        marginTop: '60px'
-    }
+        marginTop: '60px',
+    },
 };
