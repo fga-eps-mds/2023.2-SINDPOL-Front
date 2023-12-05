@@ -20,7 +20,7 @@ export default function Associates(props: any) {
   const [associates, setAssociates] = React.useState<any>([])
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
-  const [dados, setDados] = useState(null);
+  const [dados, setDados] =  React.useState<any>([])
 
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
@@ -48,13 +48,17 @@ export default function Associates(props: any) {
   
         // Chama a função que envia um associado por vez
         normalizedData.forEach((associate: any) => {
-          console.log(associate);
 
           submitFunction(associate);
         });
+
+        setDados(normalizedData);
+
       },
     });
   };
+
+  console.log(dados)
   
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -67,7 +71,6 @@ export default function Associates(props: any) {
     console.log("formstate:: ", associate);
   
     // Supondo que dispatch e createAssociate estão corretamente configurados no seu código
-    dispatch(createAssociate(associate));
   };
   
 
@@ -139,7 +142,7 @@ export default function Associates(props: any) {
           })}
         </Box>
 
-        <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+        <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}  >
           <Box>
           <Box id="modal-body" sx={styles.modalBox}>
             <input type="file" accept=".csv" onChange={handleFileChange}/>
@@ -152,7 +155,7 @@ export default function Associates(props: any) {
           </Box>
         </Modal>
 
-        <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
+        <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)} >
           <Text>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
           <thead>
             <tr>
