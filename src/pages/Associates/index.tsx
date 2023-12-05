@@ -43,10 +43,8 @@ export default function Associates(props: any) {
           return normalizeAndCreateObject(row);
         });
   
-        // normalizedData agora contém os dados normalizados
         console.log(normalizedData);
   
-        // Chama a função que envia um associado por vez
         normalizedData.forEach((associate: any) => {
 
           submitFunction(associate);
@@ -68,9 +66,7 @@ export default function Associates(props: any) {
   };
   
   const submitForm = (associate: any) => {
-    console.log("formstate:: ", associate);
-  
-    // Supondo que dispatch e createAssociate estão corretamente configurados no seu código
+    dispatch(createAssociate(associate))
   };
   
 
