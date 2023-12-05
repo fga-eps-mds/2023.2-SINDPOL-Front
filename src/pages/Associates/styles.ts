@@ -1,3 +1,20 @@
+import { CSSProperties } from 'react';
+
+export const INPUT_HIDDEN: CSSProperties = {
+    display: 'none',
+}
+
+export const ICON: CSSProperties = {
+    width: '80px',
+    height: '80px',
+}
+
+export const LABEL_ICON: CSSProperties = {
+    left: '44%',
+    position: 'absolute',
+    top: '40%'
+}
+
 export const styles = {
     boxContainer: {
         width: '100%',
@@ -41,7 +58,8 @@ export const styles = {
     modalBox: {
         borderWidth: '3px',
         borderStyle: 'dashed',
-        margin: '15px',
+        margin: '40px 0 10px 0',
+        padding: '80px',
     },
     modalBoxResult: {
         margin: '15px',
@@ -50,4 +68,16 @@ export const styles = {
         fontWeight: 'bold',
         fontSize: '30px'
     },
+    associatImportButtom: {
+        display: 'flex',
+        width: '277px',
+        height: '69px',
+        left: '17%',
+    },
+    fileInputHidden: {
+        display: 'none',
+    },
+    textImport: {
+        marginTop: '60px'
+    }
 };

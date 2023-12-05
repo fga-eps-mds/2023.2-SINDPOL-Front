@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Modal from "../../components/Modal/modal"
 import { Box, Divider, Heading, IconButton, Text, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react"
-import { styles } from "./styles"
+import { styles , INPUT_HIDDEN, ICON, LABEL_ICON } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import GenericButton from "../../components/GenericButton"
 import { fetchAssociates, selectAssociates } from "../../app/store/associate/associateSlice"
@@ -141,14 +141,14 @@ export default function Associates(props: any) {
 
         <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
-            <Box id="modal-body" sx={styles.modalBox}>
-              <input type="file" accept=".csv" onChange={handleFileChange} />
-              <Text>Solte um arquivo csv ou escolha</Text>
-            </Box>
-            <GenericButton
-              text="Importar sindicalizados"
-              onClick={() => importAssociates()}>
-            </GenericButton>
+          <Box id="modal-body" sx={styles.modalBox}>
+            <input type="file" accept=".csv" onChange={handleFileChange}/>
+            <Text>Solte um arquivo csv ou escolha</Text>
+          </Box>
+          <GenericButton 
+            text="Importar sindicalizados"
+            onClick={() => importAssociates()}>
+          </GenericButton>
           </Box>
         </Modal>
 
