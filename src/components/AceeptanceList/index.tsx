@@ -7,7 +7,7 @@ import { styles } from "./styles";
 
 interface DataItem {
     id: number;
-    fullname: string;
+    fullName: string;
     cpf: string;
     registration: number;
     birthDate: string;
@@ -42,7 +42,7 @@ export default function AceeptanceList(props: DataTableProps ) {
                                 />
                         </Td>
                         <Td>
-                            <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.fullname}</span><br />
+                            <span style={{ color: 'black', fontSize: '14px', fontWeight: 'bold' }}>{item.fullName}</span><br />
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.cpf}</span>
                             <span style={{ color: 'gray', fontSize: '12px' }}> - </span>
                             <span style={{ color: 'gray', fontSize: '12px' }}>{item.registration}</span>
