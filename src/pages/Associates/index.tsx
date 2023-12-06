@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Modal from "../../components/Modal/modal"
-import MyTable from "../../components/FiliationByFileList"
 import { Box, Divider, Heading, IconButton, Text, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react"
 import { styles, INPUT_HIDDEN, ICON, LABEL_ICON, TABLE, TABLE_MOTIVO } from "./styles"
 import GenericInput from "../../components/GenericInput"
