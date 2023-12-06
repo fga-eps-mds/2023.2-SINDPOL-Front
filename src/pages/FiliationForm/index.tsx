@@ -1,14 +1,18 @@
 import { Box, Image, Text, IconButton } from "@chakra-ui/react"
-import React, { useState } from "react"
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
 import GenericButton from "../../components/GenericButton"
 import { defaultFormState, FormState } from "./formControl"
 import { useAppDispatch } from "../../utils/hooks"
-import { createAssociate } from "../../app/store/associate/associateSlice"
-import { useNavigate } from "react-router-dom"
+import { createAssociate,updateAssociates } from "../../app/store/associate/associateSlice"
+import { useNavigate, useLocation } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
+import {
+  fetchAssociate,
+} from "../../app/store/associate/associateSlice"
 
 interface dependent {
   id: number
@@ -26,6 +30,11 @@ export default function FiliationForm(props: any) {
   const [formState, setFormState] = React.useState<FormState>(defaultFormState)
   const [boxes, setBoxes] = useState<Array<dependent>>([])
   const [cont, setCont] = useState(1)
+  const [associate, setAssociate] = React.useState<any>([])
+  const { associateId } = useParams();
+  const location = useLocation();
+
+
   const adicionarBox = () => {
     const novaBox: dependent = {
       id: cont,
@@ -53,6 +62,13 @@ export default function FiliationForm(props: any) {
 
     dispatch(createAssociate(data))
   }
+
+  const updateForm = () => {
+    let dataToSubmit = createObjectToSubmit(formState, boxes);
+    console.log("formstate:: ", dataToSubmit);
+  
+    dispatch(updateAssociates({ id: associateId, associate: dataToSubmit }));
+  };
 
   const changeFormState = (name: string, value: any) => {
     if (!validateField(name, value)) {
@@ -91,28 +107,48 @@ export default function FiliationForm(props: any) {
           <GenericInput
             type={"string"}
             name={key}
-            onChange={(e: { target: { value: any} } ) => changeFormState(key, e.target.value)}
+            onChange={(e: { target: { value: any } }) => changeFormState(key, e.target.value)}
             {...value}
-            ></GenericInput>
+          ></GenericInput>
         </div>
       )
     })
   }
+
+  useEffect(() => {
+    dispatch(fetchAssociate(associateId)).then((res) => {
+      setAssociate(res.payload);
+      setFormState((prevState) => {
+        const updatedFormState = { ...prevState };
+        Object.keys(res.payload).forEach((key) => {
+          if (updatedFormState[key]) {
+            updatedFormState[key].value = res.payload[key];
+          }
+        });
+        return updatedFormState;
+      });
+    });
+  }, []);
 
   return (
     <>
       <Box id={"container-form"} sx={styles.formContainer}>
         <Box id={"form-box"} sx={styles.formBox}>
           <Image
-            src="src/assets/logo.png"
+            src="../src/assets/logo.png"
             width={"84px"}
             marginLeft={"30px"}
             marginTop={"10px"}
           />
           <Box id={"column-fields"} sx={styles.columnFields}>
+          {location.pathname === '/filiation' ? (
             <Text fontSize={"20px"} fontWeight={"semibold"} marginTop={"20px"}>
               Formulário de Filiação
             </Text>
+          ) : (
+            <Text fontSize={"20px"} fontWeight={"semibold"} marginTop={"20px"}>
+              Detalhes do Sindicalizado
+            </Text>)}
             <Box id={"row-fields"} sx={styles.rowFields} marginTop={"20px"}>
               {renderForm()}
             </Box>
@@ -202,18 +238,37 @@ export default function FiliationForm(props: any) {
               ))}
           </Box>
           <Box id={"row-buttons"} sx={styles.rowButtons}>
-            <GenericButton
-              text="Enviar Solicitação de Filiação"
-              marginTop={"20px"}
-              width={"250px"}
-              onClick={submitForm}
-            />
-            <GenericButton
-              text="Cancelar"
-              marginTop={"20px"}
-              width={"150px"}
-              onClick={() => navigate("/login")}
-            />
+            {location.pathname === '/filiation' ? ( // Rota específica para alterar o texto e a função
+              <GenericButton
+                text="Enviar Solicitação de Filiação"
+                marginTop={"20px"}
+                width={"250px"}
+                onClick={submitForm}
+              />
+            ) : (
+              <GenericButton
+                text="Salvar Alterações"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={updateForm}
+
+              />
+            )}
+            {location.pathname === '/filiation' ? ( // Rota específica para alterar o texto e a função
+              <GenericButton
+                text="Cancelar"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={() => navigate("/login")}
+              />
+            ) : (
+              <GenericButton
+                text="Voltar"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={() => navigate("/Associates")}
+              />
+            )}
           </Box>
         </Box>
       </Box>

@@ -11,7 +11,7 @@ async function getAssociates() {
     })
 }
 
-async function getAssociate(id: number) {
+async function getAssociate(id: string | undefined) {
   return await httpClient
     .get(`/gestao/users/${id}`)
     .then((response) => {
@@ -35,9 +35,9 @@ async function postAssociate(associate: any) {
     })
 }
 
-async function updateAssociate(id: number, associate: any) {
+async function updateAssociate(id: string | undefined, associate: any) {
   return await httpClient
-    .put(`/user/${id}`, associate)
+    .put(`/gestao/users/${id}`, associate)
     .then((response) => {
       return response.data
     })
@@ -59,10 +59,36 @@ async function deleteAssociate(id: number) {
     })
 }
 
+async function disableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/disable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
+async function enableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/enable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
 export {
   getAssociates,
   getAssociate,
   postAssociate,
   updateAssociate,
   deleteAssociate,
+  disableAssociate,
+  enableAssociate,
 }

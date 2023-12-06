@@ -28,6 +28,13 @@ export default function Associates(props: any) {
     })
   }, [])
 
+  console.log(associates)
+
+  const handleEyeClick = (associateId: string) => {
+    console.log("ID do associado:", associateId);
+    navigate(`/update/${associateId}`);
+  }
+
   const importAssociates = () => {
     setOpenModal(false)
     setOpenModal2(true)
@@ -113,17 +120,18 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
-                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate}</Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.fullname}</Text>
+                    <Text align={"left"}>Mat.: {associate.registration} | CPF: {associate.cpf} | {associate.birthDate}</Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => { }}
+                      onClick={() => {}}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
+
                     <IconButton
                       aria-label="mais opções"
                       icon={<IconMenu2 />}

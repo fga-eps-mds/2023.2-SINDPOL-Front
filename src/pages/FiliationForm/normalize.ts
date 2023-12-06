@@ -2,43 +2,39 @@ import { FormState } from "./formControl"
 
 export function createObjectToSubmit(formState: FormState, dependents: any[]) {
   let data = {
-    name: formState.fullName.value,
+    fullName: formState.fullName.value,
     warName: formState.warName.value,
-    registration: formState.credential.value,
-    birth_date: new Date(formState.birthDate.value).getTime(),
+    registration: formState.registration.value,
+    birthDate: new Date(formState.birthDate.value).getTime(),
     rg: formState.rg.value,
     cpf: formState.cpf.value,
-    place_of_birth: formState.natural.value,
+    placeOfBirth: formState.placeOfBirth.value,
     ufNatural: formState.ufNatural.value,
-    marital_status: formState.civilState.value,
-    zipcode: formState.cep.value,
+    civilState: formState.civilState.value,
+    cep: formState.cep.value,
     address: formState.address.value,
     number: formState.number.value,
     neighborhood: formState.neighborhood.value,
     city: formState.city.value,
-    state: formState.uf.value,
     complement: formState.complement.value,
+    uf: formState.uf.value,
     email: formState.email.value,
     cellphone: formState.cellphone.value,
     phone: formState.phone.value,
     gender: formState.gender.value,
-    mother_name: formState.motherName.value,
-    father_name: formState.fatherName.value,
-    education: formState.scolarity.value,
+    motherName: formState.motherName.value,
+    fatherName: formState.fatherName.value,
+    scolarity: formState.scolarity.value,
     religion: formState.religion.value,
-    blood_type: formState.bloodType.value,
-    situation: formState.actualSituation.value,
-    admission_date: new Date(formState.admissionDate.value).getTime(),
-    position: formState.role.value,
+    bloodType: formState.bloodType.value,
+    actualWorkSituation: formState.actualWorkSituation.value,
+    admissionDate: new Date(formState.admissionDate.value).getTime(),
+    jobRole: formState.jobRole.value,
     bodyOfLaw: formState.bodyOfLaw.value,
-    occupancy: formState.workPost.value,
     lotation: formState.lotation.value,
-    mother_date: "--",
-    dispatcher: "--",
-    dispatched_date: Date.now(),
-    category: "--",
-    pattern: "--",
-    role: "Sindicalizado",
+    workPost: formState.workPost.value,
+    systemRole: "Sindicalizado",
+    password:"1234",
     dependents: dependents.map((dependent) => {
       return {
         ...dependent,
@@ -52,27 +48,9 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
 
 export function validateField(key: string, value: any) {
   switch (key) {
-    case "fullName" ||
-      "warName" ||
-      "natural" ||
-      "civilState" ||
-      "address" ||
-      "city" ||
-      "uf" ||
-      "complement" ||
-      "gender" ||
-      "motherName" ||
-      "fatherName" ||
-      "scolarity" ||
-      "religion" ||
-      "bloodType" ||
-      "actualSituation" ||
-      "role" ||
-      "bodyOdLaw" ||
-      "workPost" ||
-      "lotation":
-      return validateString(value)
-    case "birthDate" || "admissionDate":
+    case "admissionDate":
+      return validateDate(value)
+    case "birthDate":
       return validateDate(value)
     case "cpf":
       return validateCpf(value)
@@ -84,11 +62,13 @@ export function validateField(key: string, value: any) {
       return validateNumber(value)
     case "email":
       return validateEmail(value)
-    case "cellphone" || "phone":
+    case "phone":
       return validatePhone(value)
+    case "cellphone":
+      return validatePhone(value)
+    default:
+      return validateString(value)
   }
-
-  return true
 }
 
 export function validateString(value: string) {
