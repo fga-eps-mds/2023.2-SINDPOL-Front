@@ -1,19 +1,20 @@
 export interface FormRequest {
   fullName: string
   warName: string
-  credential: string
+  registration: string
   birthDate: string
   rg: string
   cpf: string
-  natural: string
+  placeOfBirth: string
   ufNatural: string
   civilState: string
   cep: string
   address: string
   number: string
+  neighborhood: string
   city: string
-  uf: string
   complement: string
+  uf: string
   email: string
   cellphone: string
   phone: string
@@ -23,11 +24,12 @@ export interface FormRequest {
   scolarity: string
   religion: string
   bloodType: string
-  function: string
-  actualSituation: string
+  actualWorkSituation: string
   admissionDate: string
-  role: string
+  jobRole: string
   bodyOfLaw: string
   lotation: string
   workPost: string
+  systemRole: string
+  password: string
 }

@@ -2,20 +2,20 @@ export interface FormState {
   [key: string]: Property
   fullName: Property
   warName: Property
-  credential: Property
+  registration: Property
   birthDate: Property
   rg: Property
   cpf: Property
-  natural: Property
+  placeOfBirth: Property
   ufNatural: Property
   civilState: Property
   cep: Property
   address: Property
   number: Property
-  city: Property
-  uf: Property
   neighborhood: Property
+  city: Property
   complement: Property
+  uf: Property
   email: Property
   cellphone: Property
   phone: Property
@@ -25,12 +25,12 @@ export interface FormState {
   scolarity: Property
   religion: Property
   bloodType: Property
-  actualSituation: Property
+  actualWorkSituation: Property
   admissionDate: Property
-  role: Property
+  jobRole: Property
   bodyOfLaw: Property
-  workPost: Property
   lotation: Property
+  workPost: Property
 }
 
 interface DropdownOption {
@@ -54,8 +54,8 @@ export const defaultFormState = {
   fullName: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "Nome completo",
+    sxFormControl: { margin: "12px 8px", width: "400px" },
+    label: "Nome completo*",
     type: "string",
     isRequired: true,
   },
@@ -66,11 +66,11 @@ export const defaultFormState = {
     label: "Nome de guerra",
     type: "string",
   },
-  credential: {
+  registration: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "Matrícula",
+    sxFormControl: { margin: "12px 8px", width: "200px" },
+    label: "Matrícula*",
     type: "string",
     isRequired: true,
     mask: (value: string) => {
@@ -80,16 +80,15 @@ export const defaultFormState = {
   birthDate: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "Data de nascimento",
+    sxFormControl: { margin: "12px 8px", width: "200px" },
+    label: "Data de nascimento*",
     type: "date",
-    isRequired: true,
   },
   rg: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "RG",
+    sxFormControl: { margin: "12px 8px", width: "130px" },
+    label: "RG*",
     type: "string",
     isRequired: true,
     mask: (value: string) => {
@@ -99,19 +98,19 @@ export const defaultFormState = {
   cpf: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "CPF",
+    sxFormControl: { margin: "12px 8px", width: "150px" },
+    label: "CPF*",
     type: "string",
     isRequired: true,
     mask: (value: string) => {
       return value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4")
     },
   },
-  natural: {
+  placeOfBirth: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
-    label: "Naturalidade",
+    label: "Naturalidade*",
     type: "string",
   },
   ufNatural: {
@@ -154,24 +153,21 @@ export const defaultFormState = {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
-    label: "Estado civil",
+    label: "Estado civil*",
     type: "string",
   },
   cep: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "140px" },
-    label: "CEP",
+    label: "CEP*",
     type: "string",
-    mask: (value: string) => {
-      return value.replace(/^(\d{5})(\d{3})$/, "$1-$2")
-    },
   },
   address: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "Endereço",
+    sxFormControl: { margin: "12px 8px", width: "400px" },
+    label: "Endereço*",
     type: "string",
   },
   number: {
@@ -184,14 +180,14 @@ export const defaultFormState = {
   complement: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
+    sxFormControl: { margin: "12px 8px", width: "400px" },
     label: "Complemento",
     type: "string",
   },
   neighborhood: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "150px" },
+    sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Bairro",
     type: "string",
   },
@@ -242,7 +238,7 @@ export const defaultFormState = {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "E-mail",
+    label: "E-mail*",
     type: "string",
     isRequired: true,
   },
@@ -250,7 +246,7 @@ export const defaultFormState = {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
-    label: "Celular",
+    label: "Celular*",
     type: "string",
     isRequired: true,
     mask: (value: string) => {
@@ -282,15 +278,15 @@ export const defaultFormState = {
   motherName: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
-    label: "Nome da mãe",
+    sxFormControl: { margin: "12px 8px", width: "390px" },
+    label: "Nome da mãe*",
     type: "string",
     isRequired: true,
   },
   fatherName: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "300px" },
+    sxFormControl: { margin: "12px 8px", width: "400px" },
     label: "Nome do pai",
     type: "string",
     isRequired: true,
@@ -344,11 +340,11 @@ export const defaultFormState = {
       { value: "O-", label: "O-" },
     ],
   },
-  actualSituation: {
+  actualWorkSituation: {
     value: "",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "200px" },
-    label: "Situação atual",
+    sxFormControl: { margin: "12px 8px", width: "230px" },
+    label: "Situação atual*",
     type: "string",
     isRequired: true,
   },
@@ -360,7 +356,7 @@ export const defaultFormState = {
     type: "date",
     isRequired: true,
   },
-  role: {
+  jobRole: {
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "300px" },

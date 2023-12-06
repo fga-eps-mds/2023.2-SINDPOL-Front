@@ -1,16 +1,8 @@
 import React from "react"
 import { styles } from "./styles"
 import { Box, Icon, Image } from "@chakra-ui/react"
-import {
-  IconHome,
-  IconUser,
-  IconSettings,
-  IconFileExport,
-  IconDatabaseExport,
-  IconUsers,
-  IconArchive,
-  IconLogout,
-} from "@tabler/icons-react"
+import { IconHome, IconUser, IconSettings, IconFileExport, IconDatabaseExport, IconUsers,
+  IconUserPlus, IconArchive, IconLogout } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
 import Logo from "../../assets/logo.png"
 
@@ -41,6 +33,11 @@ const sidebarItens = {
     icon: <IconArchive />,
     label: "Patrimônio",
     destiny: "/patrimony",
+  },
+  IconAproveUser: {
+    icon: <IconUserPlus />,
+    label: "Aprovar Usuários",
+    destiny: "/aceeptance",
   },
   IconLogout: { icon: <IconLogout />, label: "Sair", destiny: "/login" },
 }
@@ -75,6 +72,7 @@ export default function Sidebar(props: any) {
         <Box>
           {SidebarItem("IconHome")}
           {SidebarItem("IconUsers")}
+          {SidebarItem("IconAproveUser")}
           {SidebarItem("IconFileExport")}
           {SidebarItem("IconDatabaseExport")}
           {SidebarItem("IconArchive")}

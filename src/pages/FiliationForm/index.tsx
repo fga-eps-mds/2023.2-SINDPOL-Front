@@ -1,18 +1,23 @@
 import { Box, Image, Text, IconButton } from "@chakra-ui/react"
-import React, { useState } from "react"
+import { useParams } from "react-router-dom"
+import React, { useState, useEffect } from "react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
 import GenericButton from "../../components/GenericButton"
 import { defaultFormState, FormState } from "./formControl"
 import { useAppDispatch } from "../../utils/hooks"
-import { createAssociate } from "../../app/store/associate/associateSlice"
-import { useNavigate } from "react-router-dom"
+import {
+  createAssociate,
+  fetchAssociate,
+  setAssociate,
+  updateAssociates,
+} from "../../app/store/associate/associateSlice"
+import { useNavigate, useLocation } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
 import GenericDropdown from "../../components/GenericDropdown"
 import PopUpSubmission from "../../components/PopUpSubmission"
 import DatePicker from "../../components/DatePicker"
-
 interface dependent {
   id: number
   name: string
@@ -31,6 +36,9 @@ export default function FiliationForm(props: any) {
   const [cont, setCont] = useState(1)
   const [modalOk, setModalOk] = useState(false)
   const [error, setError] = useState({})
+  const [associate, setAssociate] = React.useState<any>([])
+  const { associateId } = useParams()
+  const location = useLocation()
 
   const adicionarBox = () => {
     const novaBox: dependent = {
@@ -76,6 +84,13 @@ export default function FiliationForm(props: any) {
         }, 3000)
       }
     })
+  }
+
+  const updateForm = () => {
+    let dataToSubmit = createObjectToSubmit(formState, boxes)
+    console.log("formstate:: ", dataToSubmit)
+
+    dispatch(updateAssociates({ id: associateId, associate: dataToSubmit }))
   }
 
   const changeFormState = (name: string, value: any) => {
@@ -139,30 +154,54 @@ export default function FiliationForm(props: any) {
             </div>
           )
         case "date":
-          return (
-            <DatePicker
-              onChange={changeFormState}
-              {...value}
-            />
-          )
+          return <DatePicker onChange={changeFormState} {...value} />
       }
     })
   }
+
+  useEffect(() => {
+    dispatch(fetchAssociate(associateId)).then((res) => {
+      setAssociate(res.payload)
+      setFormState((prevState) => {
+        const updatedFormState = { ...prevState }
+        Object.keys(res.payload).forEach((key) => {
+          if (updatedFormState[key]) {
+            updatedFormState[key].value = res.payload[key]
+          }
+        })
+        return updatedFormState
+      })
+    })
+  }, [])
 
   return (
     <>
       <Box id={"container-form"} sx={styles.formContainer}>
         <Box id={"form-box"} sx={styles.formBox}>
           <Image
-            src="src/assets/logo.png"
+            src="../src/assets/logo.png"
             width={"84px"}
             marginLeft={"30px"}
             marginTop={"10px"}
           />
           <Box id={"column-fields"} sx={styles.columnFields}>
-            <Text fontSize={"20px"} fontWeight={"semibold"} marginTop={"20px"}>
-              Formulário de Filiação
-            </Text>
+            {location.pathname === "/filiation" ? (
+              <Text
+                fontSize={"20px"}
+                fontWeight={"semibold"}
+                marginTop={"20px"}
+              >
+                Formulário de Filiação
+              </Text>
+            ) : (
+              <Text
+                fontSize={"20px"}
+                fontWeight={"semibold"}
+                marginTop={"20px"}
+              >
+                Detalhes do Sindicalizado
+              </Text>
+            )}
             <Box id={"row-fields"} sx={styles.rowFields} marginTop={"20px"}>
               {renderForm()}
             </Box>
@@ -282,18 +321,36 @@ export default function FiliationForm(props: any) {
               ))}
           </Box>
           <Box id={"row-buttons"} sx={styles.rowButtons}>
-            <GenericButton
-              text="Enviar Solicitação de Filiação"
-              marginTop={"20px"}
-              width={"250px"}
-              onClick={submitForm}
-            />
-            <GenericButton
-              text="Cancelar"
-              marginTop={"20px"}
-              width={"150px"}
-              onClick={() => navigate("/login")}
-            />
+            {location.pathname === "/filiation" ? ( // Rota específica para alterar o texto e a função
+              <GenericButton
+                text="Enviar Solicitação de Filiação"
+                marginTop={"20px"}
+                width={"250px"}
+                onClick={submitForm}
+              />
+            ) : (
+              <GenericButton
+                text="Salvar Alterações"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={updateForm}
+              />
+            )}
+            {location.pathname === "/filiation" ? ( // Rota específica para alterar o texto e a função
+              <GenericButton
+                text="Cancelar"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={() => navigate("/login")}
+              />
+            ) : (
+              <GenericButton
+                text="Voltar"
+                marginTop={"20px"}
+                width={"150px"}
+                onClick={() => navigate("/Associates")}
+              />
+            )}
           </Box>
         </Box>
         <PopUpSubmission
