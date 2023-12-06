@@ -21,7 +21,7 @@ export default function Associates(props: any) {
   const [associates, setAssociates] = React.useState<any>([])
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
-  const [dados, setDados] =  React.useState<any>([])
+  const [dados, setDados] = React.useState<any>([])
 
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
@@ -43,9 +43,9 @@ export default function Associates(props: any) {
         const normalizedData = results.data.map((row: any) => {
           return normalizeAndCreateObject(row);
         });
-  
+
         console.log(normalizedData);
-  
+
         normalizedData.forEach((associate: any) => {
 
           submitFunction(associate);
@@ -58,20 +58,20 @@ export default function Associates(props: any) {
   };
 
   console.log(dados)
-  
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
       readAssociatedData(file, submitForm);
     }
   };
-  
+
   const submitForm = (associate: any) => {
     dispatch(createAssociate(associate))
   };
-  
 
- 
+
+
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -106,7 +106,7 @@ export default function Associates(props: any) {
             />
           </Box>
         </Box>
-        
+
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
           {associates.map((associate: any) => {
@@ -114,21 +114,21 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.name}</Text>
-                    <Text align={"left"}>{associate.registration} : : {associate.cpf}</Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
+                    <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate}</Text>
                   </Box>
                   <Box display={"flex"}>
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
                     <IconButton
                       aria-label="mais opções"
                       icon={<IconMenu2 />}
-                      onClick={() => {}}
+                      onClick={() => { }}
                       color={"#734A00"}
                     />
                   </Box>
@@ -137,16 +137,14 @@ export default function Associates(props: any) {
             )
           })}
         </Box>
-        
+
         <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
             <Box id="modal-body" sx={styles.modalBox}>
-              <input type="file" id="fileInput" style={INPUT_HIDDEN} accept=".csv" onChange={readAssociatedData} />
-              <label htmlFor="file" for="fileInput" style={LABEL_ICON}>
-                <IconFileUpload style={ICON} />
-              </label>
-              <Text sx={styles.textImport} >Solte um arquivo csv ou escolha</Text>
+              <input type="file" accept=".csv" onChange={handleFileChange} />
+              <Text>Solte um arquivo csv ou escolha</Text>
             </Box>
+
             <GenericButton
               sx={styles.associatImportButtom}
               text="Importar sindicalizados"
