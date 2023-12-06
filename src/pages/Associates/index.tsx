@@ -76,9 +76,6 @@ export default function Associates(props: any) {
     dispatch(createAssociate(associate))
   };
 
-
-
-
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
       <Box id="associates-page-box" sx={styles.box}>
@@ -127,7 +124,7 @@ export default function Associates(props: any) {
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => {}}
+                      onClick={() => {handleEyeClick(associate.id)}}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
@@ -162,30 +159,31 @@ export default function Associates(props: any) {
         <Box>
           <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
             <Text sx={{ marginTop: '30px', marginBottom: '20px', textAlign: 'left' }}>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
-            <table style={TABLE}>
-              <thead>
-                <tr style={TABLE}>
-                  <th style={TABLE}>Linha</th>
-                  <th style={TABLE}>Status</th>
-                  <th style={TABLE_MOTIVO}>Motivo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={TABLE}>0</td>
-                  <td style={TABLE}>Aprovado</td>
-                  <td style={TABLE_MOTIVO}>------</td>
-                </tr><tr>
-                  <td style={TABLE}>1</td>
-                  <td style={TABLE}>Aprovado</td>
-                  <td style={TABLE_MOTIVO}>------</td>
-                </tr><tr>
-                  <td style={TABLE}>2</td>
-                  <td style={TABLE}>Aprovado</td>
-                  <td style={TABLE_MOTIVO}>------</td>
-                </tr>
-              </tbody>
-            </table>
+            {dados.map((dado: any) => {
+              return (
+                <>
+                  <table style={TABLE}>
+                    <thead>
+                      <tr style={TABLE}>
+                        <th style={TABLE}>Matrícula</th>
+                        <th style={TABLE}>Status</th>
+                        <th style={TABLE_MOTIVO}>Motivo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={TABLE}>{dado.registration}</td>
+                        <td style={TABLE}>Aprovado</td>
+                        <td style={TABLE_MOTIVO}>------</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                </>
+              )
+            })}
+
           </Modal>
         </Box>
 
