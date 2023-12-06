@@ -114,7 +114,7 @@ export const defaultFormState = {
     type: "string",
   },
   ufNatural: {
-    value: "",
+    value: "Acre",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "80px" },
     label: "UF Nat.",
@@ -199,7 +199,7 @@ export const defaultFormState = {
     type: "string",
   },
   uf: {
-    value: "",
+    value: "Acre",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "80px" },
     label: "UF",
@@ -264,7 +264,7 @@ export const defaultFormState = {
     },
   },
   gender: {
-    value: "",
+    value: "Masculino",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Sexo",
@@ -299,7 +299,7 @@ export const defaultFormState = {
     type: "string",
   },
   religion: {
-    value: "",
+    value: "cristianismo",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Religião",
@@ -323,7 +323,7 @@ export const defaultFormState = {
     ],
   },
   bloodType: {
-    value: "",
+    value: "A+",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
     label: "Tipo sanguíneo",
