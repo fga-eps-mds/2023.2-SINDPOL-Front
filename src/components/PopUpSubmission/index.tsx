@@ -45,8 +45,8 @@ export default function PopUpSubmission(props: Readonly<PopUpSubmissionProps>) {
     const propsSubmission: PopUpSubmissionState = new PopUpSubmissionState(props.open, props.title, props.description, props.type, props.onClose)
     
     return (
-        <Modal isOpen={props.open} onClose={() => { props.onClose() }} >
-            <ModalOverlay />
+        <Modal isOpen={props.open} onClose={() => { props.onClose() }} isCentered>
+            <ModalOverlay  bg={"#cccccc75"}/>
             <ModalContent boxShadow={'none'}>
                 <ModalBody>
                     <Alert

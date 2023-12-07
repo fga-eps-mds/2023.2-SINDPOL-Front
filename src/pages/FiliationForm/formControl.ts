@@ -78,13 +78,13 @@ export const defaultFormState = {
     },
   },
   birthDate: {
-    value: "",
+    value: Date.now() ,
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Data de nascimento *",
     type: "date",
   },
-  rg: {
+  rg: {   
     value: "",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "130px" },
@@ -349,7 +349,7 @@ export const defaultFormState = {
     isRequired: true,
   },
   admissionDate: {
-    value: "",
+    value: Date.now(),
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Data de admissão",

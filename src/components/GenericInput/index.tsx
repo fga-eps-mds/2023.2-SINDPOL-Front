@@ -39,7 +39,7 @@ export default function GenericInput(props: GenericInputProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let { value } = event.target;
     const maskedValue = applyMask(value, props.mask);
-    console.log(event, value)
+    
     props.onChange(props.name, maskedValue);
   };
   

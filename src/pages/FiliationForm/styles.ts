@@ -43,7 +43,7 @@ export const styles = {
     alignItems: "center",
     backgroundColor: "transparent",
     marginTop: "30px",
-    padding: "12px"
+    padding: "12px",
   },
   divider: {
     display: "flex",
@@ -63,7 +63,17 @@ export const styles = {
     backgroundColor: "transparent",
     padding: "12px",
   },
+  rowDependents: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    maxWidth: "1200px",
+    flexWrap: "wrap",
+  },
   inputSize: {
-    margin: "12px 8px 0px 0px",
+    marginRight: "8px",
+    alignSelf: "flex-start"
   },
 }

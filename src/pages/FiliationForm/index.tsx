@@ -18,6 +18,7 @@ import GenericDropdown from "../../components/GenericDropdown"
 import PopUpSubmission from "../../components/PopUpSubmission"
 import DatePicker from "../../components/DatePicker"
 import { fetchAssociate } from "../../app/store/associate/associateSlice"
+import Mask from "../../utils/Mask"
 
 interface dependent {
   id: number
@@ -36,7 +37,10 @@ export default function FiliationForm(props: any) {
   const [boxes, setBoxes] = useState<Array<dependent>>([])
   const [cont, setCont] = useState(1)
   const [modalOk, setModalOk] = useState(false)
-  const [error, setError] = useState({})
+  const [error, setError] = useState({
+    hasError: false,
+    message: ""
+  })
   const [associate, setAssociate] = React.useState<any>([])
   const { associateId } = useParams()
   const location = useLocation()
@@ -67,20 +71,28 @@ export default function FiliationForm(props: any) {
     console.log("formstate:: ", data)
 
     dispatch(createAssociate(data)).then((res) => {
-      if (res.payload.response.status !== 422) {
+      console.log(res)
+      if (res.payload.status === 200) {
         setModalOk(true)
+        setError({
+          hasError: false,
+          message: ""
+        })
 
         setTimeout(() => {
           setModalOk(false)
+          window.history.back()
         }, 3000)
-
       } else {
-        setError(res.payload.response.data)
+        setError({
+          hasError: true,
+          message: res.payload.data
+        })
         setModalOk(true)
 
-        setTimeout(() => {
-          setModalOk(false)
-        }, 3000)
+        // setTimeout(() => {
+        //   setModalOk(false)
+        // }, 3000)
       }
     })
   }
@@ -93,7 +105,6 @@ export default function FiliationForm(props: any) {
   }
 
   const changeFormState = (name: string, value: any) => {
-    console.log("name: ", name, "value: ", value)
     if (!validateField(name, value)) {
       setFormState((prevState) => ({
         ...prevState,
@@ -110,7 +121,7 @@ export default function FiliationForm(props: any) {
   const changeDependentFields = (
     boxId: number,
     name: string,
-    value: string,
+    value: string | Date,
   ) => {
     if (boxes && boxes.length > 0) {
       const novasBoxes = boxes.map((e: any) => {
@@ -223,15 +234,15 @@ export default function FiliationForm(props: any) {
               boxes.map((box) => (
                 <Box
                   id={"row-fields-" + box.id}
-                  sx={styles.rowFields}
+                  sx={styles.rowDependents}
                   marginTop={"30px"}
                 >
                   <GenericInput
                     type={"string"}
                     name={"name"}
                     value={box.name}
-                    onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "name", e.target.value)
+                    onChange={(name: any, value: any) =>
+                      changeDependentFields(box.id, name, value)
                     }
                     label="Nome Completo*"
                     sxFormControl={{ ...styles.inputSize, width: "300px" }}
@@ -244,8 +255,8 @@ export default function FiliationForm(props: any) {
                     type={"string"}
                     name={"cpf"}
                     value={box.cpf}
-                    onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "cpf", e.target.value)
+                    onChange={(name: any, value: any) =>
+                      changeDependentFields(box.id, name, value)
                     }
                     label="CPF"
                     sxFormControl={{ ...styles.inputSize, width: "190px" }}
@@ -254,16 +265,11 @@ export default function FiliationForm(props: any) {
                       message: "",
                     }}
                   ></GenericInput>
-                  <GenericInput
-                    type={"string"}
+                  <DatePicker
                     name={"birth_date"}
                     value={box.birth_date}
-                    onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(
-                        box.id,
-                        "birth_date",
-                        e.target.value,
-                      )
+                    onChange={(name: any, value: any) =>
+                      changeDependentFields(box.id, name, value)
                     }
                     label="Data de Nascimento*"
                     sxFormControl={{ ...styles.inputSize, width: "190px" }}
@@ -271,17 +277,13 @@ export default function FiliationForm(props: any) {
                       hasError: false,
                       message: "",
                     }}
-                  ></GenericInput>
+                  />
                   <GenericInput
                     type={"string"}
                     name={"relationship"}
                     value={box.relationship}
-                    onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(
-                        box.id,
-                        "relationship",
-                        e.target.value,
-                      )
+                    onChange={(name: any, value: any) =>
+                      changeDependentFields(box.id, name, value)
                     }
                     label="Parentesco"
                     sxFormControl={{ ...styles.inputSize, width: "120px" }}
@@ -294,8 +296,8 @@ export default function FiliationForm(props: any) {
                     type={"string"}
                     name={"phone"}
                     value={box.phone}
-                    onChange={(e: { target: { value: string } }) =>
-                      changeDependentFields(box.id, "phone", e.target.value)
+                    onChange={(name: any, value: any) =>
+                      changeDependentFields(box.id, name, value)
                     }
                     label="Celular*"
                     sxFormControl={{ ...styles.inputSize, width: "170px" }}
@@ -303,12 +305,7 @@ export default function FiliationForm(props: any) {
                       hasError: false,
                       message: "",
                     }}
-                    mask={(value) =>
-                      `(${value.slice(0, 2)}) ${value.slice(
-                        2,
-                        7,
-                      )}-${value.slice(7)}`
-                    }
+                    mask={(value) => Mask.PhoneNumber(value)}
                   ></GenericInput>
                   <IconButton
                     aria-label={""}
@@ -354,12 +351,12 @@ export default function FiliationForm(props: any) {
           </Box>
         </Box>
         <PopUpSubmission
-          type={error ? "error" : "success"}
+          type={error.hasError ? "error" : "success"}
           open={modalOk}
           onClose={() => setModalOk(false)}
-          title={!error ? "Sucesso!" : "Erro!"}
+          title={error.hasError ? "Erro!" : "Sucesso!"}
           description={
-            !error
+            !error.hasError
               ? "Sua solicitação de filiação foi enviada com sucesso!"
               : "Ocorreu um erro ao enviar sua solicitação de filiação. Por favor, tente novamente mais tarde."
           }
