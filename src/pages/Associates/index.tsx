@@ -35,8 +35,11 @@ export default function Associates(props: any) {
     navigate(`/update/${associateId}`);
   }
 
-  const importAssociates = () => {
+  const importAssociates = (submitFunction: Function) => {
     setOpenModal(false)
+    dados.forEach((dado: any) => {
+      submitFunction(dado);
+    });
     setOpenModal2(true)
   }
 
@@ -52,10 +55,7 @@ export default function Associates(props: any) {
 
         console.log(normalizedData);
 
-        normalizedData.forEach((associate: any) => {
 
-          submitFunction(associate);
-        });
 
         setDados(normalizedData);
 
@@ -124,7 +124,7 @@ export default function Associates(props: any) {
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => {handleEyeClick(associate.id)}}
+                      onClick={() => { handleEyeClick(associate.id) }}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
@@ -152,37 +152,41 @@ export default function Associates(props: any) {
             <GenericButton
               sx={styles.associatImportButtom}
               text="Importar sindicalizados"
-              onClick={() => importAssociates()}>
+              onClick={() => importAssociates(submitForm)}>
             </GenericButton>
           </Box>
         </Modal>
         <Box>
           <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
             <Text sx={{ marginTop: '30px', marginBottom: '20px', textAlign: 'left' }}>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
-            {dados.map((dado: any) => {
-              return (
-                <>
-                  <table style={TABLE}>
-                    <thead>
-                      <tr style={TABLE}>
-                        <th style={TABLE}>Matrícula</th>
-                        <th style={TABLE}>Status</th>
-                        <th style={TABLE_MOTIVO}>Motivo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+
+            <table style={TABLE}>
+              <thead>
+                <tr style={TABLE}>
+                  <th style={TABLE}>Matrícula</th>
+                  <th style={TABLE}>Status</th>
+                  <th style={TABLE_MOTIVO}>Motivo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dados.map((dado: any) => {
+                  return (
+                    <>
                       <tr>
                         <td style={TABLE}>{dado.registration}</td>
                         <td style={TABLE}>Aprovado</td>
                         <td style={TABLE_MOTIVO}>------</td>
                       </tr>
-                    </tbody>
-                  </table>
+                      
+                    </>
+                  )
+                })}
+              </tbody>
+            </table>
 
 
-                </>
-              )
-            })}
+
+
 
           </Modal>
         </Box>
