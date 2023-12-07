@@ -9,7 +9,6 @@ import { defaultFormState, FormState } from "./formControl"
 import { useAppDispatch } from "../../utils/hooks"
 import {
   createAssociate,
-  fetchAssociate,
   setAssociate,
   updateAssociates,
 } from "../../app/store/associate/associateSlice"
@@ -18,6 +17,8 @@ import { createObjectToSubmit, validateField } from "./normalize"
 import GenericDropdown from "../../components/GenericDropdown"
 import PopUpSubmission from "../../components/PopUpSubmission"
 import DatePicker from "../../components/DatePicker"
+import { fetchAssociate } from "../../app/store/associate/associateSlice"
+
 interface dependent {
   id: number
   name: string

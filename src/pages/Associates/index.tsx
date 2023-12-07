@@ -28,23 +28,23 @@ export default function Associates(props: any) {
   }
 
   return (
-    <Box id="asssociates-page-container" sx={styles.boxContainer}>
-      <Box id="associates-page-box" sx={styles.box}>
-        <Box id="associates-page-box-header" sx={styles.boxHeader}>
-          <Heading id="associates-page-box-header-title">
-            Sindicalizados
-          </Heading>
-          <GenericInput
-            id="associates-page-box-header-input"
-            placeholder="Pesquisar por Nome ou Mátricula"
-            type="text"
-            name="search"
-            value=""
-            error={{ hasError: false, message: "" }}
-            onChange={() => { }}
-            sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
-          />
-          <Box>
+    <Box id="home-page-container" sx={styles.boxContainer}>
+      <Box id="home-page-box" sx={styles.box}>
+        <Box id="home-page-box-header" sx={styles.boxHeader}>
+          <Box sx={styles.boxHeaderTop}>
+            <Heading id="associates-page-box-header-title" sx={styles.boxHeaderTitle}> Sindicalizados </Heading>
+          </Box>
+          <Box sx={styles.boxHeaderMiddle}>
+            <GenericInput
+              id="associates-page-box-header-input"
+              placeholder="Pesquisar por Nome ou Mátricula"
+              type="text"
+              name="search"
+              value=""
+              error={{ hasError: false, message: "" }}
+              sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
+              onChange={() => { }}
+            />
             <GenericButton
               id="associates-page-box-header-add-button"
               text="Cadastrar"
@@ -75,7 +75,7 @@ export default function Associates(props: any) {
                     <IconButton
                       aria-label="Ver sindicalizado"
                       icon={<IconEye />}
-                      onClick={() => { handleEyeClick(associate.id)}}
+                      onClick={() => { handleEyeClick(associate.id) }}
                       color={"#734A00"}
                     />
                     <Divider orientation="vertical" color={"#734A00"} />
