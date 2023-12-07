@@ -48,7 +48,8 @@ export default function Associates(props: any) {
     setOpenModal(false);
     const statusArray: AssociateStatus[] = [];
 
-    for (const dado of dados) {
+    for (let i = 0; i < dados.length; i++) {
+      const dado = dados[i];
       let status = 'aprovado';
       let motivo = 'Submissão bem-sucedida';
 
@@ -58,18 +59,15 @@ export default function Associates(props: any) {
         statusArray.push({ status, motivo });
       } catch (error: any) {
         status = 'reprovado';
-        console.log(error);
-
         motivo = error.message || 'Erro desconhecido na submissão';
         statusArray.push({ status, motivo });
       }
     }
 
-
-
     setAssociatesStatus(statusArray);
     setOpenModal2(true);
   };
+
 
   const readAssociatedData = (file: File, submitFunction: Function) => {
     Papa.parse(file, {
@@ -212,7 +210,7 @@ export default function Associates(props: any) {
             <table style={TABLE}>
               <thead>
                 <tr style={TABLE}>
-                  <th style={TABLE}>Matrícula</th>
+                  <th style={TABLE}>Linha</th>
                   <th style={TABLE}>Status</th>
                   <th style={TABLE_MOTIVO}>Motivo</th>
                 </tr>
@@ -220,7 +218,7 @@ export default function Associates(props: any) {
               <tbody>
                 {associatesStatus.map((dado: any, index: number) => (
                   <tr key={index}>
-                    <td style={TABLE}>{associates[index]?.registration}</td>
+                    <td style={TABLE}>{index + 1}</td>
                     <td style={TABLE}>{dado.status}</td>
                     <td style={TABLE_MOTIVO}>{dado.motivo}</td>
                   </tr>
