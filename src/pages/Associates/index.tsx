@@ -91,7 +91,6 @@ export default function Associates(props: any) {
             )
           })}
         </Box>
-        <Box id="associates-page-box-footer">{/* Botões de paginação */}</Box>
       </Box>
     </Box>
   )

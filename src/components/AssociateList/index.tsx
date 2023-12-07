@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { styles } from './styles';
 import { Table, Tbody, Tfoot, Tr, Td, TableContainer } from '@chakra-ui/react'
-import { IconEye, IconDotsVertical, IconArrowNarrowRight, IconMinusVertical } from '@tabler/icons-react';
+import { IconEye } from '@tabler/icons-react';
 import { IconButton } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../utils/hooks"
@@ -46,19 +46,6 @@ export default function MyTable(props: any) {
             </>
           )
         })}
-        <Tfoot>
-          <Tr>
-            <Td>
-              <span style={{ color: '#734A00', fontWeight: 'inter', fontSize: '14px' }}>
-                Todos os Sindicalizados
-                <IconButton
-                  aria-label=''
-                  icon={<IconArrowNarrowRight />}
-                  onClick={() => { navigate('/Associates') }} />
-              </span>
-            </Td>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
 

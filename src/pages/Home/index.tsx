@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import AssociateList from '../../components/AssociateList';
 import { styles } from "./styles"
-import { Box, Heading } from "@chakra-ui/react"
-import MenuOrdenacao from '../../components/GenericMenuOptions';
+import { useNavigate } from "react-router-dom"
+import AssociateList from '../../components/AssociateList';
+import { Box, Heading, IconButton } from "@chakra-ui/react"
+import { IconArrowNarrowRight } from '@tabler/icons-react';
+
 
 export default function Home() {
     const Opcoes = ['Novo', 'Antigo'];
     const [associates, setAssociates] = React.useState<any>([])
-    
-    
+    const navigate = useNavigate()
+
     const handleSelecao = (opcao: string) => {
         console.log(`Opção selecionada na página: ${opcao}`);
-    
+
         let sortedAssociates = [...associates];
-    
+
         if (opcao === 'Novo') {
             sortedAssociates.sort((a: any, b: any) => {
                 const dateA = new Date(a.created_at).getTime();
@@ -27,7 +29,7 @@ export default function Home() {
                 return dateA - dateB;
             });
         }
-    
+
         setAssociates(sortedAssociates);
     };
 
@@ -37,7 +39,18 @@ export default function Home() {
                 <Box id="associates-page-box-header" sx={styles.boxHeader}>
                     <Heading id="associates-page-box-header-title" sx={styles.boxHeaderTitle}> Sindicalizados</Heading>
                 </Box>
-                <AssociateList />
+                <Box id="associates-page-box-body" sx={styles.boxList}>
+                    <AssociateList />
+                </Box>
+                <Box>
+                    <span style={{ color: '#734A00', fontWeight: 'inter', fontSize: '14px' }}>
+                        Todos os Sindicalizados
+                        <IconButton
+                            aria-label=''
+                            icon={<IconArrowNarrowRight />}
+                            onClick={() => { navigate('/Associates') }} />
+                    </span>
+                </Box>
             </Box>
         </Box>
     );
