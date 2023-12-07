@@ -10,9 +10,7 @@ import { useAppDispatch } from "../../utils/hooks"
 import { createAssociate,updateAssociates } from "../../app/store/associate/associateSlice"
 import { useNavigate, useLocation } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
-import {
-  fetchAssociate,
-} from "../../app/store/associate/associateSlice"
+import { fetchAssociate } from "../../app/store/associate/associateSlice"
 
 interface dependent {
   id: number
