@@ -94,6 +94,7 @@ export default function FiliationForm(props: any) {
   }
 
   const changeFormState = (name: string, value: any) => {
+    console.log("name: ", name, "value: ", value)
     if (!validateField(name, value)) {
       setFormState((prevState) => ({
         ...prevState,
@@ -154,7 +155,7 @@ export default function FiliationForm(props: any) {
             </div>
           )
         case "date":
-          return <DatePicker onChange={changeFormState} {...value} />
+          return <DatePicker onChange={changeFormState} name={key} {...value} />
       }
     })
   }
