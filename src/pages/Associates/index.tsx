@@ -40,6 +40,7 @@ export default function Associates(props: any) {
             type="text"
             name="search"
             value=""
+            error={{ hasError: false, message: "" }}
             onChange={() => { }}
             sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
           />
@@ -67,7 +68,7 @@ export default function Associates(props: any) {
               <>
                 <Box sx={styles.boxItem}>
                   <Box>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.fullname}</Text>
+                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
                     <Text align={"left"}>Mat.: {associate.registration} | CPF: {associate.cpf} | {associate.birthDate}</Text>
                   </Box>
                   <Box display={"flex"}>

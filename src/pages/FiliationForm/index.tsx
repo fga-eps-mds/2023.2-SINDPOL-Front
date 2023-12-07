@@ -71,10 +71,8 @@ export default function FiliationForm(props: any) {
 
         setTimeout(() => {
           setModalOk(false)
-          window.history.back()
         }, 3000)
 
-        // navigate("/login")
       } else {
         setError(res.payload.response.data)
         setModalOk(true)
