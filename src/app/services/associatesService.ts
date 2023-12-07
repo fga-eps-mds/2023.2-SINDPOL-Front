@@ -27,7 +27,7 @@ async function postAssociate(associate: any) {
   return await httpClient
     .post("/gestao/users", associate)
     .then((response) => {
-      return response.data
+      return response
     })
     .catch((error) => {
       console.log(error)

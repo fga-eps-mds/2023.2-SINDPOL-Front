@@ -106,6 +106,10 @@ export default function Aceeptance(props: any) {
                             value=""
                             sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
                             onChange={() => { }}
+                            error={{
+                                hasError: false,
+                                message: ""
+                            }}
                         />
                         <MenuOrdenacao opcoes={Opcoes} onSelecao={handleSelecao} />
                     </Box>

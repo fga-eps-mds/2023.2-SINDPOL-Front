@@ -41,6 +41,7 @@ export default function Associates(props: any) {
               type="text"
               name="search"
               value=""
+              error={{ hasError: false, message: "" }}
               sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
               onChange={() => { }}
             />
