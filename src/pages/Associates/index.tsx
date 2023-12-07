@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom"
 import Papa from "papaparse";
 import { normalizeAndCreateObject } from "./normalize"
 import { createAssociate } from "../../app/store/associate/associateSlice"
+import { AxiosError } from 'axios';
+
 
 
 
@@ -21,6 +23,8 @@ export default function Associates(props: any) {
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
   const [dados, setDados] = React.useState<any>([])
+  const [associatesStatus, setAssociatesStatus] = useState<AssociateStatus[]>([]);
+
 
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
@@ -28,22 +32,44 @@ export default function Associates(props: any) {
     })
   }, [])
 
-  console.log(associates)
+
+  interface AssociateStatus {
+    status: string;
+    motivo: string;
+  }
+
 
   const handleEyeClick = (associateId: string) => {
     console.log("ID do associado:", associateId);
     navigate(`/update/${associateId}`);
   }
 
-  const importAssociates = (submitFunction: Function) => {
-    setOpenModal(false)
-    dados.forEach((dado: any) => {
-      submitFunction(dado);
-    });
-    setOpenModal2(true)
-  }
+  const importAssociates = async (submitFunction: Function) => {
+    setOpenModal(false);
+    const statusArray: AssociateStatus[] = [];
+
+    for (const dado of dados) {
+      let status = 'aprovado';
+      let motivo = 'Submissão bem-sucedida';
+
+      try {
+        await submitFunction(dado);
+
+        statusArray.push({ status, motivo });
+      } catch (error: any) {
+        status = 'reprovado';
+        console.log(error);
+
+        motivo = error.message || 'Erro desconhecido na submissão';
+        statusArray.push({ status, motivo });
+      }
+    }
 
 
+
+    setAssociatesStatus(statusArray);
+    setOpenModal2(true);
+  };
 
   const readAssociatedData = (file: File, submitFunction: Function) => {
     Papa.parse(file, {
@@ -72,8 +98,31 @@ export default function Associates(props: any) {
     }
   };
 
-  const submitForm = (associate: any) => {
-    dispatch(createAssociate(associate))
+  const submitForm = async (associate: any) => {
+    try {
+      const action = await dispatch(createAssociate(associate));
+
+      if (action.payload && (action.payload as AxiosError).response) {
+        throw new Error('Reprovado');
+      }
+
+      return 'Aprovado';
+    } catch (error) {
+      console.error('Erro ao criar associado:', error);
+
+      if (error instanceof Error && (error as AxiosError).response) {
+        const axiosError = error as AxiosError;
+
+        if (axiosError.response) {
+          console.error('Detalhes do erro:', axiosError.response.data);
+          console.error('Status do erro:', axiosError.response.status);
+
+          return axiosError.response.data || 'Erro desconhecido';
+        }
+      }
+
+      throw error;
+    }
   };
 
   return (
@@ -169,18 +218,13 @@ export default function Associates(props: any) {
                 </tr>
               </thead>
               <tbody>
-                {dados.map((dado: any) => {
-                  return (
-                    <>
-                      <tr>
-                        <td style={TABLE}>{dado.registration}</td>
-                        <td style={TABLE}>Aprovado</td>
-                        <td style={TABLE_MOTIVO}>------</td>
-                      </tr>
-                      
-                    </>
-                  )
-                })}
+                {associatesStatus.map((dado: any, index: number) => (
+                  <tr key={index}>
+                    <td style={TABLE}>{associates[index]?.registration}</td>
+                    <td style={TABLE}>{dado.status}</td>
+                    <td style={TABLE_MOTIVO}>{dado.motivo}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
 
