@@ -1,9 +1,9 @@
 export interface FormState {
-  [key: string]: Property
+  [key: string]: Property | DateProperty
   fullName: Property
   warName: Property
   registration: Property
-  birthDate: Property
+  birthDate: DateProperty
   rg: Property
   cpf: Property
   placeOfBirth: Property
@@ -26,20 +26,32 @@ export interface FormState {
   religion: Property
   bloodType: Property
   actualWorkSituation: Property
-  admissionDate: Property
+  admissionDate: DateProperty
   jobRole: Property
   bodyOfLaw: Property
   lotation: Property
   workPost: Property
 }
 
-interface DropdownOption {
+export interface DropdownOption {
   value: string
   label: string
 }
 
-interface Property {
+export interface Property {
   value: string
+  options?: DropdownOption[]
+  isInvalid: boolean
+  sxFormControl: any
+  label?: string
+  type?: string
+  isRequired?: boolean
+  helperText?: string
+  mask?: (value: string) => string
+}
+
+interface DateProperty {
+  value: string | Date
   options?: DropdownOption[]
   isInvalid: boolean
   sxFormControl: any
@@ -78,7 +90,7 @@ export const defaultFormState = {
     },
   },
   birthDate: {
-    value: Date.now() ,
+    value: new Date(),
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Data de nascimento *",
@@ -349,7 +361,7 @@ export const defaultFormState = {
     isRequired: true,
   },
   admissionDate: {
-    value: Date.now(),
+    value: new Date(),
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Data de admissão",

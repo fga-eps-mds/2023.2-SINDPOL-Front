@@ -5,7 +5,7 @@ import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
 import GenericButton from "../../components/GenericButton"
-import { defaultFormState, FormState } from "./formControl"
+import { defaultFormState, FormState, Property } from "./formControl"
 import { useAppDispatch } from "../../utils/hooks"
 import {
   createAssociate,
@@ -148,7 +148,7 @@ export default function FiliationForm(props: any) {
                   hasError: value.isInvalid,
                   message: "Erro",
                 }}
-                {...value}
+                {...value as Property}
               ></GenericInput>
             </div>
           )
@@ -159,7 +159,7 @@ export default function FiliationForm(props: any) {
                 type={"string"}
                 name={key}
                 onChange={changeFormState}
-                {...value}
+                {...value as Property}
                 options={value.options}
               ></GenericDropdown>
             </div>
