@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
-import { getAssociate, getAssociates, disableAssociate, enableAssociate, updateAssociate, postAssociate} from "../../services/associatesService";
+import { getAssociate, getAssociates, disableAssociate, enableAssociate, updateAssociate, postAssociate, deleteAssociate} from "../../services/associatesService";
 
 type AssociateState = {
   associates: any[]
@@ -62,10 +62,10 @@ export const updateAssociates = createAsyncThunk(
     }
 )
 
-export const deleteAssociate = createAsyncThunk(
+export const removeAssociate = createAsyncThunk(
   "associate/deleteAssociate",
   async (id: string | undefined) => {
-    var result = await getAssociate(id)
+    var result = await deleteAssociate(id)
 
     if (result == null) {
       return { error: result }
