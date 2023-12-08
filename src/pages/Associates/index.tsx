@@ -61,7 +61,7 @@ export default function Associates(props: any) {
         statusArray.push({ status, motivo });
       } catch (error: any) {
         status = 'reprovado';
-        motivo = error.mensage || 'Erro desconhecido na submissão';
+        motivo = error.message || 'Erro desconhecido na submissão';
         statusArray.push({ status, motivo });
       }
     }
@@ -78,6 +78,8 @@ export default function Associates(props: any) {
         const normalizedData = results.data.map((row: any) => {
           return normalizeAndCreateObject(row);
         });
+
+
 
         setDados(normalizedData);
 
@@ -103,16 +105,22 @@ export default function Associates(props: any) {
     try {
       const res = await dispatch(createAssociate(associate));
       console.log(res);
-  
-      if (res.payload.response) {
-        throw new Error('Reprovado');
+
+      if (res.payload.response && res.payload.response.data && res.payload.response.data.detail) {
+        throw new Error(res.payload.response.data.detail.toString()); // Convertendo para string, se necessário
       } else {
         return 'Aprovado';
       }
     } catch (error) {
-      throw new Error('Reprovado');
+      if (error instanceof Error) {
+        throw new Error(error.message || 'Reprovado');
+      } else {
+        throw new Error('Reprovado');
+      }
     }
   };
+
+
 
 
 
