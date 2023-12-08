@@ -26,7 +26,7 @@ export default function Modal({ isOpen, setModalOpen, Title, children }: ModalPr
                             <IconButton
                                 onClick={() => {
                                     setModalOpen;
-                                    window.location.reload(); // Atualiza a página ao fechar o modal
+                                    window.location.reload(); 
                                 }} aria-label="fechar"
                                 icon={<IconX />}
                                 color={"#000"}>

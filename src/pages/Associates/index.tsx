@@ -58,13 +58,11 @@ export default function Associates(props: any) {
       let status = 'aprovado';
       let motivo = 'Submissão bem-sucedida';
   
-      // Verifica se há erros nos dados
       if (erro.length > 0) {
         status = 'reprovado';
         motivo = `Campos inválidos: ${erro.join(', ')}`;
       } else {
         try {
-          // Se não houver erros, realiza a submissão
           await submitFunction(dado);
         } catch (error: any) {
           status = 'reprovado';
@@ -109,7 +107,6 @@ export default function Associates(props: any) {
       const file = files[0];
       setSelectedFile(file.name);
       readAssociatedData(file, submitForm);
-      // Outras operações com o arquivo, se necessário
     } else {
       setSelectedFile(null);
     }
