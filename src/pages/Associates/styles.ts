@@ -73,7 +73,7 @@ export const styles = {
         borderStyle: 'dashed',
         margin: '40px 0 10px 0',
         padding: '80px',
-        width: '800px,',
+        minWidth: '500px'
     },
     modalBoxResult: {
         margin: '15px',

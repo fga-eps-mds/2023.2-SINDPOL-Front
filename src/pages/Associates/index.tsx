@@ -216,34 +216,38 @@ export default function Associates(props: any) {
           </Box>
         </Modal>
         <Box>
-          <Modal Title="Importar Sindicalizados" isOpen={openModal2} setModalOpen={() => setOpenModal2(!openModal2)}>
-            <Text sx={{ marginTop: '30px', marginBottom: '20px', textAlign: 'left' }}>Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados</Text>
+          <Modal
+            Title="Importar Sindicalizados"
+            isOpen={openModal2}
+            setModalOpen={() => setOpenModal2(!openModal2)}
+          >
+            <Text sx={{ marginTop: '30px', marginBottom: '20px', textAlign: 'left' }}>
+              Assim que o processamento terminar os sindicalizados estarão listados na tela de sindicalizados
+            </Text>
 
-            <table style={TABLE}>
-              <thead>
-                <tr style={TABLE}>
-                  <th style={TABLE}>Linha</th>
-                  <th style={TABLE}>Status</th>
-                  <th style={TABLE_MOTIVO}>Motivo</th>
-                </tr>
-              </thead>
-              <tbody>
-                {associatesStatus.map((dado: any, index: number) => (
-                  <tr key={index}>
-                    <td style={TABLE}>{index + 1}</td>
-                    <td style={TABLE}>{dado.status}</td>
-                    <td style={TABLE_MOTIVO}>{dado.motivo}</td>
+            <div style={{ maxHeight: '250px', overflowY: 'auto' }}> {/* Defina a altura máxima e a rolagem vertical */}
+              <table style={TABLE}>
+                <thead>
+                  <tr style={TABLE}>
+                    <th style={TABLE}>Linha</th>
+                    <th style={TABLE}>Status</th>
+                    <th style={TABLE_MOTIVO}>Motivo</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-
-
-
-
-
+                </thead>
+                <tbody>
+                  {associatesStatus.map((dado: any, index: number) => (
+                    <tr key={index}>
+                      <td style={TABLE}>{index + 1}</td>
+                      <td style={TABLE}>{dado.status}</td>
+                      <td style={TABLE_MOTIVO}>{dado.motivo}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </Modal>
         </Box>
+
 
         <Box id="associates-page-box-footer">{/* Botões de paginação */}</Box>
       </Box>
