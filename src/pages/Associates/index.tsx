@@ -99,35 +99,22 @@ export default function Associates(props: any) {
     }
   };
 
-
-
   const submitForm = async (associate: any) => {
     try {
-      const action = await dispatch(createAssociate(associate));
-
-      if (action.payload && (action.payload as AxiosError).response) {
+      const res = await dispatch(createAssociate(associate));
+      console.log(res);
+  
+      if (res.payload.response) {
         throw new Error('Reprovado');
+      } else {
+        return 'Aprovado';
       }
-
-      return 'Aprovado';
     } catch (error) {
-      console.error('Erro ao criar associado:', error);
-
-      if (error instanceof AxiosError && error.response) {
-        console.error('Detalhes do erro:', error.response.data);
-        console.error('Status do erro:', error.response.status);
-
-        return error.response.data || 'Erro desconhecido';
-      }
-
-      if (error instanceof Error) {
-        console.error('Erro desconhecido:', error);
-        return 'Erro desconhecido';
-      }
-
-      throw error;
+      throw new Error('Reprovado');
     }
   };
+
+
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
