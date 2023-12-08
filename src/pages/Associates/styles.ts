@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 
 export const INPUT_HIDDEN: CSSProperties = {
     display: 'none',
+    width:'100%'
 }
 
 export const ICON: CSSProperties = {
@@ -72,6 +73,7 @@ export const styles = {
         borderStyle: 'dashed',
         margin: '40px 0 10px 0',
         padding: '80px',
+        width: '800px,',
     },
     modalBoxResult: {
         margin: '15px',

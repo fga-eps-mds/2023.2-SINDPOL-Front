@@ -24,6 +24,8 @@ export default function Associates(props: any) {
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
   const [dados, setDados] = React.useState<any>([])
   const [associatesStatus, setAssociatesStatus] = useState<AssociateStatus[]>([]);
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+
 
 
   useEffect(() => {
@@ -86,14 +88,19 @@ export default function Associates(props: any) {
   console.log(dados)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    if (file) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setSelectedFile(file.name);
       readAssociatedData(file, submitForm);
+      // Outras operações com o arquivo, se necessário
+    } else {
+      setSelectedFile(null);
     }
   };
 
-  
-  
+
+
   const submitForm = async (associate: any) => {
     try {
       const action = await dispatch(createAssociate(associate));
@@ -105,19 +112,19 @@ export default function Associates(props: any) {
       return 'Aprovado';
     } catch (error) {
       console.error('Erro ao criar associado:', error);
-  
+
       if (error instanceof AxiosError && error.response) {
         console.error('Detalhes do erro:', error.response.data);
         console.error('Status do erro:', error.response.status);
-  
+
         return error.response.data || 'Erro desconhecido';
       }
-  
+
       if (error instanceof Error) {
         console.error('Erro desconhecido:', error);
         return 'Erro desconhecido';
       }
-  
+
       throw error;
     }
   };
@@ -190,11 +197,17 @@ export default function Associates(props: any) {
 
         <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
-            <Box id="modal-body" sx={styles.modalBox} onDragOver={(e) => e.preventDefault()}>
-              <input type="file" accept=".csv" onChange={handleFileChange} />
-              <Text>Solte um arquivo csv ou escolha</Text>
+            <Box id="modal-body" sx={styles.modalBox}>
+              <label htmlFor="fileInput" style={LABEL_ICON}>
+                <IconFileUpload style={ICON} />
+                <input type="file" id="fileInput" style={INPUT_HIDDEN} accept=".csv" onChange={handleFileChange} />
+              </label>
+              {selectedFile ? (
+                <Text sx={styles.textImport}>{selectedFile}</Text>
+              ) : (
+                <Text sx={styles.textImport}>&nbsp;Escolha um arquivo csv ou solte-o aqui</Text>
+              )}
             </Box>
-
             <GenericButton
               sx={styles.associatImportButtom}
               text="Importar sindicalizados"
