@@ -104,7 +104,7 @@ export const defaultFormState = {
     type: "string",
     isRequired: true,
     mask: (value: string) => {
-      return value.replace(/^(\d{2})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4")
+      return value.replace(/^(\d{1})(\d{3})(\d{3})$/, "$1.$2.$3")
     },
   },
   cpf: {
@@ -126,12 +126,13 @@ export const defaultFormState = {
     type: "string",
   },
   ufNatural: {
-    value: "Acre",
+    value: "--",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "80px" },
+    sxFormControl: { margin: "12px 8px", width: "120px" },
     label: "UF Nat.",
     type: "select",
     options: [
+      { value: "--", label: "--Select--" },
       { value: "Acre", label: "AC" },
       { value: "Alagoas", label: "AL" },
       { value: "Amapá", label: "AP" },
@@ -166,7 +167,14 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
     label: "Estado civil *",
-    type: "string",
+    type: "select",
+    options: [
+      { value: "--", label: "--Select--" },
+      { value: "single", label: "Solteiro(a)" },
+      { value: "married", label: "Casado(a)" },
+      { value: "wodower", label: "Viúvo(a)" },
+      { value: "divorced", label: "Divorciado(a)" },
+    ],
   },
   cep: {
     value: "",
@@ -174,6 +182,9 @@ export const defaultFormState = {
     sxFormControl: { margin: "12px 8px", width: "140px" },
     label: "CEP *",
     type: "string",
+    mask: (value: string) => {
+      return value.replace(/^(\d{2})(\d{3})(\d{3})$/, "$1.$2-$3")
+    },
   },
   address: {
     value: "",
@@ -211,12 +222,13 @@ export const defaultFormState = {
     type: "string",
   },
   uf: {
-    value: "Acre",
+    value: "--",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "80px" },
+    sxFormControl: { margin: "12px 8px", width: "120px" },
     label: "UF",
     type: "select",
     options: [
+      { value: "--", label: "--Select--" },
       { value: "Acre", label: "AC" },
       { value: "Alagoas", label: "AL" },
       { value: "Amapá", label: "AP" },
@@ -276,13 +288,14 @@ export const defaultFormState = {
     },
   },
   gender: {
-    value: "Masculino",
+    value: "--Select--",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "160px" },
     label: "Sexo",
     type: "select",
     isRequired: true,
     options: [
+      { value: "--", label: "--Select--" },
       { value: "Masculino", label: "Masculino" },
       { value: "Feminino", label: "Feminino" },
     ],
@@ -304,19 +317,27 @@ export const defaultFormState = {
     isRequired: true,
   },
   scolarity: {
-    value: "",
+    value: "--",
     isInvalid: false,
-    sxFormControl: { margin: "12px 8px", width: "160px" },
+    sxFormControl: { margin: "12px 8px", width: "180px" },
     label: "Escolaridade",
-    type: "string",
+    type: "select",
+    options: [
+      { value: "--", label: "--Select--" },
+      { value: "elementary school", label: "Ensino Fundamental" },
+      { value: "high school", label: "Ensino Médio" },
+      { value: "graduation", label: "Graduação" },
+      { value: "postgraduation", label: "Pós-Graduação" },
+    ],
   },
   religion: {
-    value: "cristianismo",
+    value: "--",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "200px" },
     label: "Religião",
     type: "select",
     options: [
+      { value: "--", label: "--Select--" },
       { value: "cristianismo", label: "Cristianismo" },
       { value: "islamismo", label: "Islamismo" },
       { value: "hinduismo", label: "Hinduísmo" },
@@ -335,13 +356,14 @@ export const defaultFormState = {
     ],
   },
   bloodType: {
-    value: "A+",
+    value: "--",
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "150px" },
     label: "Tipo sanguíneo",
     type: "select",
     isRequired: true,
     options: [
+      { value: "--", label: "--Select--" },
       { value: "A+", label: "A+" },
       { value: "A-", label: "A-" },
       { value: "B+", label: "B+" },
@@ -357,8 +379,15 @@ export const defaultFormState = {
     isInvalid: false,
     sxFormControl: { margin: "12px 8px", width: "230px" },
     label: "Situação atual",
-    type: "string",
+    type: "select",
     isRequired: true,
+    options: [
+      { value: "--", label: "--Select--" },
+      { value: "active", label: "Ativo" },
+      { value: "inactive", label: "Inativo" },
+      { value: "retiree", label: "Aposentado" },
+      { value: "pensioner", label: "Pensionista" },
+    ],
   },
   admissionDate: {
     value: new Date(),
