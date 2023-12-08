@@ -11,6 +11,8 @@ interface ModalProps {
     setModalOpen: () => void;
 }
 
+
+
 export default function Modal({ isOpen, setModalOpen, Title, children }: ModalProps) {
     if (isOpen) {
         return (
@@ -22,8 +24,10 @@ export default function Modal({ isOpen, setModalOpen, Title, children }: ModalPr
                         </div>
                         <div style={CLOSE_MODAL_BUTTON}>
                             <IconButton
-                                onClick={setModalOpen}
-                                aria-label="fechar"
+                                onClick={() => {
+                                    setModalOpen;
+                                    window.location.reload(); // Atualiza a página ao fechar o modal
+                                }} aria-label="fechar"
                                 icon={<IconX />}
                                 color={"#000"}>
                             </IconButton>
