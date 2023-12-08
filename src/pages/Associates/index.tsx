@@ -59,7 +59,7 @@ export default function Associates(props: any) {
         statusArray.push({ status, motivo });
       } catch (error: any) {
         status = 'reprovado';
-        motivo = error.message || 'Erro desconhecido na submissão';
+        motivo = error.mensage || 'Erro desconhecido na submissão';
         statusArray.push({ status, motivo });
       }
     }
@@ -77,10 +77,6 @@ export default function Associates(props: any) {
           return normalizeAndCreateObject(row);
         });
 
-        console.log(normalizedData);
-
-
-
         setDados(normalizedData);
 
       },
@@ -96,6 +92,8 @@ export default function Associates(props: any) {
     }
   };
 
+  
+  
   const submitForm = async (associate: any) => {
     try {
       const action = await dispatch(createAssociate(associate));
@@ -107,18 +105,19 @@ export default function Associates(props: any) {
       return 'Aprovado';
     } catch (error) {
       console.error('Erro ao criar associado:', error);
-
-      if (error instanceof Error && (error as AxiosError).response) {
-        const axiosError = error as AxiosError;
-
-        if (axiosError.response) {
-          console.error('Detalhes do erro:', axiosError.response.data);
-          console.error('Status do erro:', axiosError.response.status);
-
-          return axiosError.response.data || 'Erro desconhecido';
-        }
+  
+      if (error instanceof AxiosError && error.response) {
+        console.error('Detalhes do erro:', error.response.data);
+        console.error('Status do erro:', error.response.status);
+  
+        return error.response.data || 'Erro desconhecido';
       }
-
+  
+      if (error instanceof Error) {
+        console.error('Erro desconhecido:', error);
+        return 'Erro desconhecido';
+      }
+  
       throw error;
     }
   };
@@ -191,7 +190,7 @@ export default function Associates(props: any) {
 
         <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
-            <Box id="modal-body" sx={styles.modalBox}>
+            <Box id="modal-body" sx={styles.modalBox} onDragOver={(e) => e.preventDefault()}>
               <input type="file" accept=".csv" onChange={handleFileChange} />
               <Text>Solte um arquivo csv ou escolha</Text>
             </Box>
