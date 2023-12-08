@@ -9,13 +9,13 @@ export const styles = {
         alignItems: 'center',
         backgroundColor: '#fff',
         height: '90vh',
-        borderRadius: '24px',
+        borderRadius: '24px',        
     },
     boxList: {
         width: '100%',
         height: '100%',
         padding: '12px',
-        overflowY: 'scroll',
+        overflowY: 'scroll', 
     },
     boxItem: {
         display: 'flex',
@@ -24,6 +24,7 @@ export const styles = {
         alignItems: 'center',
         padding: '12px 24px',
         borderRadius: '16px',
+
         _hover: {
             backgroundColor: '#FFF7E8',
         }
@@ -34,29 +35,31 @@ export const styles = {
         justifyContent: 'space-between',
         width: '100%',
         padding: '24px',
-        fontSize: '20px',
+        fontSize:'20px',
         fontWeight: 'semibold',
-        color: 'black'
+        color:'black'
     },
-    boxHeaderTop: {
+    boxHeaderTop:{
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    boxHeaderMiddle: {
+    boxHeaderMiddle:{
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: '20px',
     },
-    boxHeaderBotton: {
+    boxHeaderBotton:{
         display: 'flex',
         flexDirection: 'row',
-        marginTop: '30px',
+        marginTop:'30px',
         justifyContent: "flex-start"
     },
-    boxHeaderTitle: {
+    boxHeaderTitle:{
         fontWeight: 'semibold',
         textAlign: 'left',
     }
+
+
 };

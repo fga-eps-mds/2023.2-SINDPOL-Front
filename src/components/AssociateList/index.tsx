@@ -1,60 +1,53 @@
+import React, { useEffect } from "react"
 import { styles } from './styles';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-} from '@chakra-ui/react'
-import { IconEye, IconEyeOff, IconDotsVertical, IconChevronDown, IconArrowNarrowRight, IconMinusVertical} from '@tabler/icons-react';
+import { Table, Tbody, Tfoot, Tr, Td, TableContainer } from '@chakra-ui/react'
+import { IconEye } from '@tabler/icons-react';
 import { IconButton } from '@chakra-ui/react'
+import { useNavigate } from "react-router-dom"
+import { useAppDispatch } from "../../utils/hooks"
+import { fetchAssociates } from "../../app/store/associate/associateSlice"
 
 export default function MyTable(props: any) {
-    return (
-      <TableContainer>
-        <Table variant="unstyled"
-            sx={styles.table}
-        >
-          <Thead>
-            <Tr>
-              <Td><span style={{ color: 'black', fontWeight: 'bold', fontSize:'20px'}}>Sindicalizados</span></Td>
-              <Td><><br /></></Td>
-              <Td><span style={{ color: 'Dark Gray', fontWeight: 'inter', fontSize:'14px'}}>Ordenar por </span>
-              <span style={{ color: 'Dark Gray', fontWeight: 'bold', fontSize:'14px'}}>Mais novos</span>
-              <IconButton aria-label='Search database' icon={<IconChevronDown/>} /></Td>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-            <Td><span style={{ color: 'black', fontWeight: 'bold', fontSize:'14px'}}>Nome</span><br/>
-            <span style={{ color: 'black', fontSize:'12px'}}>Matrícula</span></Td>
-            <Td><><br /></></Td>
-            <Td><><br /></></Td>
-            <Td><><br /></></Td>
-            <Td><><br /></></Td>
-            <Td><><br /></></Td>
-            <IconButton aria-label='Search database' icon={<IconEye/>} />
-            <IconButton aria-label='Search database' icon={<IconMinusVertical/>}/>
-            <IconButton aria-label='Search database' icon={<IconDotsVertical/>} />
-            </Tr>
-            <Tr>
-            <Td><span style={{ color: 'black', fontWeight: 'bold', fontSize:'14px'}}>
-            Nome</span><br/><span style={{ color: 'black', fontSize:'12px'}}>Matrícula</span></Td>
-            <span style={{ color: '#734A00'}}></span>
-            </Tr>
-          </Tbody>
-          <Tfoot>
-            <Tr>
-            <Td><span style={{ color: '#734A00', fontWeight: 'inter', fontSize:'14px'}}>
-            Todos os Sindicalizados<IconButton aria-label='Search database' icon={<IconArrowNarrowRight/>}/></span></Td>
-            </Tr>
-          </Tfoot>
-        </Table>
-      </TableContainer>
-      
-    );
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const [associates, setAssociates] = React.useState<any>([])
+
+  useEffect(() => {
+    dispatch(fetchAssociates()).then((res) => {
+      setAssociates(res.payload)
+    })
+  }, [])
+
+  const handleEyeClick = (associateId: string) => {
+    console.log("ID do associado:", associateId);
+    navigate(`/update/${associateId}`);
+  }
+
+  return (
+    <TableContainer>
+      <Table variant="unstyled">
+        {associates.map((associate: any) => {
+          return (
+            <>
+              <Tbody>
+                <Tr>
+                  <Td>
+                    <span style={{ color: 'black', fontWeight: 'bold', fontSize: '14px' }}>{associate.fullName}</span>
+                    <br />
+                    <span style={{ color: 'black', fontSize: '12px' }}>CPF: {associate.cpf}</span>
+                  </Td>
+                  <IconButton 
+                    aria-label='Search database' 
+                    icon={<IconEye />} 
+                    onClick={() => { handleEyeClick(associate.id) }}
+                    />
+                </Tr>
+              </Tbody>
+            </>
+          )
+        })}
+      </Table>
+    </TableContainer>
+
+  );
 }
