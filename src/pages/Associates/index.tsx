@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks"
 import { IconEye, IconMenu2, IconFileUpload } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
 import Papa from "papaparse";
-import { normalizeAndCreateObject } from "./normalize"
+import { normalizeAndCreateObject, errosData } from "./normalize"
 import { createAssociate } from "../../app/store/associate/associateSlice"
 import { AxiosError } from 'axios';
 
@@ -23,6 +23,8 @@ export default function Associates(props: any) {
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
   const [dados, setDados] = React.useState<any>([])
+  const [dadosError, setDadosError] = React.useState<any>([])
+
   const [associatesStatus, setAssociatesStatus] = useState<AssociateStatus[]>([]);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
@@ -49,26 +51,34 @@ export default function Associates(props: any) {
   const importAssociates = async (submitFunction: Function) => {
     setOpenModal(false);
     const statusArray: AssociateStatus[] = [];
-
+  
     for (let i = 0; i < dados.length; i++) {
       const dado = dados[i];
+      const erro = dadosError[i];
       let status = 'aprovado';
       let motivo = 'Submissão bem-sucedida';
-
-      try {
-        await submitFunction(dado);
-
-        statusArray.push({ status, motivo });
-      } catch (error: any) {
+  
+      // Verifica se há erros nos dados
+      if (erro.length > 0) {
         status = 'reprovado';
-        motivo = error.message || 'Erro desconhecido na submissão';
-        statusArray.push({ status, motivo });
+        motivo = `Campos inválidos: ${erro.join(', ')}`;
+      } else {
+        try {
+          // Se não houver erros, realiza a submissão
+          await submitFunction(dado);
+        } catch (error: any) {
+          status = 'reprovado';
+          motivo = error.message || 'Erro desconhecido na submissão';
+        }
       }
+  
+      statusArray.push({ status, motivo });
     }
-
+  
     setAssociatesStatus(statusArray);
     setOpenModal2(true);
   };
+
 
 
   const readAssociatedData = (file: File, submitFunction: Function) => {
@@ -79,9 +89,13 @@ export default function Associates(props: any) {
           return normalizeAndCreateObject(row);
         });
 
+        const errors =  results.data.map((row: any) => {
+          return errosData(row);
+        });
 
-
+        setDadosError(errors)
         setDados(normalizedData);
+
 
       },
     });
@@ -119,8 +133,6 @@ export default function Associates(props: any) {
       }
     }
   };
-
-
 
 
 
