@@ -1,64 +1,57 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
-import HttpClient from "../../api/HttpClient";
-import { getAssociate, getAssociates } from "../../services/associatesService";
-
-type Associate = {
-
-}
+import { getAssociate, getAssociates, disableAssociate, enableAssociate, updateAssociate, postAssociate} from "../../services/associatesService";
 
 type AssociateState = {
-    associates: any[],
-    associateId: number | null,
-    associate: any | null
+  associates: any[]
+  associateId: number | null
+  associate: any | null
 }
 
 export const fetchAssociates = createAsyncThunk(
-    'associate/getAssociates',
-    async () => {
-        var result = await getAssociates()
-
-        if(result == null) {
-            return 'error'
-        }
-
-        setAssociates(result);
-        return result;
+  "associate/getAssociates",
+  async () => {
+    var result = await getAssociates()
+    if (result === null) {
+      return "error"
     }
-) 
+    setAssociates(result)
+    return result
+  },
+)
 
 export const fetchAssociate = createAsyncThunk(
-    'associate/getAssociateById',
-    async (id: number) => {
-        var result = await getAssociate(id)
+  "associate/getAssociateById",
+  async (id: string | undefined) => {
+    var result = await getAssociate(id)
 
-        if(result == null) {
-            return 'error'
-        }
-
-        setAssociate(result);
-        return result;
+    if (result == null) {
+      return "error"
     }
+
+    setAssociate(result)
+    return result
+  },
 )
 
 export const createAssociate = createAsyncThunk(
     'associate/createAssociate',
     async (associate: any) => {
-        var result = await getAssociate(associate)
+        var result = await postAssociate(associate)
 
-        if(result == null) {
-            return {'error': result}
-        }
-
-        setAssociate(result);
-        return result;
+    if (result == null) {
+      return { error: result }
     }
+
+    setAssociate(result)
+    return result
+  },
 )
 
-export const updateAssociate = createAsyncThunk(
-    'associate/updateAssociate',
-    async (associate: any) => {
-        var result = await getAssociate(associate)
+export const updateAssociates = createAsyncThunk(
+  "associate/updateAssociate",
+  async ({ id, associate }: { id: string | undefined, associate: any }) => {
+    var result = await updateAssociate(id,associate)
 
         if(result == null) {
             return {'error': result}
@@ -70,42 +63,73 @@ export const updateAssociate = createAsyncThunk(
 )
 
 export const deleteAssociate = createAsyncThunk(
-    'associate/deleteAssociate',
-    async (id: number) => {
-        var result = await getAssociate(id)
+  "associate/deleteAssociate",
+  async (id: string | undefined) => {
+    var result = await getAssociate(id)
 
+    if (result == null) {
+      return { error: result }
+    }
+
+    setAssociate(result)
+    return result
+  },
+)
+
+export const disableAssociateID = createAsyncThunk(
+  "associate/disableAssociate",
+  async (id: string) => {
+    var result = await disableAssociate(id)
         if(result == null) {
             return {'error': result}
         }
-
-        setAssociate(result);
-        return result;
+    if (result == null) {
+      return { error: result }
     }
+
+    setAssociate(result)
+    return result
+  },
 )
 
-const slice = createSlice({
-    name: 'associate',
-    initialState: { associates: [], associateId: null, associate: null } as AssociateState,
-    reducers: {
-        setAssociates: (state, { payload: { associates } }) => {
-            state.associates = associates
-        },
-        setAssociateId: (state, { payload: { associateId } }) => {
-            state.associateId = associateId
-        },
-        setAssociate: (state, { payload: { associate } }) => {
-            state.associate = associate
-        },
-    },
-    extraReducers: (builder) => {
-        
+export const enableAssociateID = createAsyncThunk(
+  "associate/enableAssociate",
+  async (id: string) => {
+    var result = await enableAssociate(id)
+
+    if (result == null) {
+      return { error: result }
     }
-});
 
-export const { setAssociates, setAssociateId, setAssociate } = slice.actions;
+    setAssociate(result)
+    return result
+  },
+)
+const slice = createSlice({
+  name: "associate",
+  initialState: {
+    associates: [],
+    associateId: null,
+    associate: null,
+  } as AssociateState,
+  reducers: {
+    setAssociates: (state, { payload: { associates } }) => {
+      state.associates = associates
+    },
+    setAssociateId: (state, { payload: { associateId } }) => {
+      state.associateId = associateId
+    },
+    setAssociate: (state, { payload: { associate } }) => {
+      state.associate = associate
+    },
+  },
+  extraReducers: (builder) => {},
+})
 
-export const selectAssociates = (state: RootState) => state.associate.associates;
-export const selectAssociateId = (state: RootState) => state.associate.associateId;
-export const selectAssociate = (state: RootState) => state.associate.associate;
+export const { setAssociates, setAssociateId, setAssociate } = slice.actions
 
-export default slice.reducer;
+export const selectAssociates  = (state: RootState) => state.associate.associates
+export const selectAssociateId = (state: RootState) => state.associate.associateId
+export const selectAssociate   = (state: RootState) => state.associate.associate
+
+export default slice.reducer

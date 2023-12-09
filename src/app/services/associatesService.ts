@@ -1,55 +1,94 @@
-import { createApi} from '@reduxjs/toolkit/query/react'
-import { RootState } from '../store/store'
-import httpClient from '../api/HttpClient'
+import httpClient from "../api/HttpClient"
 
-function getAssociates() {
-  httpClient.get('/').then(response => {
-    return response.data
-  }).catch(error => {
-    console.log(error)
-  })
+async function getAssociates() {
+  return await httpClient
+    .get("/gestao/users")
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
-function getAssociate(id: number) {
-  httpClient.get(`/gestao/users/${id}`).then(response => {
-    return response.data
-  }).catch(error => {
-    console.log(error)
-    return null
-  })
+async function getAssociate(id: string | undefined) {
+  return await httpClient
+    .get(`/gestao/users/${id}`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return null
+    })
 }
 
-function createAssociate(associate: any) {
-  httpClient.post('/gestao/users', associate).then(response => {
-    return response.data
-  }).catch(error => {
-    console.log(error)
-    return error
-  })
+async function postAssociate(associate: any) {
+  return await httpClient
+    .post("/gestao/users", associate)
+    .then((response) => {
+      return response
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
 }
 
-function updateAssociate(id: number, associate: any) {
-  httpClient.put(`/user/${id}`, associate).then(response => {
-    return response.data
-  }).catch(error => {
-    console.log(error)
-    return error
-  })
+async function updateAssociate(id: string | undefined, associate: any) {
+  return await httpClient
+    .put(`/gestao/users/${id}`, associate)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
 }
 
-function deleteAssociate(id: number) {
-  httpClient.delete(`/user/${id}`).then(response => {
-    return response.data
-  }).catch(error => {
-    console.log(error)
-    return error
-  })
+async function deleteAssociate(id: number) {
+  return await httpClient
+    .delete(`/user/${id}`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
+async function disableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/disable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
+async function enableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/enable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
 }
 
 export {
-    getAssociates,
-    getAssociate,
-    createAssociate,
-    updateAssociate,
-    deleteAssociate
+  getAssociates,
+  getAssociate,
+  postAssociate,
+  updateAssociate,
+  deleteAssociate,
+  disableAssociate,
+  enableAssociate,
 }

@@ -40,6 +40,10 @@ export default function Email(props: any) {
                         onChange={(e: { target: { value: any; }; }) => setEmailForPass(e.target.value)}
                         label='Email'
                         sxFormControl={{ marginTop: '20px' }}
+                        error={{
+                            hasError: false,
+                            message: '',
+                        }}
                     />
                     <GenericButton
                         text='Enviar recuperação de senha'
