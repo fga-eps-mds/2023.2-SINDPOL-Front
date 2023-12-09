@@ -43,10 +43,6 @@ describe("Associate page", () => {
     expect(history.location.pathname).toBe('/filiation');
   });
 
-  
-
-
-
   const worker = setupServer(
     http.get('http://localhost:8001/api/users', () => HttpResponse.json({ id: 'abc-123', fullName:'pedro', registration:'1234', cpf:'05680941155', birthDate:'2023-11-22' }))
   );
@@ -69,6 +65,5 @@ describe("Associate page", () => {
     screen.getAllByText('05680941155');
     screen.getAllByText('2023-11-22');
   }
-
 
 });
