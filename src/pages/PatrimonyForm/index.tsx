@@ -9,6 +9,8 @@ import { useAppDispatch } from "../../utils/hooks"
 import { createAssociate } from "../../app/store/associate/associateSlice"
 import { useNavigate } from "react-router-dom"
 import { createObjectToSubmit, validateField } from "./normalize"
+import DatePicker from "../../components/DatePicker"
+import GenericDropdown from "../../components/GenericDropdown"
 
 interface dependent {
   id: number
@@ -46,18 +48,39 @@ export default function PatrimonyForm(props: any) {
       [name]: { ...prevState[name], value },
     }))
   }
+  
   const renderForm = () => {
     return Object.entries(formState).map(([key, value]) => {
-      return (
-        <div>
-          <GenericInput
-            type={"string"}
-            name={key}
-            onChange={(e: { target: { value: any} } ) => changeFormState(key, e.target.value)}
-            {...value}
-            ></GenericInput>
-        </div>
-      )
+      switch (value.type) {
+        case "string":
+          return (
+            <div>
+              <GenericInput
+                type={"string"}
+                name={key}
+                onChange={changeFormState}
+                error={{
+                  hasError: value.isInvalid,
+                  message: "Erro",
+                }}
+                {...value}
+              ></GenericInput>
+            </div>
+          )
+        case "select":
+          return (
+            <div>
+              <GenericDropdown
+                type={"string"}
+                name={key}
+                onChange={changeFormState}
+                {...value}
+              ></GenericDropdown>
+            </div>
+          )
+        case "date":
+          return <DatePicker onChange={changeFormState} name={key} {...value} />
+      }
     })
   }
 
