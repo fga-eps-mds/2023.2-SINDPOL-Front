@@ -73,14 +73,9 @@ export default function Sidebar(props: any) {
           {SidebarItem("IconHome")}
           {SidebarItem("IconUsers")}
           {SidebarItem("IconAproveUser")}
-          {SidebarItem("IconFileExport")}
-          {SidebarItem("IconDatabaseExport")}
-          {SidebarItem("IconArchive")}
         </Box>
       </Box>
       <Box>
-        {SidebarItem("IconUser")}
-        {SidebarItem("IconSettings")}
         {SidebarItem("IconLogout")}
       </Box>
     </Box>

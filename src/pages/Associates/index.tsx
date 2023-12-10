@@ -51,13 +51,13 @@ export default function Associates(props: any) {
   const importAssociates = async (submitFunction: Function) => {
     setOpenModal(false);
     const statusArray: AssociateStatus[] = [];
-  
+
     for (let i = 0; i < dados.length; i++) {
       const dado = dados[i];
       const erro = dadosError[i];
       let status = 'aprovado';
       let motivo = 'Submissão bem-sucedida';
-  
+
       if (erro.length > 0) {
         status = 'reprovado';
         motivo = `Campos inválidos: ${erro.join(', ')}`;
@@ -69,10 +69,10 @@ export default function Associates(props: any) {
           motivo = error.message || 'Erro desconhecido na submissão';
         }
       }
-  
+
       statusArray.push({ status, motivo });
     }
-  
+
     setAssociatesStatus(statusArray);
     setOpenModal2(true);
   };
@@ -87,7 +87,7 @@ export default function Associates(props: any) {
           return normalizeAndCreateObject(row);
         });
 
-        const errors =  results.data.map((row: any) => {
+        const errors = results.data.map((row: any) => {
           return errosData(row);
         });
 
@@ -134,22 +134,23 @@ export default function Associates(props: any) {
 
 
   return (
-    <Box id="asssociates-page-container" sx={styles.boxContainer}>
-      <Box id="associates-page-box" sx={styles.box}>
-        <Box id="associates-page-box-header" sx={styles.boxHeader}>
-          <Heading id="associates-page-box-header-title">
-            Sindicalizados
-          </Heading>
-          <GenericInput
-            id="associates-page-box-header-input"
-            placeholder="Pesquisar por Nome ou Mátricula"
-            type="text"
-            name="search"
-            value=""
-            onChange={() => { }}
-            sxFormControl={{ marginX: "12px", maxWidth: "600px" }}
-          />
-          <Box>
+    <Box id="home-page-container" sx={styles.boxContainer}>
+      <Box id="home-page-box" sx={styles.box}>
+        <Box id="home-page-box-header" sx={styles.boxHeader}>
+          <Box sx={styles.boxHeaderTop}>
+            <Heading id="associates-page-box-header-title" sx={styles.boxHeaderTitle}> Sindicalizados </Heading>
+          </Box>
+          <Box sx={styles.boxHeaderMiddle}>
+            <GenericInput
+              id="associates-page-box-header-input"
+              placeholder="Pesquisar por Nome ou Mátricula"
+              type="text"
+              name="search"
+              value=""
+              error={{ hasError: false, message: "" }}
+              sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
+              onChange={() => { }}
+            />
             <GenericButton
               id="associates-page-box-header-add-button"
               text="Cadastrar"
@@ -169,7 +170,7 @@ export default function Associates(props: any) {
 
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
-          {associates.map((associate: any) => {
+          {associates && associates.length > 0 && associates.map((associate: any) => {
             return (
               <>
                 <Box sx={styles.boxItem}>
@@ -198,7 +199,6 @@ export default function Associates(props: any) {
             )
           })}
         </Box>
-
         <Modal Title="Importar Sindicalizados" isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
           <Box>
             <Box id="modal-body" sx={styles.modalBox}>
