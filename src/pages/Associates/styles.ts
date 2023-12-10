@@ -64,6 +64,30 @@ export const styles = {
         justifyContent: 'space-between',
         width: '100%',
         padding: '24px',
+        fontSize: '20px',
+        fontWeight: 'semibold',
+        color: 'black'
+    },
+    boxHeaderTop: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    boxHeaderMiddle: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: '20px',
+    },
+    boxHeaderBotton: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: '30px',
+        justifyContent: "flex-start"
+    },
+    boxHeaderTitle: {
+        fontWeight: 'semibold',
+        textAlign: 'left',
     },
     modalBox: {
         borderWidth: '3px',
