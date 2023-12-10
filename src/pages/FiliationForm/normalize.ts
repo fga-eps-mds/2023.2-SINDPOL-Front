@@ -34,11 +34,10 @@ export function createObjectToSubmit(formState: FormState, dependents: any[]) {
     lotation: formState.lotation.value,
     workPost: formState.workPost.value,
     systemRole: "Sindicalizado",
-    password:"1234",
     dependents: dependents.map((dependent) => {
       return {
         ...dependent,
-        birth_date: new Date(dependent.birth_date).getTime()
+        birth_date: new Date(dependent.birth_date).getTime(),
       }
     }),
   }

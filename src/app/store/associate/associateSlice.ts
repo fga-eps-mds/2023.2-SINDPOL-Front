@@ -1,11 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import type { RootState } from "../store"
-import {
-  getAssociate,
-  getAssociates,
-  postAssociate,
-  updateAssociate,
-} from "../../services/associatesService"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { RootState } from "../store";
+import { getAssociate, getAssociates, disableAssociate, enableAssociate, updateAssociate, postAssociate, deleteAssociate} from "../../services/associatesService";
 
 type AssociateState = {
   associates: any[]
@@ -40,9 +35,9 @@ export const fetchAssociate = createAsyncThunk(
 )
 
 export const createAssociate = createAsyncThunk(
-  "associate/createAssociate",
-  async (associate: any) => {
-    const result = await postAssociate(associate)
+    'associate/createAssociate',
+    async (associate: any) => {
+        var result = await postAssociate(associate)
 
     if (result == null) {
       return { error: result }
@@ -58,19 +53,19 @@ export const updateAssociates = createAsyncThunk(
   async ({ id, associate }: { id: string | undefined, associate: any }) => {
     var result = await updateAssociate(id,associate)
 
-    if (result == null) {
-      return { error: result }
-    }
+        if(result == null) {
+            return {'error': result}
+        }
 
-    setAssociate(result)
-    return result
-  },
+        setAssociate(result);
+        return result;
+    }
 )
 
-export const deleteAssociate = createAsyncThunk(
+export const removeAssociate = createAsyncThunk(
   "associate/deleteAssociate",
   async (id: string | undefined) => {
-    var result = await getAssociate(id)
+    var result = await deleteAssociate(id)
 
     if (result == null) {
       return { error: result }
@@ -81,6 +76,35 @@ export const deleteAssociate = createAsyncThunk(
   },
 )
 
+export const disableAssociateID = createAsyncThunk(
+  "associate/disableAssociate",
+  async (id: string) => {
+    var result = await disableAssociate(id)
+        if(result == null) {
+            return {'error': result}
+        }
+    if (result == null) {
+      return { error: result }
+    }
+
+    setAssociate(result)
+    return result
+  },
+)
+
+export const enableAssociateID = createAsyncThunk(
+  "associate/enableAssociate",
+  async (id: string) => {
+    var result = await enableAssociate(id)
+
+    if (result == null) {
+      return { error: result }
+    }
+
+    setAssociate(result)
+    return result
+  },
+)
 const slice = createSlice({
   name: "associate",
   initialState: {

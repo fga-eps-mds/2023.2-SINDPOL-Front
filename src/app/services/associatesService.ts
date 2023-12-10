@@ -27,7 +27,7 @@ async function postAssociate(associate: any) {
   return await httpClient
     .post("/api/users", associate)
     .then((response) => {
-      return response.data
+      return response
     })
     .catch((error) => {
       console.log(error)
@@ -47,9 +47,33 @@ async function updateAssociate(id: string | undefined, associate: any) {
     })
 }
 
-async function deleteAssociate(id: number) {
+async function deleteAssociate(id: string | undefined) {
   return await httpClient
-    .delete(`/user/${id}`)
+    .delete(`/gestao/users/${id}`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return null
+    })
+}
+
+async function disableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/disable`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
+async function enableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/enable`)
     .then((response) => {
       return response.data
     })
@@ -65,4 +89,6 @@ export {
   postAssociate,
   updateAssociate,
   deleteAssociate,
+  disableAssociate,
+  enableAssociate,
 }
