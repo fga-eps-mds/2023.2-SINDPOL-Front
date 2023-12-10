@@ -27,7 +27,7 @@ async function postAssociate(associate: any) {
   return await httpClient
     .post("/gestao/users/", associate)
     .then((response) => {
-      return response.data
+      return response
     })
     .catch((error) => {
       console.log(error)
@@ -47,15 +47,15 @@ async function updateAssociate(id: string | undefined, associate: any) {
     })
 }
 
-async function deleteAssociate(id: number) {
+async function deleteAssociate(id: string | undefined) {
   return await httpClient
-    .delete(`/user/${id}`)
+    .delete(`/gestao/users/${id}`)
     .then((response) => {
       return response.data
     })
     .catch((error) => {
       console.log(error)
-      return error
+      return null
     })
 }
 
