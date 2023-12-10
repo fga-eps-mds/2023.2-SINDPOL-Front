@@ -33,43 +33,42 @@ interface RowData {
 }
 
 export function normalizeAndCreateObject(row: RowData) {
-  return{
+  return {
     fullName: row.fullName,
-    warName: row.warName,
+    warName: row.warName || "Atualizar Campo",
     registration: row.registration,
-    birthDate: new Date(row.birthDate).getTime(),
+    birthDate: new Date(row.birthDate).getTime() || new Date().getTime(),
     rg: row.rg,
     cpf: row.cpf,
-    placeOfBirth: row.placeOfBirth,
-    ufNatural: row.ufNatural,
-    civilState: row.civilState,
-    cep: row.cep,
-    address: row.address,
-    number: row.number,
-    neighborhood: row.neighborhood,
-    city: row.city,
-    complement: row.complement,
-    uf: row.uf,
+    placeOfBirth: row.placeOfBirth || "Atualizar Campo",
+    ufNatural: row.ufNatural || "Atualizar Campo",
+    civilState: row.civilState || "Atualizar Campo",
+    cep: row.cep || "Atualizar Campo",
+    address: row.address || "Atualizar Campo",
+    number: row.number || "Atualizar Campo",
+    neighborhood: row.neighborhood || "Atualizar Campo",
+    city: row.city || "Atualizar Campo",
+    complement: row.complement || "Atualizar Campo",
+    uf: row.uf || "Atualizar Campo",
     email: row.email,
-    cellphone: row.cellphone,
-    phone: row.phone,
-    gender: row.gender,
-    motherName: row.motherName,
-    fatherName: row.fatherName,
-    scolarity: row.scolarity,
-    religion: row.religion,
-    bloodType: row.bloodType,
-    actualWorkSituation: row.actualWorkSituation,
-    admissionDate: new Date(row.admissionDate).getTime(),
-    jobRole: row.jobRole,
-    bodyOfLaw: row.bodyOfLaw,
-    lotation: row.lotation,
-    workPost: row.workPost,
+    cellphone: row.cellphone || "Atualizar Campo",
+    phone: row.phone || "Atualizar Campo",
+    gender: row.gender || "Atualizar Campo",
+    motherName: row.motherName || "Atualizar Campo",
+    fatherName: row.fatherName || "Atualizar Campo",
+    scolarity: row.scolarity || "Atualizar Campo",
+    religion: row.religion || "Atualizar Campo",
+    bloodType: row.bloodType || "Atualizar Campo",
+    actualWorkSituation: row.actualWorkSituation || "Atualizar Campo",
+    admissionDate: new Date(row.admissionDate).getTime() || new Date().getTime(),
+    jobRole: row.jobRole || "Atualizar Campo",
+    bodyOfLaw: row.bodyOfLaw || "Atualizar Campo",
+    lotation: row.lotation || "Atualizar Campo",
+    workPost: row.workPost || "Atualizar Campo",
     systemRole: "Sindicalizado",
     password: "1234",
     dependents: []
   };
-
 }
 
 interface RowData {
@@ -113,11 +112,13 @@ export function errosData(row: RowData) {
 
   for (const key in row) {
     if (Object.prototype.hasOwnProperty.call(row, key)) {
-      const value = row[key as keyof RowData];
-      const isValid = validateField(key, value);
+      if (key === "cpf" || key === "fullName" || key === "email" || key === "registration") {
+        const value = row[key as keyof RowData];
+        const isValid = validateField(key, value);
 
-      if (!isValid) {
-        errorFields.push(key);
+        if (!isValid) {
+          errorFields.push(key);
+        }
       }
     }
   }

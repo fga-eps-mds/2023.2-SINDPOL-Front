@@ -13,9 +13,6 @@ import { normalizeAndCreateObject, errosData } from "./normalize"
 import { createAssociate } from "../../app/store/associate/associateSlice"
 import { AxiosError } from 'axios';
 
-
-
-
 export default function Associates(props: any) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -28,20 +25,16 @@ export default function Associates(props: any) {
   const [associatesStatus, setAssociatesStatus] = useState<AssociateStatus[]>([]);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
-
-
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
       setAssociates(res.payload)
     })
   }, [])
 
-
   interface AssociateStatus {
     status: string;
     motivo: string;
   }
-
 
   const handleEyeClick = (associateId: string) => {
     console.log("ID do associado:", associateId);
@@ -77,8 +70,6 @@ export default function Associates(props: any) {
     setOpenModal2(true);
   };
 
-
-
   const readAssociatedData = (file: File, submitFunction: Function) => {
     Papa.parse(file, {
       header: true,
@@ -93,13 +84,9 @@ export default function Associates(props: any) {
 
         setDadosError(errors)
         setDados(normalizedData);
-
-
       },
     });
   };
-
-  console.log(dados)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -130,8 +117,6 @@ export default function Associates(props: any) {
       }
     }
   };
-
-
 
   return (
     <Box id="home-page-container" sx={styles.boxContainer}>
