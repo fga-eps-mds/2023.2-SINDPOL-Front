@@ -176,7 +176,6 @@ export default function Associates(props: any) {
                 <Box sx={styles.boxItem}>
                   <Box>
                     <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
-                    <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
                     <Text align={"left"}>Mat.: {associate.registration} | CPF: {associate.cpf} | {associate.birthDate}</Text>
                   </Box>
                   <Box display={"flex"}>
