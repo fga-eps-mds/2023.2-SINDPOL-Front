@@ -12,7 +12,7 @@ import Reports from "../../pages/Reports"
 import Associates from "../../pages/Associates"
 import Patrimony from "../../pages/Patrimony"
 import FiliationForm from "../../pages/FiliationForm"
-import SelectAssociateDoc from "../../pages/SelectAssociateDoc"
+import SelectAssociateDoc from "../../pages/selectAssociateDoc"
 import Aceeptance from "../../pages/AceeptanceList"
 
 export default function AppRouter(props: any) {

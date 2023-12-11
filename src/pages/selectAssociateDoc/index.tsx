@@ -1,21 +1,15 @@
 import React, { useEffect } from "react"
-import { Box, Divider, Heading, IconButton, Text } from "@chakra-ui/react"
+import { Box, Heading, IconButton, Text } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
-import GenericButton from "../../components/GenericButton"
 import httpClient from "../../app/api/HttpClient"
-
-import {
-    fetchAssociates,
-    selectAssociates,
-} from "../../app/store/associate/associateSlice"
-import { useAppDispatch, useAppSelector } from "../../utils/hooks"
-import { IconEye, IconMenu2, IconDownload } from "@tabler/icons-react"
+import { fetchAssociates } from "../../app/store/associate/associateSlice"
+import { useAppDispatch } from "../../utils/hooks"
+import { IconDownload } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
-import axios from 'axios';
 
 
-export default function Associates(props: any) {
+export default function SelectAssociateDoc(props: any) {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [associates, setAssociates] = React.useState<any>([])
