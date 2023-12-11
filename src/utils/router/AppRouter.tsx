@@ -12,6 +12,7 @@ import Reports from "../../pages/Reports"
 import Associates from "../../pages/Associates"
 import Patrimony from "../../pages/Patrimony"
 import FiliationForm from "../../pages/FiliationForm"
+import SelectAssociateDoc from "../../pages/SelectAssociateDoc"
 import Aceeptance from "../../pages/AceeptanceList"
 
 export default function AppRouter(props: any) {
@@ -21,8 +22,9 @@ export default function AppRouter(props: any) {
         <Route path={"/"} element={<PublicOutlet />}>
           <Route path={"/"} element={<Login />} />
           <Route path={"/login"} element={<Login />} />
-          <Route path={"/filiation/"} element={<FiliationForm />} />
-          <Route path={"/update/:associateId"} element={<FiliationForm />} />
+          <Route path={"/filiation"} element={<FiliationForm />} />
+          <Route path={"/declaration"} element={<SelectAssociateDoc />} />
+
           {/* Pagina de filiação */}
         </Route>
         <Route path={"/"} element={<PrivateOutlet />}>
