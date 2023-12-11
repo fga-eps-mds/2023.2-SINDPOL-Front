@@ -10,6 +10,7 @@ import AceeptanceList from '../../components/AceeptanceList';
 import MenuOrdenacao from '../../components/GenericMenuOptions';
 
 export default function Aceeptance(props: any) {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [associates, setAssociates] = React.useState<any>([])
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -59,7 +60,7 @@ export default function Aceeptance(props: any) {
                     console.error(`Failed to enable user with ID ${userId}:`, error);
                 }
             }
-            window.location.reload();
+            reFetchList()
 
         } catch (error) {
             console.error('Error enabling users:', error);
@@ -77,12 +78,18 @@ export default function Aceeptance(props: any) {
                     console.error(`Failed to enable user with ID ${userId}:`, error);
                 }
             }
-            window.location.reload();
+            reFetchList()
 
         } catch (error) {
             console.error('Error enabling users:', error);
         }
     };
+
+    const reFetchList = () => {
+        dispatch(fetchAssociates()).then((res) => {
+            setAssociates(res.payload)
+        })
+    }
 
     useEffect(() => {
         dispatch(fetchAssociates()).then((res) => {
