@@ -2,7 +2,7 @@ import httpClient from "../api/HttpClient"
 
 async function getAssociates() {
   return await httpClient
-    .get("/gestao/users/")
+    .get("/api/users/")
     .then((response) => {
       return response.data
     })
