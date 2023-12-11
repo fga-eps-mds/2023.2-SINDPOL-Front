@@ -45,18 +45,6 @@ export default function Associates(props: any) {
                             Declaração de Vínculo
                             <Flex>
                                 <IconButton
-                                    aria-label="Download"
-                                    icon={<IconDownload size={20} />}
-                                    onClick={() => {
-                                        setIsDeclarationSelected(!isDeclarationSelected);
-                                    }}
-                                />
-                                <IconButton
-                                    aria-label="Minus Vertical"
-                                    icon={<IconMinusVertical size={20} />}
-                                    ml={2}
-                                />
-                                <IconButton
                                     aria-label="Dots Vertical"
                                     icon={<IconDotsVertical size={20} />}
                                     ml={2}

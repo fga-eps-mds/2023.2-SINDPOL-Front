@@ -2,7 +2,7 @@ import httpClient from "../api/HttpClient"
 
 async function getAssociates() {
   return await httpClient
-    .get("/gestao/users")
+    .get("/api/users/")
     .then((response) => {
       return response.data
     })
@@ -13,7 +13,7 @@ async function getAssociates() {
 
 async function getAssociate(id: number) {
   return await httpClient
-    .get(`/gestao/users/${id}`)
+    .get(`/api/users/${id}`)
     .then((response) => {
       return response.data
     })
@@ -25,7 +25,7 @@ async function getAssociate(id: number) {
 
 async function postAssociate(associate: any) {
   return await httpClient
-    .post("/gestao/users", associate)
+    .post("/api/users", associate)
     .then((response) => {
       return response.data
     })
