@@ -73,6 +73,8 @@ export default function Sidebar(props: any) {
           {SidebarItem("IconHome")}
           {SidebarItem("IconUsers")}
           {SidebarItem("IconAproveUser")}
+          {SidebarItem("IconFileExport")}
+
         </Box>
       </Box>
       <Box>
