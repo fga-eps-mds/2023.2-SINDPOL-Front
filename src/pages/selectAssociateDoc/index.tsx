@@ -10,17 +10,40 @@ import {
 import { useAppDispatch, useAppSelector } from "../../utils/hooks"
 import { IconEye, IconMenu2,IconDownload } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
+import axios from 'axios';
+
 
 export default function Associates(props: any) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [associates, setAssociates] = React.useState<any>([])
+  const [documentContent, setDocumentContent] = React.useState<any>([])
+
+  const fetchDocument = async () => {
+    try {
+      const response = await axios.get('http://localhost:8001/api/documents/affiliation/', {
+        responseType: 'arraybuffer', 
+      });
+
+      const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+
+      const url = URL.createObjectURL(blob);
+
+      setDocumentContent(url);
+    } catch (error) {
+      console.error('Erro ao buscar o documento:', error);
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchAssociates()).then((res) => {
       setAssociates(res.payload)
     })
   }, [])
+
+  const generateDoc= (associateId: string) => {
+    console.log("ID do associado:", associateId);
+  }
 
   return (
     <Box id="asssociates-page-container" sx={styles.boxContainer}>
@@ -53,14 +76,7 @@ export default function Associates(props: any) {
                     <IconButton
                       aria-label="Dowload"
                       icon={<IconDownload size={20} />}
-                      onClick={() => {}}
-                      color={"#734A00"}
-                    />
-                    <Divider orientation="vertical" color={"#734A00"} />
-                    <IconButton
-                      aria-label="mais opções"
-                      icon={<IconMenu2 />}
-                      onClick={() => {}}
+                      onClick={() => {generateDoc(associate.id)}}
                       color={"#734A00"}
                     />
                   </Box>
