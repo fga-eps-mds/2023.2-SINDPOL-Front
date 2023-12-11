@@ -24,6 +24,7 @@ export default function AppRouter(props: any) {
           <Route path={"/login"} element={<Login />} />
           <Route path={"/filiation"} element={<FiliationForm />} />
           <Route path={"/declaration"} element={<SelectAssociateDoc />} />
+          <Route path={"/report-users"} element={<Reports />} />
 
           {/* Pagina de filiação */}
         </Route>
