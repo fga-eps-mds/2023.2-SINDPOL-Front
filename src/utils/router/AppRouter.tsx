@@ -1,8 +1,8 @@
 import React from "react"
 import { Box } from "@chakra-ui/react"
+import { Routes, Route } from "react-router-dom"
 import PrivateOutlet from "./Private/PrivateOutlet"
 import PublicOutlet from "./Public/PublicOutlet"
-import { Routes, Route } from "react-router-dom"
 import Login from "../../pages/Login"
 import Home from "../../pages/Home"
 import Profile from "../../pages/Profile"
@@ -13,6 +13,7 @@ import Associates from "../../pages/Associates"
 import Patrimony from "../../pages/Patrimony"
 import FiliationForm from "../../pages/FiliationForm"
 import SelectAssociateDoc from "../../pages/SelectAssociateDoc"
+import Aceeptance from "../../pages/AceeptanceList"
 
 export default function AppRouter(props: any) {
   return (
@@ -22,8 +23,6 @@ export default function AppRouter(props: any) {
           <Route path={"/"} element={<Login />} />
           <Route path={"/login"} element={<Login />} />
           <Route path={"/filiation"} element={<FiliationForm />} />
-          <Route path={"/declaration"} element={<SelectAssociateDoc />} />
-
           {/* Pagina de filiação */}
         </Route>
         <Route path={"/"} element={<PrivateOutlet />}>
@@ -32,6 +31,7 @@ export default function AppRouter(props: any) {
           <Route path={"/documents"} element={<Documents />} />
         </Route>
         <Route path={"/"} element={<AdminOutlet />}>
+          <Route path={"/aceeptance"} element={<Aceeptance />} />
           <Route path={"/reports"} element={<Reports />} />
           <Route path={"/associates"} element={<Associates />} />
           <Route path={"/patrimony"} element={<Patrimony />} />

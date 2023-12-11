@@ -38,6 +38,10 @@ export default function Login(props: any) {
               maxWidth: "500px",
               minHeight: "50px",
             }}
+            error={{
+              hasError: false,
+              message: "",
+            }}
           />
           <PasswordInput
             type={"password"}

@@ -2,7 +2,7 @@ import httpClient from "../api/HttpClient"
 
 async function getAssociates() {
   return await httpClient
-    .get("/api/users/")
+    .get("/gestao/users/")
     .then((response) => {
       return response.data
     })
@@ -11,7 +11,7 @@ async function getAssociates() {
     })
 }
 
-async function getAssociate(id: number) {
+async function getAssociate(id: string | undefined) {
   return await httpClient
     .get(`/api/users/${id}`)
     .then((response) => {
@@ -25,7 +25,19 @@ async function getAssociate(id: number) {
 
 async function postAssociate(associate: any) {
   return await httpClient
-    .post("/api/users", associate)
+    .post("/gestao/users/", associate)
+    .then((response) => {
+      return response
+    })
+    .catch((error) => {
+      console.log(error)
+      return error
+    })
+}
+
+async function updateAssociate(id: string | undefined, associate: any) {
+  return await httpClient
+    .put(`/gestao/users/${id}`, associate)
     .then((response) => {
       return response.data
     })
@@ -35,9 +47,21 @@ async function postAssociate(associate: any) {
     })
 }
 
-async function updateAssociate(id: number, associate: any) {
+async function deleteAssociate(id: string | undefined) {
   return await httpClient
-    .put(`/user/${id}`, associate)
+    .delete(`/gestao/users/${id}`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return null
+    })
+}
+
+async function disableAssociate(id: string) {
+  return await httpClient
+    .patch(`/gestao/users/${id}/disable`)
     .then((response) => {
       return response.data
     })
@@ -47,9 +71,9 @@ async function updateAssociate(id: number, associate: any) {
     })
 }
 
-async function deleteAssociate(id: number) {
+async function enableAssociate(id: string) {
   return await httpClient
-    .delete(`/user/${id}`)
+    .patch(`/gestao/users/${id}/enable`)
     .then((response) => {
       return response.data
     })
@@ -65,4 +89,6 @@ export {
   postAssociate,
   updateAssociate,
   deleteAssociate,
+  disableAssociate,
+  enableAssociate,
 }
