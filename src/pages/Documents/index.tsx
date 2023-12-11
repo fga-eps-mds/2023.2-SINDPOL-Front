@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Box, VStack, Flex, IconButton } from '@chakra-ui/react';
 import { styles } from './styles';
-import { fetchAssociates, selectAssociates } from '../../app/store/associate/associateSlice';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { fetchAssociates } from '../../app/store/associate/associateSlice';
+import { useAppDispatch } from '../../utils/hooks';
 import { useNavigate } from 'react-router-dom';
-import { IconDownload, IconMinusVertical, IconDotsVertical } from '@tabler/icons-react';
+import { IconArrowNarrowRight } from '@tabler/icons-react';
 
 export default function Associates(props: any) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const associates = useAppSelector(selectAssociates);
-    const [isDeclarationSelected, setIsDeclarationSelected] = useState(false);
-    const [isCardSelected, setIsCardSelected] = useState(false);
+    const [isReportSelected, setIsReportSelected] = useState(false);
 
     useEffect(() => {
         dispatch(fetchAssociates());
@@ -23,7 +21,7 @@ export default function Associates(props: any) {
                 <VStack align="flex-start" spacing={4} width="100%">
                     <Box width="100%">
                         <h2 style={{ color: 'black', textAlign: 'center', fontSize: '24px' }}>
-                            Gerar Documento
+                            Gerar Documentos
                         </h2>
                     </Box>
                     <Box width="100%" display="flex" flexDirection="column" sx={{ paddingLeft: '20px', paddingRight: '20px' }}>
@@ -31,7 +29,7 @@ export default function Associates(props: any) {
                             id="associates-page-box-header-add-button"
                             onClick={() => {
                                 navigate('/declaration');
-                                setIsDeclarationSelected(true);
+                                setIsReportSelected(true);
                             }}
                             width="100%"
                             height="60px"
@@ -41,13 +39,13 @@ export default function Associates(props: any) {
                             textAlign="left"
                             fontWeight= 'bold'
                             color="black"
-                            sx={{ backgroundColor: isDeclarationSelected ? '#FFF7E8' : 'transparent' }}
+                            sx={{ backgroundColor: isReportSelected ? '#FFF7E8' : 'transparent' }}
                         >
                             Declaração de Vínculo
                             <Flex>
                                 <IconButton
                                     aria-label="Dots Vertical"
-                                    icon={<IconDotsVertical size={20} />}
+                                    icon={<IconArrowNarrowRight size={20} />}
                                     ml={2}
                                 />
                             </Flex>
