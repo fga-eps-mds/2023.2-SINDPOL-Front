@@ -1,12 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import type { User } from "../../services/authService"
+import { login, type LoginRequest, type User } from "../../services/authService"
 import type { RootState } from "../store"
 
 type AuthState = {
   user: User | null
   token: string | null
 }
+
+export const postLogin = createAsyncThunk(
+  "login",
+  async (params : LoginRequest) => {
+    var result = await login(params)
+  
+    return result
+  }
+)
 
 const slice = createSlice({
   name: "auth",

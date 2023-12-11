@@ -1,6 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
-import { getAssociate, getAssociates, disableAssociate, enableAssociate, updateAssociate, postAssociate, deleteAssociate} from "../../services/associatesService";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import type { RootState } from "../store"
+import {
+  getAssociate,
+  getAssociates,
+  disableAssociate,
+  enableAssociate,
+  updateAssociate,
+  postAssociate,
+  deleteAssociate,
+} from "../../services/associatesService"
 
 type AssociateState = {
   associates: any[]
@@ -35,12 +43,11 @@ export const fetchAssociate = createAsyncThunk(
 )
 
 export const createAssociate = createAsyncThunk(
-    'associate/createAssociate',
-    async (associate: any) => {
-      var result = await postAssociate(associate)
+  "associate/createAssociate",
+  async (associate: any) => {
+    var result = await postAssociate(associate)
 
     if (result == null) {
-
       return { error: result }
     }
 
@@ -51,16 +58,16 @@ export const createAssociate = createAsyncThunk(
 
 export const updateAssociates = createAsyncThunk(
   "associate/updateAssociate",
-  async ({ id, associate }: { id: string | undefined, associate: any }) => {
-    var result = await updateAssociate(id,associate)
+  async ({ id, associate }: { id: string | undefined; associate: any }) => {
+    var result = await updateAssociate(id, associate)
 
-        if(result == null) {
-            return {'error': result}
-        }
-
-        setAssociate(result);
-        return result;
+    if (result == null) {
+      return { error: result }
     }
+
+    setAssociate(result)
+    return result
+  },
 )
 
 export const removeAssociate = createAsyncThunk(
@@ -81,9 +88,9 @@ export const disableAssociateID = createAsyncThunk(
   "associate/disableAssociate",
   async (id: string) => {
     var result = await disableAssociate(id)
-        if(result == null) {
-            return {'error': result}
-        }
+    if (result == null) {
+      return { error: result }
+    }
     if (result == null) {
       return { error: result }
     }
@@ -129,8 +136,9 @@ const slice = createSlice({
 
 export const { setAssociates, setAssociateId, setAssociate } = slice.actions
 
-export const selectAssociates  = (state: RootState) => state.associate.associates
-export const selectAssociateId = (state: RootState) => state.associate.associateId
-export const selectAssociate   = (state: RootState) => state.associate.associate
+export const selectAssociates = (state: RootState) => state.associate.associates
+export const selectAssociateId = (state: RootState) =>
+  state.associate.associateId
+export const selectAssociate = (state: RootState) => state.associate.associate
 
 export default slice.reducer
