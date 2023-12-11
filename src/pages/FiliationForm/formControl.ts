@@ -324,10 +324,14 @@ export const defaultFormState = {
     type: "select",
     options: [
       { value: "--", label: "--Selecionar--" },
-      { value: "elementary school", label: "Ensino Fundamental" },
-      { value: "high school", label: "Ensino Médio" },
-      { value: "graduation", label: "Graduação" },
-      { value: "postgraduation", label: "Pós-Graduação" },
+      { value: "c elementary school", label: "Fundamental Completo" },
+      { value: "i elementary school", label: "Fundamental Incompleto" },
+      { value: "c high school", label: "Ensino Médio Completo" },
+      { value: "i high school", label: "Ensino Médio Incompleto" },
+      { value: "c graduation", label: "Superior Completo" },
+      { value: "i graduation", label: "Superior Incompleto" },
+      { value: "c postgraduation", label: "Pós-Graduação Completo" },
+      { value: "i postgraduation", label: "Pós-Graduação Incompleto" },
     ],
   },
   religion: {
