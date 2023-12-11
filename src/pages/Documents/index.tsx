@@ -39,6 +39,7 @@ export default function Associates(props: any) {
                             justifyContent="space-between"
                             alignItems="center"
                             textAlign="left"
+                            fontWeight= 'bold'
                             color="black"
                             sx={{ backgroundColor: isDeclarationSelected ? '#FFF7E8' : 'transparent' }}
                         >
@@ -50,43 +51,7 @@ export default function Associates(props: any) {
                                     ml={2}
                                 />
                             </Flex>
-                        </Flex>
-                        <Flex
-                            id="associates-page-box-header-import-button"
-                            onClick={() => {
-                                navigate('/card');
-                                setIsCardSelected(true);
-                            }}
-                            width="100%"
-                            height="60px"
-                            fontSize="20px"
-                            justifyContent="space-between"
-                            alignItems="center"
-                            textAlign="left"
-                            color="black"
-                            sx={{ backgroundColor: isCardSelected ? '#FFF7E8' : 'transparent' }}
-                        >
-                            Gerar Carteirinha Digital do Sindicalizado
-                            <Flex>
-                                <IconButton
-                                    aria-label="Download"
-                                    icon={<IconDownload size={20} />}
-                                    onClick={() => {
-                                        setIsCardSelected(!isCardSelected);
-                                    }}
-                                />
-                                <IconButton
-                                    aria-label="Minus Vertical"
-                                    icon={<IconMinusVertical size={20} />}
-                                    ml={2}
-                                />
-                                <IconButton
-                                    aria-label="Dots Vertical"
-                                    icon={<IconDotsVertical size={20} />}
-                                    ml={2}
-                                />
-                            </Flex>
-                        </Flex>
+                        </Flex>  
                     </Box>
                 </VStack>
             </Box>
