@@ -24,7 +24,9 @@
     "date-fns": "^2.30.0",
     "dayzed": "^3.2.3",
     "framer-motion": "^10.16.4",
+    "history": "^5.3.0",
     "moment": "^2.29.4",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-datepicker": "^4.24.0",
     "react-dom": "^18.2.0",
@@ -36,19 +38,22 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.2.5",
+    "@types/papaparse": "^5.3.13",
     "@types/react": "^18.0.15",
     "@types/react-datepicker": "^4.19.3",
     "@types/react-dom": "^18.0.6",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/coverage-c8": "^0.33.0",
     "eslint": "^8.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "jsdom": "^21.1.0",
+    "msw": "^2.0.10",
     "prettier": "^2.7.1",
     "prettier-config-nick": "^1.0.2",
     "typescript": "^5.0.2",
-    "vite": "^4.0.0",
+    "vite": "^5.0.5",
     "vitest": "^0.30.1"
   },
   "eslintConfig": {
@@ -63,6 +68,18 @@
       "prettier/prettier": "error",
       "react/jsx-no-target-blank": "off"
     }
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/pages/Associates/index.tsx"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ]
   },
   "prettier": "prettier-config-nick"
 }

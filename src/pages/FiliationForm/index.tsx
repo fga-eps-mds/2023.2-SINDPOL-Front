@@ -40,7 +40,7 @@ export default function FiliationForm(props: any) {
   const [modalOk, setModalOk] = useState(false)
   const [error, setError] = useState({
     hasError: false,
-    message: ""
+    message: "",
   })
   const [associate, setAssociate] = React.useState<any>([])
   const { associateId } = useParams()
@@ -77,7 +77,7 @@ export default function FiliationForm(props: any) {
         setModalOk(true)
         setError({
           hasError: false,
-          message: ""
+          message: "",
         })
 
         setTimeout(() => {
@@ -87,7 +87,7 @@ export default function FiliationForm(props: any) {
       } else {
         setError({
           hasError: true,
-          message: res.payload.data
+          message: res.payload.data,
         })
         setModalOk(true)
 
@@ -102,7 +102,28 @@ export default function FiliationForm(props: any) {
     let dataToSubmit = createObjectToSubmit(formState, boxes)
     console.log("formstate:: ", dataToSubmit)
 
-    dispatch(updateAssociates({ id: associateId, associate: dataToSubmit }))
+    dispatch(
+      updateAssociates({ id: associateId, associate: dataToSubmit }),
+    ).then((res) => {
+      if (res.payload.status === 200) {
+        setModalOk(true)
+        setError({
+          hasError: false,
+          message: "",
+        })
+
+        setTimeout(() => {
+          setModalOk(false)
+          window.history.back()
+        }, 3000)
+      } else {
+        setError({
+          hasError: true,
+          message: res.payload.data,
+        })
+        setModalOk(true)
+      }
+    })
   }
 
   const changeFormState = (name: string, value: any) => {
@@ -153,7 +174,7 @@ export default function FiliationForm(props: any) {
                   hasError: value.isInvalid,
                   message: "Erro",
                 }}
-                {...value as Property}
+                {...(value as Property)}
               ></GenericInput>
             </div>
           )
@@ -164,7 +185,7 @@ export default function FiliationForm(props: any) {
                 type={"string"}
                 name={key}
                 onChange={changeFormState}
-                {...value as Property}
+                {...(value as Property)}
                 options={value.options}
               ></GenericDropdown>
             </div>
