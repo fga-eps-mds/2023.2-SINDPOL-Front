@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/login", "dest": "/src/pages/Login/index.tsx" },
+    { "src": "/filiation/*", "dest": "/src/pages/FiliationForm/index.tsx" },
+    { "src": "/home", "dest": "/src/pages/Home/index.tsx" },
+    { "src": "/profile", "dest": "/src/pages/Profile/index.tsx" },
+    { "src": "/documents", "dest": "/src/pages/Documents/index.tsx" },
+    { "src": "/aceeptance", "dest": "/src/pages/AceeptanceList/index.tsx" },
+    { "src": "/reports", "dest": "/src/pages/Reports/index.tsx" },
+    { "src": "/associates", "dest": "/src/pages/Associates/index.tsx" },
+    { "src": "/patrimony", "dest": "/src/pages/Patrimony/index.tsx" },
+    { "src": "/update/:associateId", "dest": "/src/pages/FiliationForm/index.tsx" },
+    { "src": "/(.*)", "dest": "/404.html" }
+  ]
+}
