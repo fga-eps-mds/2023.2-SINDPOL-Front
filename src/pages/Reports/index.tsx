@@ -46,7 +46,7 @@ export default function Reports(props: any) {
             <Box id="associates-page-box" sx={{ ...styles.box, padding: '20px', border: '1px solid white' }}>
                 <VStack align="flex-start" spacing={4} width="100%">
                     <Box width="100%">
-                        <h2 style={{ color: 'black', textAlign: 'center', fontSize: '24px' }}>
+                        <h2 style={{ color: 'black', textAlign: 'center', fontSize: '24px', fontWeight:'bold' }}>
                             Gerar Relatórios
                         </h2>
                     </Box>
@@ -62,9 +62,8 @@ export default function Reports(props: any) {
                             justifyContent="space-between"
                             alignItems="center"
                             textAlign="left"
-                            fontWeight= 'bold'
                             color="black"
-                            sx={{ backgroundColor: isReportSelected ? '#FFF7E8' : 'transparent' }}
+                            _hover={{ backgroundColor: '#FFF7E8' }}
                         >
                             Relatório de Associados
                             <Flex>

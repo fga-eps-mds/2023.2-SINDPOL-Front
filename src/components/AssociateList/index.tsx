@@ -27,24 +27,27 @@ export default function MyTable(props: any) {
     <TableContainer>
       <Table variant="unstyled">
         {associates.map((associate: any) => {
-          return (
-            <>
-              <Tbody>
-                <Tr>
-                  <Td>
-                    <span style={{ color: 'black', fontWeight: 'bold', fontSize: '14px' }}>{associate.fullName}</span>
-                    <br />
-                    <span style={{ color: 'black', fontSize: '12px' }}>CPF: {associate.cpf}</span>
-                  </Td>
-                  <IconButton 
-                    aria-label='Search database' 
-                    icon={<IconEye />} 
-                    onClick={() => { handleEyeClick(associate.id) }}
+          if (associate.status == 'active') {
+            return (
+              <>
+                <Tbody>
+                  <Tr>
+                    <Td>
+                      <span style={{ color: 'black', fontWeight: 'bold', fontSize: '14px' }}>{associate.fullName}</span>
+                      <br />
+                      <span style={{ color: 'black', fontSize: '12px' }}>CPF: {associate.cpf}</span>
+                    </Td>
+                    <IconButton
+                      aria-label='Search database'
+                      icon={<IconEye />}
+                      onClick={() => { handleEyeClick(associate.id) }}
                     />
-                </Tr>
-              </Tbody>
-            </>
-          )
+                  </Tr>
+                </Tbody>
+              </>
+            )
+          }
+          return null;
         })}
       </Table>
     </TableContainer>
