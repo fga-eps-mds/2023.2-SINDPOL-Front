@@ -24,7 +24,7 @@ export default function SelectAssociateDoc(props: any) {
     const generateDoc = async (associateId: string) => {
         console.log("ID do associado:", associateId);
         try {
-            const response = await httpClient.get(`/api/documents/affiliation/${associateId}`, {
+            const response = await httpClient.get(`/gestao/documents/affiliation/${associateId}`, {
                 responseType: 'arraybuffer',
             });
 
