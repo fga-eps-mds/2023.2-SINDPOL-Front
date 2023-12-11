@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Box, Heading, IconButton, Text } from "@chakra-ui/react"
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
@@ -13,6 +13,8 @@ export default function SelectAssociateDoc(props: any) {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [associates, setAssociates] = React.useState<any>([])
+    const [searchText, setSearchText] = useState('');
+
 
 
 
@@ -43,6 +45,9 @@ export default function SelectAssociateDoc(props: any) {
             console.error('Erro ao buscar o documento:', error);
         }
     }
+    const filteredAssociates = associates.filter((associate: any) =>
+        associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+    );
 
 
     return (
@@ -54,37 +59,44 @@ export default function SelectAssociateDoc(props: any) {
                     </Heading>
                     <GenericInput
                         id="associates-page-box-header-input"
-                        placeholder="Pesquisar por Nome ou Mátricula"
-                        type="text"
-                        name="search"
-                        value=""
+                        placeholder="Pesquisar por Nome"
+                        type={"string"}
+                        name={"search"}
+                        value={searchText}
                         error={{ hasError: false, message: "" }}
                         sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
-                        onChange={() => { }}
-                    />
+                        onChange={(name: any, value: any) =>
+                            setSearchText(value)} />
                 </Box>
                 <Box id="associates-page-box-body" sx={styles.boxList}>
                     {/* Tabela de associados */}
-                    {associates && associates.length > 0 && associates.map((associate: any) => {
-                        return (
-                            <>
-                                <Box sx={styles.boxItem}>
-                                    <Box>
-                                        <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
-                                        <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate}</Text>
-                                    </Box>
-                                    <Box display={"flex"}>
-                                        <IconButton
-                                            aria-label="Dowload"
-                                            icon={<IconDownload size={20} />}
-                                            onClick={() => { generateDoc(associate.id) }}
-                                            color={"#734A00"}
-                                        />
-                                    </Box>
-                                </Box>
-                            </>
-                        )
-                    })}
+                    {filteredAssociates && filteredAssociates.length > 0 ? (
+                        filteredAssociates.map((associate: any) => {
+                            if (associate.status === 'active') {
+                                return (
+                                    <>
+                                        <Box sx={styles.boxItem}>
+                                            <Box>
+                                                <Text align={"left"} fontWeight={'bold'}>{associate.fullName}</Text>
+                                                <Text align={"left"}>{associate.registration} - {associate.cpf} - {associate.birthDate}</Text>
+                                            </Box>
+                                            <Box display={"flex"}>
+                                                <IconButton
+                                                    aria-label="Dowload"
+                                                    icon={<IconDownload size={20} />}
+                                                    onClick={() => { generateDoc(associate.id) }}
+                                                    color={"#734A00"}
+                                                />
+                                            </Box>
+                                        </Box>
+                                    </>
+                                )
+                            }
+                            return null;
+                        })
+                    ) : (
+                        <Text>Nenhum associado encontrado.</Text>
+                    )}
                 </Box>
                 <Box id="associates-page-box-footer">{/* Botões de paginação */}</Box>
             </Box>

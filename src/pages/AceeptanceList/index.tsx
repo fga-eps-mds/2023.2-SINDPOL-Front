@@ -15,6 +15,8 @@ export default function Aceeptance(props: any) {
     const [associates, setAssociates] = React.useState<any>([])
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const Opcoes = ['Novo', 'Antigo'];
+    const [searchText, setSearchText] = useState('');
+
 
     const handleSelecao = (opcao: string) => {
         console.log(`Opção selecionada na página: ${opcao}`);
@@ -85,6 +87,10 @@ export default function Aceeptance(props: any) {
         }
     };
 
+    const filteredAssociates = associates.filter((associate: any) =>
+        associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+    );
+
     const reFetchList = () => {
         dispatch(fetchAssociates()).then((res) => {
             setAssociates(res.payload)
@@ -108,11 +114,12 @@ export default function Aceeptance(props: any) {
                         <GenericInput
                             id="associates-page-box-header-input"
                             placeholder="Pesquisar por Nome ou Matrícula"
-                            type="text"
-                            name="search"
-                            value=""
+                            type={"string"}
+                            name={"search"}
+                            value={searchText}
                             sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
-                            onChange={() => { }}
+                            onChange={(name: any, value: any) =>
+                                setSearchText(value)}
                             error={{
                                 hasError: false,
                                 message: ""
@@ -137,7 +144,7 @@ export default function Aceeptance(props: any) {
                 </Box>
                 <Box id="associates-page-box-body" sx={styles.boxList}>
                     {/* Tabela de associados */}
-                    <AceeptanceList data={associates} selectedIds={selectedIds} onCheckboxChange={handleCheckboxChange} />
+                    <AceeptanceList data={filteredAssociates} selectedIds={selectedIds} onCheckboxChange={handleCheckboxChange} />
                 </Box>
                 <Box id="associates-page-box-footer">
                     {/* Botões de paginação */}
