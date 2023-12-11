@@ -39,7 +39,7 @@ async function updateAssociate(id: string | undefined, associate: any) {
   return await httpClient
     .put(`/gestao/users/${id}`, associate)
     .then((response) => {
-      return response.data
+      return response
     })
     .catch((error) => {
       console.log(error)
