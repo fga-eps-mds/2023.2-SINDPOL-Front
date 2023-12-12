@@ -157,6 +157,19 @@ export default function Associates(props: any) {
     }
   }
 
+  const reFetchList = () => {
+    dispatch(fetchAssociates()).then((res) => {
+      setAssociates(res.payload)
+    })
+  }
+
+  useEffect(() => {
+    if (!openModal2) {
+      reFetchList(); // Chamada da função para buscar os associados novamente
+    }
+  }, [openModal2]);
+
+
 
 
   return (

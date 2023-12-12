@@ -27,8 +27,7 @@ export default function Modal({ isOpen, setModalOpen, Title, children }: ModalPr
                         <div style={CLOSE_MODAL_BUTTON}>
                             <IconButton
                                 onClick={() => {
-                                    setModalOpen;
-                                    window.location.reload(); 
+                                    setModalOpen();
                                 }} aria-label="fechar"
                                 icon={<IconX />}
                                 color={"#000"}>

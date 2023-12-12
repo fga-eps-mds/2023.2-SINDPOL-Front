@@ -103,6 +103,8 @@ export default function Aceeptance(props: any) {
         })
     }, [])
 
+    
+
     return (
         <Box id="asssociates-page-container" sx={styles.boxContainer}>
             <Box id="associates-page-box" sx={styles.box}>
