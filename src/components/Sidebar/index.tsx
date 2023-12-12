@@ -74,6 +74,7 @@ export default function Sidebar(props: any) {
           {SidebarItem("IconUsers")}
           {SidebarItem("IconAproveUser")}
           {SidebarItem("IconFileExport")}
+          {SidebarItem("IconDatabaseExport")}
 
         </Box>
       </Box>
