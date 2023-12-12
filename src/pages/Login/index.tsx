@@ -17,13 +17,17 @@ export default function Login(props: any) {
 
   const [loginState, setLoginState] = React.useState<LoginRequest>({
     registration: "",
-    cpf: "",
+    password: "",
   })
 
   const submitLogin = () => {
-
-    navigate("/home")
-
+    dispatch(postLogin(loginState))
+      .then((response) => {
+        console.log(response)
+        if (response.payload && (response.payload as any).status == 200) {
+          navigate("/home")
+        }
+      })
   }
 
   return (
@@ -56,9 +60,9 @@ export default function Login(props: any) {
           <GenericInput
             type={"string"}
             name={"cpf"}
-            value={loginState.cpf}
+            value={loginState.password}
             onChange={(name: any, value: any) =>
-              setLoginState({ ...loginState, cpf: value })
+              setLoginState({ ...loginState, password: value })
             }
 
             label="CPF"

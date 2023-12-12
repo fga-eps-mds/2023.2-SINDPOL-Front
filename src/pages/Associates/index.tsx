@@ -73,7 +73,7 @@ export default function Associates(props: any) {
 
   // Filtra os associados com base no texto de busca
   const filteredAssociates = associates.filter((associate: any) =>
-    associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+    associate.fullName.toLowerCase().includes(searchText.toLowerCase()) || associate.registration.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const importAssociates = async (submitFunction: Function) => {
@@ -156,6 +156,21 @@ export default function Associates(props: any) {
       }
     }
   }
+
+  const reFetchList = () => {
+    dispatch(fetchAssociates()).then((res) => {
+      setAssociates(res.payload)
+    })
+  }
+
+  useEffect(() => {
+    if (!openModal2) {
+      reFetchList(); // Chamada da função para buscar os associados novamente
+    }
+  }, [openModal2]);
+
+
+
 
   return (
     <Box id="home-page-container" sx={styles.boxContainer}>
