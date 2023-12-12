@@ -14,12 +14,12 @@ export interface UserResponse {
 
 export interface LoginRequest {
   registration: string
-  cpf: string
+  password: string
 }
 
 async function login(request: LoginRequest) {
   return await HttpClient
-  .post('/gestao/login/user')
+  .post('/gestao/login/user', request)
   .then((response) => {
     return response
   })

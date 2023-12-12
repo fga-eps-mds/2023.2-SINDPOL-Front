@@ -17,7 +17,7 @@ export default function Login(props: any) {
 
   const [loginState, setLoginState] = React.useState<LoginRequest>({
     registration: "",
-    cpf: "",
+    password: "",
   })
 
   const submitLogin = () => {
@@ -60,9 +60,9 @@ export default function Login(props: any) {
           <GenericInput
             type={"string"}
             name={"cpf"}
-            value={loginState.cpf}
+            value={loginState.password}
             onChange={(name: any, value: any) =>
-              setLoginState({ ...loginState, cpf: value })
+              setLoginState({ ...loginState, password: value })
             }
 
             label="CPF"
