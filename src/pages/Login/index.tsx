@@ -21,9 +21,13 @@ export default function Login(props: any) {
   })
 
   const submitLogin = () => {
-    
+    dispatch(postLogin(loginState))
+      .then((response) => {
+        console.log(response)
+        if (response.payload && (response.payload as any).status == 200) {
           navigate("/home")
-
+        }
+      })
   }
 
   return (

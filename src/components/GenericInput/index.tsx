@@ -49,7 +49,7 @@ export default function GenericInput(props: GenericInputProps) {
         {...(props.id && { id: props.id })}
         isInvalid={props.error.hasError ? true : false}
         isRequired={props.isRequired}
-        {...(props.sxFormControl && { sx: props.sxFormControl })}
+        {...(props.sxFormControl && { sx: props.sxFormControl })} 
       >
         {props.label && <FormLabel margin={"0px"}>{props.label}</FormLabel>}
         <Input {...props} {...(props.sxInput && { sx: props.sxInput })}

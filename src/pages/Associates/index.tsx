@@ -43,6 +43,8 @@ export default function Associates(props: any) {
   const [openModal2, setOpenModal2] = React.useState<boolean>(false)
   const [dados, setDados] = React.useState<any>([])
   const [dadosError, setDadosError] = React.useState<any>([])
+  const [searchText, setSearchText] = useState('');
+
 
   const [associatesStatus, setAssociatesStatus] = useState<AssociateStatus[]>(
     [],
@@ -64,6 +66,15 @@ export default function Associates(props: any) {
     console.log("ID do associado:", associateId)
     navigate(`/update/${associateId}`)
   }
+
+  const handleInputChange = (value: string) => {
+    setSearchText(value); // Atualiza o texto de busca
+  };
+
+  // Filtra os associados com base no texto de busca
+  const filteredAssociates = associates.filter((associate: any) =>
+    associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   const importAssociates = async (submitFunction: Function) => {
     setOpenModal(false)
@@ -164,18 +175,14 @@ export default function Associates(props: any) {
           <Box sx={styles.boxHeaderMiddle}>
             <GenericInput
               id="associates-page-box-header-input"
-              placeholder="Pesquisar por Nome ou Mátricula"
-              type="text"
-              name="search"
-              value=""
+              placeholder="Pesquisar por Nome"
+              type={"string"}
+              name={"search"}
+              value={searchText}
+              sxInput={{ border: 'none', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', width: '400px' }}
               error={{ hasError: false, message: "" }}
-              sxInput={{
-                border: "none",
-                borderRadius: "10px",
-                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-                width: "400px",
-              }}
-              onChange={() => {}}
+              onChange={(name: any, value: any) =>
+                setSearchText(value)}
             />
             <GenericButton
               id="associates-page-box-header-add-button"
@@ -196,12 +203,11 @@ export default function Associates(props: any) {
 
         <Box id="associates-page-box-body" sx={styles.boxList}>
           {/* Tabela de associados */}
-          {associates &&
-            associates.length > 0 &&
-            associates.map((associate: any) => {
-              return (
-                <>
-                  <Box sx={styles.boxItem}>
+          {filteredAssociates && filteredAssociates.length > 0 ? (
+            filteredAssociates.map((associate: any) => {
+              if (associate.status === 'active') {
+                return (
+                  <Box key={associate.id} sx={styles.boxItem}>
                     <Box>
                       <Text align={"left"} fontWeight={"bold"}>
                         {associate.fullName}
@@ -221,18 +227,17 @@ export default function Associates(props: any) {
                         color={"#734A00"}
                       />
                       <Divider orientation="vertical" color={"#734A00"} />
-
-                      {/* <IconButton
-                      aria-label="mais opções"
-                      icon={<IconMenu2 />}
-                      onClick={() => { }}
-                      color={"#734A00"}
-                    /> */}
+                      {/* ... (restante do seu código) ... */}
                     </Box>
                   </Box>
-                </>
-              )
-            })}
+                );
+              }
+              return null;
+            })
+          ) : (
+            <Text>Nenhum associado encontrado.</Text>
+          )}
+
         </Box>
         <Modal
           Title="Importar Sindicalizados"
