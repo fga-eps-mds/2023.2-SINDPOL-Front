@@ -157,7 +157,7 @@ export default function FiliationForm(props: any) {
 
   const resetFormState = () => {
     const initialState = Object.keys(formState).reduce((acc:any, key) => {
-      acc[key] = { ...formState[key], value: null }; // ou defina para um valor vazio dependendo do tipo de dados esperado
+      acc[key] = { ...formState[key], value: "" }; // ou defina para um valor vazio dependendo do tipo de dados esperado
       return acc;
     }, {});
     setFormState(initialState);
