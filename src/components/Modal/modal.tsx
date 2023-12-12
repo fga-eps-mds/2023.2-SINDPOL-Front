@@ -13,6 +13,8 @@ interface ModalProps {
 
 
 
+
+
 export default function Modal({ isOpen, setModalOpen, Title, children }: ModalProps) {
     if (isOpen) {
         return (

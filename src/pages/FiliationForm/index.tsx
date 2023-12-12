@@ -155,6 +155,15 @@ export default function FiliationForm(props: any) {
     }
   }
 
+  const resetFormState = () => {
+    const initialState = Object.keys(formState).reduce((acc:any, key) => {
+      acc[key] = { ...formState[key], value: null }; // ou defina para um valor vazio dependendo do tipo de dados esperado
+      return acc;
+    }, {});
+    setFormState(initialState);
+  };
+
+
   const renderForm = () => {
     return Object.entries(formState).map(([key, value]) => {
       switch (value.type) {
@@ -192,6 +201,7 @@ export default function FiliationForm(props: any) {
   }
 
   useEffect(() => {
+    resetFormState()
     dispatch(fetchAssociate(associateId)).then((res) => {
       setAssociate(res.payload)
       setFormState((prevState) => {
