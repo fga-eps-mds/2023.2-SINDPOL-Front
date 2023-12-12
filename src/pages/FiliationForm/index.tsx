@@ -1,6 +1,7 @@
-import { Box, Image, Text, IconButton } from "@chakra-ui/react"
+import { Box, Image, Text, IconButton, FormControl } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
 import React, { useState, useEffect } from "react"
+import Logo from '../../assets/logo.png'
 import { styles } from "./styles"
 import GenericInput from "../../components/GenericInput"
 import { IconArrowDown, IconSquareXFilled } from "@tabler/icons-react"
@@ -137,6 +138,10 @@ export default function FiliationForm(props: any) {
       ...prevState,
       [name]: { ...prevState[name], isInvalid: false, value },
     }))
+
+    if (name == "birthDate") {
+      console.log(value, formState.birthDate.value)
+    }
   }
 
   const changeDependentFields = (
@@ -211,7 +216,7 @@ export default function FiliationForm(props: any) {
       <Box id={"container-form"} sx={styles.formContainer}>
         <Box id={"form-box"} sx={styles.formBox}>
           <Image
-            src="../src/assets/logo.png"
+            src={Logo}
             width={"84px"}
             marginLeft={"30px"}
             marginTop={"10px"}
