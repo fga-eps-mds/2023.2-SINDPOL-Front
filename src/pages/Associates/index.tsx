@@ -73,7 +73,7 @@ export default function Associates(props: any) {
 
   // Filtra os associados com base no texto de busca
   const filteredAssociates = associates.filter((associate: any) =>
-    associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+    associate.fullName.toLowerCase().includes(searchText.toLowerCase()) || associate.registration.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const importAssociates = async (submitFunction: Function) => {

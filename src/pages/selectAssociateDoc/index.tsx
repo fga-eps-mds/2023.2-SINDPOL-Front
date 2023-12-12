@@ -46,7 +46,7 @@ export default function SelectAssociateDoc(props: any) {
         }
     }
     const filteredAssociates = associates.filter((associate: any) =>
-        associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+        associate.fullName.toLowerCase().includes(searchText.toLowerCase()) || associate.registration.toLowerCase().includes(searchText.toLowerCase())
     );
 
 

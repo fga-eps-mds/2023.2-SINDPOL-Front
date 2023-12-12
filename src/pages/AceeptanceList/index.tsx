@@ -88,7 +88,7 @@ export default function Aceeptance(props: any) {
     };
 
     const filteredAssociates = associates.filter((associate: any) =>
-        associate.fullName.toLowerCase().includes(searchText.toLowerCase())
+        associate.fullName.toLowerCase().includes(searchText.toLowerCase()) || associate.registration.toLowerCase().includes(searchText.toLowerCase())
     );
 
     const reFetchList = () => {
@@ -103,7 +103,7 @@ export default function Aceeptance(props: any) {
         })
     }, [])
 
-    
+
 
     return (
         <Box id="asssociates-page-container" sx={styles.boxContainer}>
